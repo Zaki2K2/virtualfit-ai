@@ -12,6 +12,8 @@ export interface TryOnOutput {
   imageBuffer?: Buffer;
   /** Must point at a host listed in the provider's allowedImageHosts. */
   imageUrl?: string;
+  /** Exact model/version that produced the image, when the provider knows it (stored per try-on). */
+  modelLabel?: string;
 }
 
 /**

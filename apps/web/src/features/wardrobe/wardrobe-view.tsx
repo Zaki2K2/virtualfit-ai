@@ -12,6 +12,7 @@ import { EmptyState, ErrorState, GridSkeleton } from '@/components/shared/states
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useClothing, useDeleteClothing, useHealth } from '@/hooks/use-api';
+import { describeError } from '@/lib/api-errors';
 
 export function WardrobeView() {
   const [category, setCategory] = useState<CategoryFilterValue>('all');
@@ -89,7 +90,7 @@ export function WardrobeView() {
       )}
       {remove.isError && (
         <p role="alert" className="mt-4 text-sm text-danger">
-          {remove.error.message}
+          {describeError(remove.error).message}
         </p>
       )}
     </PageContainer>

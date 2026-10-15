@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { AlertTriangle, ShieldAlert, Sparkles } from 'lucide-react';
-import { CATEGORY_LABELS } from '@virtualfit/shared';
+import { CATEGORY_LABELS, type ModelOptionId } from '@virtualfit/shared';
 import { ImageDropzone } from '@/components/shared/image-dropzone';
 import { FitDisclaimer, SimulationBadge } from '@/components/shared/ai-notices';
 import { PageContainer, PageHeader } from '@/components/shared/page-header';
@@ -13,7 +13,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useClothing, useHealth, useProfile } from '@/hooks/use-api';
 import { GarmentPicker, type GarmentChoice } from './garment-picker';
 import { ResultPanel } from './result-panel';
+import { ModelSelector } from './model-selector';
 import { useTryOn, type GenerateInput } from './use-try-on';
+import { describeError } from '@/lib/api-errors';
 
 function StepTitle({ n, title, description }: { n: number; title: string; description: string }) {
   return (
@@ -39,11 +41,14 @@ export function TryOnStudio() {
   const [person, setPerson] = useState<File | null>(null);
   const [garment, setGarment] = useState<GarmentChoice | null>(null);
   const [consent, setConsent] = useState(false);
+  const [modelChoice, setModelChoice] = useState<ModelOptionId | null>(null);
   const lastInput = useRef<GenerateInput | null>(null);
 
   const maxMb = health.data?.limits.maxUploadMb ?? 8;
   const ai = health.data?.ai;
-  const needsConsent = !!ai?.externalProcessing;
+  const selectedId = modelChoice ?? ai?.defaultOption ?? 'mock';
+  const selected = ai?.options.find((o) => o.id === selectedId);
+  const needsConsent = !!selected?.externalProcessing;
 
   // Pre-select a garment coming from the wardrobe / history ("?garment=<id>")
   useEffect(() => {
@@ -72,7 +77,7 @@ export function TryOnStudio() {
     !person && 'Upload your photo',
     !garmentReady && 'Choose a garment',
     needsConsent && !consent && 'Confirm AI processing consent',
-    ai && !ai.configured && 'AI provider is not configured',
+    selected && !selected.available && `${selected.label} is not available`,
   ].filter(Boolean) as string[];
 
   function buildInput(): GenerateInput | null {
@@ -83,6 +88,7 @@ export function TryOnStudio() {
         category: garment.item.category,
         garment: { kind: 'catalog', id: garment.item.id },
         consent,
+        model: selectedId,
       };
     }
     if (!garment.file) return null;
@@ -91,6 +97,7 @@ export function TryOnStudio() {
       category: garment.category,
       garment: { kind: 'upload', file: garment.file },
       consent,
+      model: selectedId,
     };
   }
 
@@ -107,7 +114,7 @@ export function TryOnStudio() {
       <PageHeader
         title="Virtual Try-On Studio"
         description="Upload a photo, choose a garment and preview how it could look on you."
-        actions={ai?.simulated ? <SimulationBadge /> : undefined}
+        actions={selected?.simulated ? <SimulationBadge /> : undefined}
       />
 
       {health.isError && (
@@ -117,7 +124,12 @@ export function TryOnStudio() {
         >
           <AlertTriangle className="mt-0.5 size-4 shrink-0" />
           <p>
-            The API is not reachable. Start it with <code>npm run dev</code> and refresh this page.
+            {describeError(health.error).message}{' '}
+            {describeError(health.error).kind === 'unreachable' && (
+              <button type="button" className="underline" onClick={() => health.refetch()}>
+                Check again
+              </button>
+            )}
           </p>
         </div>
       )}
@@ -180,6 +192,15 @@ export function TryOnStudio() {
                 </p>
               )}
 
+              {ai && (
+                <ModelSelector
+                  options={ai.options}
+                  value={selectedId}
+                  onChange={setModelChoice}
+                  disabled={busy}
+                />
+              )}
+
               {needsConsent && (
                 <label className="flex cursor-pointer gap-3 rounded-md border border-warning/30 bg-warning-soft p-3 text-sm">
                   <input
@@ -194,18 +215,12 @@ export function TryOnStudio() {
                       <ShieldAlert className="size-4" /> Send my photo to an external AI service
                     </span>
                     <span className="text-muted-foreground">
-                      Your photo and the garment are sent to a third-party AI service (Hugging Face)
-                      to create the result. They are not stored on this server after processing.
+                      Your photo and the garment are sent to an AI service outside this server (for
+                      example Hugging Face) to create the result. They are not stored on this server
+                      after processing.
                     </span>
                   </span>
                 </label>
-              )}
-
-              {ai && !ai.configured && (
-                <p role="alert" className="rounded-md bg-danger-soft p-3 text-sm text-danger">
-                  The server is set to use a real AI provider but it is not fully configured. See{' '}
-                  <code>docs/ai-integration.md</code>.
-                </p>
               )}
 
               <Button

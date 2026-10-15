@@ -1,0 +1,1291 @@
+{
+  "version": "fashion-eval-v2",
+  "split": "development",
+  "created_at_utc": "2026-10-15T11:54:04.584687+00:00",
+  "dataset_sha256": "c71de831ef00b7b7aa7553739cae38bf679e1693393fc7446b851ab720910eb7",
+  "catalog_sha256": "ddb4f6af5eef0eadeb15af081823f4f246e197017919c33350ec5aedefdede21",
+  "catalog": {
+    "eval-pants-blue": {
+      "name": "Blue winter trousers",
+      "category": "bottoms",
+      "description": "Blue casual trousers for winter."
+    },
+    "eval-shirt-red": {
+      "name": "Red summer shirt",
+      "category": "tops",
+      "description": "Red casual shirt for summer."
+    },
+    "eval-coat-black": {
+      "name": "Black wool coat",
+      "category": "outerwear",
+      "description": "Black coat for casual winter."
+    },
+    "eval-sherwani-navy": {
+      "name": "Navy sherwani",
+      "category": "outerwear",
+      "description": "Navy sherwani for formal winter autumn."
+    },
+    "eval-shalwar-black": {
+      "name": "Black shalwar",
+      "category": "bottoms",
+      "description": "Black shalwar for formal spring autumn winter."
+    },
+    "eval-kameez-green": {
+      "name": "Green kameez",
+      "category": "tops",
+      "description": "Green kameez for formal spring autumn."
+    },
+    "eval-shalwar-white": {
+      "name": "White shalwar",
+      "category": "bottoms",
+      "description": "White shalwar for casual summer spring."
+    },
+    "eval-kurta-white": {
+      "name": "White cotton kurta",
+      "category": "tops",
+      "description": "White traditional kurta for casual summer spring."
+    },
+    "tee-classic-white": {
+      "name": "Classic Crew T-shirt",
+      "category": "tops",
+      "description": "Plain short-sleeve cotton tee in white."
+    },
+    "tee-graphite": {
+      "name": "Graphite T-shirt",
+      "category": "tops",
+      "description": "Relaxed short-sleeve tee in graphite grey."
+    },
+    "shirt-oxford-blue": {
+      "name": "Oxford Button Shirt",
+      "category": "tops",
+      "description": "Long-sleeve collared shirt in sky blue."
+    },
+    "shirt-linen-sand": {
+      "name": "Linen Shirt",
+      "category": "tops",
+      "description": "Lightweight collared shirt in sand."
+    },
+    "jacket-denim": {
+      "name": "Denim Jacket",
+      "category": "outerwear",
+      "description": "Classic indigo denim jacket."
+    },
+    "jacket-bomber-olive": {
+      "name": "Bomber Jacket",
+      "category": "outerwear",
+      "description": "Olive bomber jacket with ribbed hem."
+    },
+    "trousers-chino-khaki": {
+      "name": "Chino Trousers",
+      "category": "bottoms",
+      "description": "Straight-fit chinos in khaki."
+    },
+    "trousers-tailored-charcoal": {
+      "name": "Tailored Trousers",
+      "category": "bottoms",
+      "description": "Charcoal tailored trousers."
+    },
+    "dress-midi-indigo": {
+      "name": "Midi Dress",
+      "category": "dresses",
+      "description": "Sleeveless midi dress in indigo."
+    },
+    "dress-summer-rose": {
+      "name": "Summer Dress",
+      "category": "dresses",
+      "description": "Short-sleeve flared dress in dusty rose."
+    }
+  },
+  "model_config": {
+    "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "gguf_repo": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+    "revision": "9217f5db79a29953eb74d5343926648285ec7e67",
+    "filename": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+    "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+    "model_bytes": 491400032,
+    "runtime_tag": "b11643",
+    "runtime_file": "llama-b11643-bin-win-cpu-x64.zip",
+    "runtime_sha256": "7bf670617ed02a54de52fae4637d16cb633b8a2dfeb851469630e827cf9854d5",
+    "context": 2048,
+    "threads": 4,
+    "port": 8081,
+    "alias": "virtualfit-style-base"
+  },
+  "total": 16,
+  "successful": 16,
+  "metrics": {
+    "intent_accuracy": {
+      "correct": 16,
+      "total": 16,
+      "rate": 1.0
+    },
+    "category_accuracy": {
+      "correct": 16,
+      "total": 16,
+      "rate": 1.0
+    },
+    "color_accuracy": {
+      "correct": 14,
+      "total": 14,
+      "rate": 1.0
+    },
+    "valid_catalog_selection": {
+      "correct": 16,
+      "total": 16,
+      "rate": 1.0
+    },
+    "exact_outfit_match": {
+      "correct": 16,
+      "total": 16,
+      "rate": 1.0
+    },
+    "json_schema_valid": {
+      "correct": 16,
+      "total": 16,
+      "rate": 1.0
+    }
+  },
+  "model_calls": 16,
+  "accepted_model_outputs": 8,
+  "fallbacks": 8,
+  "raw_schema_valid": 16,
+  "raw_selection_valid": 8,
+  "latency_seconds": {
+    "mean": 3.10651875,
+    "median": 3.44965,
+    "p95": 4.7438
+  },
+  "limitations": "Synthetic scenario suite, correlated paraphrases. Metrics describe the whole pipeline including deterministic policy/fallback, not a trained-model accuracy gain. Memory-isolated API catalog; real CPU inference. No live MongoDB benchmark writes.",
+  "cases": [
+    {
+      "id": "development-000",
+      "scenario": "case-00",
+      "message": "Development check: please choose a casual white tee with khaki trousers.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "tee-classic-white",
+            "trousers-chino-khaki"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "tee-classic-white": "white",
+          "trousers-chino-khaki": "khaki"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Select the classic white tee with khaki trousers for a casual white tee and khaki trousers outfit. The outfit includes a plain short-sleeve cotton tee in white and straight-fit chinos in khaki. This combination is suitable for a casual white tee and khaki trousers outfit. The shirt is suitable for a white tee and khaki trousers outfit. The outfit is suitable for a casual white tee and khaki trousers outfit. The shirt is suitable for a white tee and khaki trousers outfit. The outfit is suitable for a casual white tee and khaki trousers outfit. The shirt is suitable for a white tee and khaki.",
+        "itemIds": [
+          "tee-classic-white",
+          "trousers-chino-khaki"
+        ],
+        "occasion": "casual",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "tee-classic-white",
+            "trousers-chino-khaki"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "tee-classic-white",
+            "name": "Classic Crew T-shirt",
+            "category": "tops",
+            "description": "Plain short-sleeve cotton tee in white.",
+            "imageUrl": "/api/v1/clothing/tee-classic-white/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "trousers-chino-khaki",
+            "name": "Chino Trousers",
+            "category": "bottoms",
+            "description": "Straight-fit chinos in khaki.",
+            "imageUrl": "/api/v1/clothing/trousers-chino-khaki/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "tee-classic-white",
+        "trousers-chino-khaki"
+      ],
+      "latency_seconds": 4.6134
+    },
+    {
+      "id": "development-001",
+      "scenario": "case-01",
+      "message": "Development check: please choose a formal blue shirt with charcoal trousers.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "shirt-oxford-blue",
+            "trousers-tailored-charcoal"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "shirt-oxford-blue": "blue",
+          "trousers-tailored-charcoal": "charcoal"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose the Oxford Button Shirt in sky blue for the top and the tailored charcoal trousers for the bottom. These items match the formal blue shirt and the charcoal trousers perfectly. They are suitable for a formal outfit. They are not excluded from the list of items needed for one outfit. They are up to 4 wardrobe items matching the user request. They are not suitable for a different season or occasion. They are not excluded from the list of items needed for one outfit. They are not suitable for a different season or occasion. They are not excluded from the list of items needed for one outfit.",
+        "itemIds": [
+          "shirt-oxford-blue",
+          "trousers-tailored-charcoal"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "shirt-oxford-blue",
+            "trousers-tailored-charcoal"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "trousers-tailored-charcoal",
+            "name": "Tailored Trousers",
+            "category": "bottoms",
+            "description": "Charcoal tailored trousers.",
+            "imageUrl": "/api/v1/clothing/trousers-tailored-charcoal/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "shirt-oxford-blue",
+        "trousers-tailored-charcoal"
+      ],
+      "latency_seconds": 3.4819
+    },
+    {
+      "id": "development-002",
+      "scenario": "case-02",
+      "message": "Development check: please choose an indigo dress for dinner.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "dress-midi-indigo"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "dresses"
+        ],
+        "colorsByItem": {
+          "dress-midi-indigo": "indigo"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose the Midi Dress in Indigo for Dinner. It's a stylish and elegant choice for a dinner outfit. It's a sleeveless midi dress in indigo, perfect for a formal dinner. It's a great option for a dinner outfit as it's a versatile dress that can be dressed up or down. It's a perfect fit for a formal dinner. It's a great option for a formal dinner. It's a great option for a formal dinner. It's a great option for a formal dinner. It's a great option for a formal dinner. It's a great option for a formal dinner. It's a great option for a formal dinner. It's a great option for a formal dinner. It's a.",
+        "itemIds": [
+          "dress-midi-indigo"
+        ],
+        "occasion": "dinner",
+        "categories": [
+          "dresses"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "dress-midi-indigo"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "dress-midi-indigo",
+            "name": "Midi Dress",
+            "category": "dresses",
+            "description": "Sleeveless midi dress in indigo.",
+            "imageUrl": "/api/v1/clothing/dress-midi-indigo/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "dress-midi-indigo"
+      ],
+      "latency_seconds": 3.4174
+    },
+    {
+      "id": "development-003",
+      "scenario": "case-03",
+      "message": "Development check: please choose a rose dress for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "dress-summer-rose"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "dresses"
+        ],
+        "colorsByItem": {
+          "dress-summer-rose": "rose"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose the Summer Dress in Dusty Rose. It's a short-sleeve flared dress in dusty rose. It's perfect for summer.",
+        "itemIds": [
+          "dress-summer-rose"
+        ],
+        "occasion": "",
+        "categories": [
+          "dresses"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "dress-summer-rose"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "dress-summer-rose",
+            "name": "Summer Dress",
+            "category": "dresses",
+            "description": "Short-sleeve flared dress in dusty rose.",
+            "imageUrl": "/api/v1/clothing/dress-summer-rose/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "dress-summer-rose"
+      ],
+      "latency_seconds": 1.5482
+    },
+    {
+      "id": "development-004",
+      "scenario": "case-04",
+      "message": "Development check: please choose a graphite tee.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "tee-graphite"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "tee-graphite": "graphite"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Graphite T-shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "tee-graphite"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "tee-graphite"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "tee-graphite",
+            "name": "Graphite T-shirt",
+            "category": "tops",
+            "description": "Relaxed short-sleeve tee in graphite grey.",
+            "imageUrl": "/api/v1/clothing/tee-graphite/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "tee-graphite"
+      ],
+      "latency_seconds": 3.6152
+    },
+    {
+      "id": "development-005",
+      "scenario": "case-05",
+      "message": "Development check: please choose a sand shirt for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "shirt-linen-sand"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "shirt-linen-sand": "sand"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Linen Shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "shirt-linen-sand"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "shirt-linen-sand"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-linen-sand",
+            "name": "Linen Shirt",
+            "category": "tops",
+            "description": "Lightweight collared shirt in sand.",
+            "imageUrl": "/api/v1/clothing/shirt-linen-sand/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "shirt-linen-sand"
+      ],
+      "latency_seconds": 1.8434
+    },
+    {
+      "id": "development-006",
+      "scenario": "case-06",
+      "message": "Development check: please choose an olive bomber jacket for winter.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "jacket-bomber-olive"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {
+          "jacket-bomber-olive": "olive"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose the Bomber Jacket with Olive Hem for Winter. It's a stylish outerwear option with a ribbed hem. It's perfect for the cold weather. Please select the Bomber Jacket with Olive Hem for Winter. It's a stylish outerwear option with a ribbed hem. It's perfect for the cold weather. Please select the Bomber Jacket with Olive Hem for Winter.",
+        "itemIds": [
+          "jacket-bomber-olive"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "jacket-bomber-olive"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "jacket-bomber-olive",
+            "name": "Bomber Jacket",
+            "category": "outerwear",
+            "description": "Olive bomber jacket with ribbed hem.",
+            "imageUrl": "/api/v1/clothing/jacket-bomber-olive/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "jacket-bomber-olive"
+      ],
+      "latency_seconds": 2.5649
+    },
+    {
+      "id": "development-007",
+      "scenario": "case-07",
+      "message": "Development check: please choose a denim jacket over a white tee.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "jacket-denim",
+            "tee-classic-white"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear",
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Denim Jacket with Classic Crew T-shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "jacket-denim",
+          "tee-classic-white"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear",
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "jacket-denim",
+            "tee-classic-white"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "jacket-denim",
+            "name": "Denim Jacket",
+            "category": "outerwear",
+            "description": "Classic indigo denim jacket.",
+            "imageUrl": "/api/v1/clothing/jacket-denim/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "tee-classic-white",
+            "name": "Classic Crew T-shirt",
+            "category": "tops",
+            "description": "Plain short-sleeve cotton tee in white.",
+            "imageUrl": "/api/v1/clothing/tee-classic-white/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "jacket-denim",
+        "tee-classic-white"
+      ],
+      "latency_seconds": 1.6741
+    },
+    {
+      "id": "development-008",
+      "scenario": "case-00",
+      "message": "Help me find a casual white tee with khaki trousers.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "tee-classic-white",
+            "trousers-chino-khaki"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "tee-classic-white": "white",
+          "trousers-chino-khaki": "khaki"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Classic Crew T-shirt with Chino Trousers. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "tee-classic-white",
+          "trousers-chino-khaki"
+        ],
+        "occasion": "casual",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "tee-classic-white",
+            "trousers-chino-khaki"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "tee-classic-white",
+            "name": "Classic Crew T-shirt",
+            "category": "tops",
+            "description": "Plain short-sleeve cotton tee in white.",
+            "imageUrl": "/api/v1/clothing/tee-classic-white/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "trousers-chino-khaki",
+            "name": "Chino Trousers",
+            "category": "bottoms",
+            "description": "Straight-fit chinos in khaki.",
+            "imageUrl": "/api/v1/clothing/trousers-chino-khaki/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "tee-classic-white",
+        "trousers-chino-khaki"
+      ],
+      "latency_seconds": 1.9335
+    },
+    {
+      "id": "development-009",
+      "scenario": "case-01",
+      "message": "Help me find a formal blue shirt with charcoal trousers.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "shirt-oxford-blue",
+            "trousers-tailored-charcoal"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "shirt-oxford-blue": "blue",
+          "trousers-tailored-charcoal": "charcoal"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Oxford Button Shirt with Tailored Trousers. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "shirt-oxford-blue",
+          "trousers-tailored-charcoal"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "shirt-oxford-blue",
+            "trousers-tailored-charcoal"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "trousers-tailored-charcoal",
+            "name": "Tailored Trousers",
+            "category": "bottoms",
+            "description": "Charcoal tailored trousers.",
+            "imageUrl": "/api/v1/clothing/trousers-tailored-charcoal/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "shirt-oxford-blue",
+        "trousers-tailored-charcoal"
+      ],
+      "latency_seconds": 1.859
+    },
+    {
+      "id": "development-010",
+      "scenario": "case-02",
+      "message": "Help me find an indigo dress for dinner.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "dress-midi-indigo"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "dresses"
+        ],
+        "colorsByItem": {
+          "dress-midi-indigo": "indigo"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose the dress-midi-indigo, which is a midi dress in indigo, for dinner. It's a stylish option for a dinner outfit. The dress is suitable for the given preferences and slots. The dress is available in the specified colors and is a dress from the dresses category. The dress is suitable for the given season and is not excluded from the list of excluded categories. The dress is not excluded from the list of excluded colors. The dress is not excluded from the list of excluded categories. The dress is not excluded from the list of excluded categories. The dress is not excluded from the list of ex",
+        "itemIds": [
+          "dress-midi-indigo"
+        ],
+        "occasion": "dinner",
+        "categories": [
+          "dresses"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "dress-midi-indigo"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "dress-midi-indigo",
+            "name": "Midi Dress",
+            "category": "dresses",
+            "description": "Sleeveless midi dress in indigo.",
+            "imageUrl": "/api/v1/clothing/dress-midi-indigo/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "dress-midi-indigo"
+      ],
+      "latency_seconds": 3.8854
+    },
+    {
+      "id": "development-011",
+      "scenario": "case-03",
+      "message": "Help me find a rose dress for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "dress-summer-rose"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "dresses"
+        ],
+        "colorsByItem": {
+          "dress-summer-rose": "rose"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Summer Dress. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "dress-summer-rose"
+        ],
+        "occasion": "",
+        "categories": [
+          "dresses"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "dress-summer-rose"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "dress-summer-rose",
+            "name": "Summer Dress",
+            "category": "dresses",
+            "description": "Short-sleeve flared dress in dusty rose.",
+            "imageUrl": "/api/v1/clothing/dress-summer-rose/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "dress-summer-rose"
+      ],
+      "latency_seconds": 4.2747
+    },
+    {
+      "id": "development-012",
+      "scenario": "case-04",
+      "message": "Help me find a graphite tee.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "tee-graphite"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "tee-graphite": "graphite"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Graphite T-shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "tee-graphite"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "tee-graphite"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "tee-graphite",
+            "name": "Graphite T-shirt",
+            "category": "tops",
+            "description": "Relaxed short-sleeve tee in graphite grey.",
+            "imageUrl": "/api/v1/clothing/tee-graphite/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "tee-graphite"
+      ],
+      "latency_seconds": 4.2106
+    },
+    {
+      "id": "development-013",
+      "scenario": "case-05",
+      "message": "Help me find a sand shirt for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "shirt-linen-sand"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "shirt-linen-sand": "sand"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Select the linen shirt in sand as your top for summer. It's lightweight and suitable for the season. Choose the color sand to match your outfit. This outfit is suitable for summer and includes a linen shirt in sand. It's a perfect choice for a casual look.",
+        "itemIds": [
+          "shirt-linen-sand"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "shirt-linen-sand"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-linen-sand",
+            "name": "Linen Shirt",
+            "category": "tops",
+            "description": "Lightweight collared shirt in sand.",
+            "imageUrl": "/api/v1/clothing/shirt-linen-sand/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "shirt-linen-sand"
+      ],
+      "latency_seconds": 2.2394
+    },
+    {
+      "id": "development-014",
+      "scenario": "case-06",
+      "message": "Help me find an olive bomber jacket for winter.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "jacket-bomber-olive"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {
+          "jacket-bomber-olive": "olive"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Select the Bomber Jacket with Ribbed Hem for Olive Colors. This outfit is suitable for winter and includes the bomber jacket with ribbed hem. It's a great choice for a casual look. Please note that this is a verified complete outfit, and you can use it as is. If you need more options, please let me know. Please note that this is a verified complete outfit, and you can use it as is.",
+        "itemIds": [
+          "jacket-bomber-olive"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "jacket-bomber-olive"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "jacket-bomber-olive",
+            "name": "Bomber Jacket",
+            "category": "outerwear",
+            "description": "Olive bomber jacket with ribbed hem.",
+            "imageUrl": "/api/v1/clothing/jacket-bomber-olive/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "jacket-bomber-olive"
+      ],
+      "latency_seconds": 3.7994
+    },
+    {
+      "id": "development-015",
+      "scenario": "case-07",
+      "message": "Help me find a denim jacket over a white tee.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "jacket-denim",
+            "tee-classic-white"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear",
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Denim Jacket with Classic Crew T-shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "jacket-denim",
+          "tee-classic-white"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear",
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "jacket-denim",
+            "tee-classic-white"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "jacket-denim",
+            "name": "Denim Jacket",
+            "category": "outerwear",
+            "description": "Classic indigo denim jacket.",
+            "imageUrl": "/api/v1/clothing/jacket-denim/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "tee-classic-white",
+            "name": "Classic Crew T-shirt",
+            "category": "tops",
+            "description": "Plain short-sleeve cotton tee in white.",
+            "imageUrl": "/api/v1/clothing/tee-classic-white/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "jacket-denim",
+        "tee-classic-white"
+      ],
+      "latency_seconds": 4.7438
+    }
+  ]
+}

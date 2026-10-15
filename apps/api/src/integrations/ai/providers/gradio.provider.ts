@@ -1,6 +1,7 @@
 import { CATEGORY_TO_CLOTH_TYPE } from '@virtualfit/shared';
 import { AppError } from '../../../utils/errors';
 import { logger } from '../../../utils/logger';
+import { readImageResponse } from '../../../utils/image-response';
 import type {
   TryOnInput,
   TryOnOutput,
@@ -17,7 +18,6 @@ export interface GradioProviderConfig {
 }
 
 const PLACEHOLDER = /^\{\{(person|garment|clothType|category)\}\}$/;
-const MAX_RESULT_BYTES = 20 * 1024 * 1024;
 
 type Values = {
   person: unknown;
@@ -128,10 +128,18 @@ export class GradioProvider implements VirtualTryOnProvider {
     }
 
     const { Client, handle_file } = await import('@gradio/client');
+    let closeClient: (() => void) | undefined;
+    let cancelJob: (() => void) | undefined;
     try {
+      signal?.throwIfAborted();
       const client = await Client.connect(this.config.spaceId as string, {
         ...(this.config.token ? { token: this.config.token as `hf_${string}` } : {}),
       });
+      closeClient = () => {
+        client.heartbeat_event?.close();
+        client.close();
+      };
+      signal?.throwIfAborted();
       const payload = fillTemplate(template, {
         person: handle_file(new Blob([new Uint8Array(personImage)], { type: 'image/png' })),
         garment: handle_file(new Blob([new Uint8Array(garmentImage)], { type: 'image/png' })),
@@ -147,7 +155,15 @@ export class GradioProvider implements VirtualTryOnProvider {
         null,
         true,
       );
-      signal?.addEventListener('abort', () => void job.cancel());
+      cancelJob = () => {
+        void job.cancel().catch(() => undefined);
+        closeClient?.();
+      };
+      signal?.addEventListener('abort', cancelJob, { once: true });
+      if (signal?.aborted) {
+        cancelJob();
+        signal.throwIfAborted();
+      }
 
       let data: unknown[] | null = null;
       let failure: string | null = null;
@@ -172,6 +188,9 @@ export class GradioProvider implements VirtualTryOnProvider {
         message: message.slice(0, 300),
       });
       throw classifyGradioError(message);
+    } finally {
+      if (cancelJob) signal?.removeEventListener('abort', cancelJob);
+      closeClient?.();
     }
   }
 
@@ -189,11 +208,10 @@ export class GradioProvider implements VirtualTryOnProvider {
     }
     const res = await fetch(parsed, {
       signal,
+      redirect: 'error',
       headers: this.config.token ? { Authorization: `Bearer ${this.config.token}` } : {},
     });
     if (!res.ok) throw new Error(`Result download failed (${res.status})`);
-    const buf = Buffer.from(await res.arrayBuffer());
-    if (buf.length > MAX_RESULT_BYTES) throw new Error('Result image too large');
-    return buf;
+    return readImageResponse(res);
   }
 }

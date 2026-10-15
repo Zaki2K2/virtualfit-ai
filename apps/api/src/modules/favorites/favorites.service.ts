@@ -19,7 +19,8 @@ export class FavoritesService {
         tryOn: await this.tryOns.get(doc.tryOnId, doc.ownerId),
         createdAt: doc.createdAt.toISOString(),
       };
-    } catch {
+    } catch (err) {
+      if (!(err instanceof AppError) || err.status !== 404) throw err;
       return null; // the underlying try-on no longer exists
     }
   }

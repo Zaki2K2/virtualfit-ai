@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/dialog';
 import { useFavorites, useRemoveFavorite } from '@/hooks/use-api';
 import { formatDate } from '@/lib/utils';
+import { describeError } from '@/lib/api-errors';
 
 function FavoriteCard({
   fav,
@@ -126,7 +127,7 @@ export function FavoritesView() {
           </div>
           {remove.isError && (
             <p role="alert" className="mt-4 text-sm text-danger">
-              {remove.error.message}
+              {describeError(remove.error).message}
             </p>
           )}
         </>

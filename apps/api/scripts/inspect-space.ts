@@ -15,8 +15,12 @@ async function main() {
   const token = process.env.HF_TOKEN as `hf_${string}` | undefined;
   const { Client } = await import('@gradio/client');
   const client = await Client.connect(spaceId, token ? { token } : {});
-  const api = await client.view_api();
-  console.log(JSON.stringify(api, null, 2));
+  try {
+    const api = await client.view_api();
+    console.log(JSON.stringify(api, null, 2));
+  } finally {
+    client.close();
+  }
 }
 
 main().catch((err) => {

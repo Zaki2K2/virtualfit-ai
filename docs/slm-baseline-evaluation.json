@@ -1,0 +1,489 @@
+{
+  "total": 8,
+  "successful": 8,
+  "exact_id_rate": 0.375,
+  "mean_precision": 0.53125,
+  "mean_recall": 0.75,
+  "cases": [
+    {
+      "id": "test-000",
+      "request": "From my wardrobe, find casual white tee and khaki trousers, no dresses.",
+      "expected": {
+        "answer": "Pair the white cotton tee with khaki chinos for a simple casual outfit.",
+        "itemIds": [
+          "tee-classic-white",
+          "trousers-chino-khaki"
+        ],
+        "occasion": "casual",
+        "categories": [
+          "tops",
+          "bottoms"
+        ]
+      },
+      "success": true,
+      "actual": {
+        "answer": "From your wardrobe, find casual white tee and khaki trousers, no dresses.",
+        "itemIds": [
+          "tee-classic-white",
+          "trousers-chino-khaki"
+        ],
+        "occasion": "Casual",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "items": [
+          {
+            "id": "tee-classic-white",
+            "name": "Classic Crew T-shirt",
+            "category": "tops",
+            "description": "Plain short-sleeve cotton tee in white.",
+            "imageUrl": "/api/v1/clothing/tee-classic-white/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "trousers-chino-khaki",
+            "name": "Chino Trousers",
+            "category": "bottoms",
+            "description": "Straight-fit chinos in khaki.",
+            "imageUrl": "/api/v1/clothing/trousers-chino-khaki/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false
+      },
+      "exact_ids": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "categories_exact": true,
+      "seconds": 2.84
+    },
+    {
+      "id": "test-001",
+      "request": "From my wardrobe, find blue shirt with smart charcoal trousers for the office.",
+      "expected": {
+        "answer": "Combine the blue Oxford shirt with charcoal tailored trousers for an office outfit.",
+        "itemIds": [
+          "shirt-oxford-blue",
+          "trousers-tailored-charcoal"
+        ],
+        "occasion": "office",
+        "categories": [
+          "tops",
+          "bottoms"
+        ]
+      },
+      "success": true,
+      "actual": {
+        "answer": "From my wardrobe, find blue shirt with smart charcoal trousers for the office.",
+        "itemIds": [
+          "shirt-oxford-blue",
+          "trousers-tailored-charcoal",
+          "shirt-linen-sand",
+          "jacket-bomber-olive"
+        ],
+        "occasion": "office",
+        "categories": [
+          "tops",
+          "bottoms",
+          "outerwear",
+          "dresses"
+        ],
+        "items": [
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "trousers-tailored-charcoal",
+            "name": "Tailored Trousers",
+            "category": "bottoms",
+            "description": "Charcoal tailored trousers.",
+            "imageUrl": "/api/v1/clothing/trousers-tailored-charcoal/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "shirt-linen-sand",
+            "name": "Linen Shirt",
+            "category": "tops",
+            "description": "Lightweight collared shirt in sand.",
+            "imageUrl": "/api/v1/clothing/shirt-linen-sand/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "jacket-bomber-olive",
+            "name": "Bomber Jacket",
+            "category": "outerwear",
+            "description": "Olive bomber jacket with ribbed hem.",
+            "imageUrl": "/api/v1/clothing/jacket-bomber-olive/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false
+      },
+      "exact_ids": false,
+      "precision": 0.5,
+      "recall": 1.0,
+      "categories_exact": false,
+      "seconds": 3.023
+    },
+    {
+      "id": "test-002",
+      "request": "From my wardrobe, find a denim layer over a white top, avoid dresses.",
+      "expected": {
+        "answer": "Layer the blue denim jacket over the white tee for a relaxed look.",
+        "itemIds": [
+          "jacket-denim",
+          "tee-classic-white"
+        ],
+        "occasion": "casual",
+        "categories": [
+          "outerwear",
+          "tops"
+        ]
+      },
+      "success": true,
+      "actual": {
+        "answer": "From my wardrobe, find a denim layer over a white top, avoid dresses.",
+        "itemIds": [
+          "tee-classic-white",
+          "shirt-oxford-blue",
+          "jacket-denim",
+          "jacket-bomber-olive"
+        ],
+        "occasion": "white top",
+        "categories": [
+          "tops",
+          "outerwear",
+          "bottoms"
+        ],
+        "items": [
+          {
+            "id": "tee-classic-white",
+            "name": "Classic Crew T-shirt",
+            "category": "tops",
+            "description": "Plain short-sleeve cotton tee in white.",
+            "imageUrl": "/api/v1/clothing/tee-classic-white/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "jacket-denim",
+            "name": "Denim Jacket",
+            "category": "outerwear",
+            "description": "Classic indigo denim jacket.",
+            "imageUrl": "/api/v1/clothing/jacket-denim/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "jacket-bomber-olive",
+            "name": "Bomber Jacket",
+            "category": "outerwear",
+            "description": "Olive bomber jacket with ribbed hem.",
+            "imageUrl": "/api/v1/clothing/jacket-bomber-olive/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false
+      },
+      "exact_ids": false,
+      "precision": 0.5,
+      "recall": 1.0,
+      "categories_exact": false,
+      "seconds": 2.722
+    },
+    {
+      "id": "test-003",
+      "request": "From my wardrobe, find an indigo dress for dinner, no trousers.",
+      "expected": {
+        "answer": "Choose the indigo midi dress for dinner. Check its appearance in the try-on studio.",
+        "itemIds": [
+          "dress-midi-indigo"
+        ],
+        "occasion": "dinner",
+        "categories": [
+          "dresses"
+        ]
+      },
+      "success": true,
+      "actual": {
+        "answer": "From my wardrobe, find an indigo dress for dinner, no trousers.",
+        "itemIds": [
+          "dress-midi-indigo"
+        ],
+        "occasion": "dinner",
+        "categories": [
+          "dresses",
+          "tops",
+          "outerwear"
+        ],
+        "items": [
+          {
+            "id": "dress-midi-indigo",
+            "name": "Midi Dress",
+            "category": "dresses",
+            "description": "Sleeveless midi dress in indigo.",
+            "imageUrl": "/api/v1/clothing/dress-midi-indigo/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false
+      },
+      "exact_ids": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "categories_exact": false,
+      "seconds": 2.427
+    },
+    {
+      "id": "test-004",
+      "request": "From my wardrobe, find a red silk scarf only.",
+      "expected": {
+        "answer": "There is no red silk scarf in the available wardrobe. Add one before requesting a recommendation for it.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": []
+      },
+      "success": true,
+      "actual": {
+        "answer": "From my wardrobe, find a red silk scarf only.",
+        "itemIds": [
+          "shirt-oxford-blue",
+          "shirt-linen-sand",
+          "dress-midi-indigo"
+        ],
+        "occasion": "occasion",
+        "categories": [
+          "tops",
+          "bottoms",
+          "dresses"
+        ],
+        "items": [
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "shirt-linen-sand",
+            "name": "Linen Shirt",
+            "category": "tops",
+            "description": "Lightweight collared shirt in sand.",
+            "imageUrl": "/api/v1/clothing/shirt-linen-sand/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "dress-midi-indigo",
+            "name": "Midi Dress",
+            "category": "dresses",
+            "description": "Sleeveless midi dress in indigo.",
+            "imageUrl": "/api/v1/clothing/dress-midi-indigo/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false
+      },
+      "exact_ids": false,
+      "precision": 0.0,
+      "recall": 0.0,
+      "categories_exact": false,
+      "seconds": 2.867
+    },
+    {
+      "id": "test-005",
+      "request": "From my wardrobe, find explain which category a denim jacket belongs to, without picking an outfit.",
+      "expected": {
+        "answer": "A denim jacket belongs to outerwear and can be used as a layer over a top.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ]
+      },
+      "success": true,
+      "actual": {
+        "answer": "Denim Jacket",
+        "itemIds": [
+          "jacket-denim"
+        ],
+        "occasion": "outerwear",
+        "categories": [
+          "outerwear",
+          "tops",
+          "bottoms",
+          "dresses"
+        ],
+        "items": [
+          {
+            "id": "jacket-denim",
+            "name": "Denim Jacket",
+            "category": "outerwear",
+            "description": "Classic indigo denim jacket.",
+            "imageUrl": "/api/v1/clothing/jacket-denim/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false
+      },
+      "exact_ids": false,
+      "precision": 0.0,
+      "recall": 0.0,
+      "categories_exact": false,
+      "seconds": 2.473
+    },
+    {
+      "id": "test-006",
+      "request": "From my wardrobe, find a white top only; exclude jackets and dresses.",
+      "expected": {
+        "answer": "The white cotton crew-neck tee matches your preference for a white top.",
+        "itemIds": [
+          "tee-classic-white"
+        ],
+        "occasion": "casual",
+        "categories": [
+          "tops"
+        ]
+      },
+      "success": true,
+      "actual": {
+        "answer": "A white top from the wardrobe: tee-classic-white",
+        "itemIds": [
+          "tee-classic-white"
+        ],
+        "occasion": "Dresses",
+        "categories": [
+          "dresses"
+        ],
+        "items": [
+          {
+            "id": "tee-classic-white",
+            "name": "Classic Crew T-shirt",
+            "category": "tops",
+            "description": "Plain short-sleeve cotton tee in white.",
+            "imageUrl": "/api/v1/clothing/tee-classic-white/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false
+      },
+      "exact_ids": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "categories_exact": false,
+      "seconds": 2.039
+    },
+    {
+      "id": "test-007",
+      "request": "From my wardrobe, find a blue office shirt, avoid pants and dresses.",
+      "expected": {
+        "answer": "The blue Oxford shirt matches your request for an office top.",
+        "itemIds": [
+          "shirt-oxford-blue"
+        ],
+        "occasion": "office",
+        "categories": [
+          "tops"
+        ]
+      },
+      "success": true,
+      "actual": {
+        "answer": "From my wardrobe, find a blue office shirt, avoid pants and dresses.",
+        "itemIds": [
+          "shirt-oxford-blue",
+          "shirt-linen-sand",
+          "tee-classic-white",
+          "tee-graphite"
+        ],
+        "occasion": "office",
+        "categories": [
+          "tops",
+          "dresses",
+          "outerwear"
+        ],
+        "items": [
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "shirt-linen-sand",
+            "name": "Linen Shirt",
+            "category": "tops",
+            "description": "Lightweight collared shirt in sand.",
+            "imageUrl": "/api/v1/clothing/shirt-linen-sand/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "tee-classic-white",
+            "name": "Classic Crew T-shirt",
+            "category": "tops",
+            "description": "Plain short-sleeve cotton tee in white.",
+            "imageUrl": "/api/v1/clothing/tee-classic-white/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "tee-graphite",
+            "name": "Graphite T-shirt",
+            "category": "tops",
+            "description": "Relaxed short-sleeve tee in graphite grey.",
+            "imageUrl": "/api/v1/clothing/tee-graphite/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false
+      },
+      "exact_ids": false,
+      "precision": 0.25,
+      "recall": 1.0,
+      "categories_exact": false,
+      "seconds": 3.887
+    }
+  ],
+  "limitations": "Eight synthetic paraphrase scenarios; not an independent fashion-quality benchmark. Includes retrieval and guardrails, not just raw model quality."
+}

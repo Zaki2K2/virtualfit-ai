@@ -18,3 +18,23 @@ export class AppError extends Error {
     return new AppError(404, 'NOT_FOUND', `${what} not found`);
   }
 }
+
+const DATABASE_ERROR_NAMES = new Set([
+  'MongoNetworkError',
+  'MongoNetworkTimeoutError',
+  'MongoServerSelectionError',
+  'MongoNotConnectedError',
+  'MongoTopologyClosedError',
+  'MongoPoolClearedError',
+  'MongoPoolClosedError',
+  'MongooseServerSelectionError',
+]);
+
+/** True for failures that mean "the database is unreachable" (as opposed to a bug or bad input). */
+export function isDatabaseUnavailable(err: unknown): boolean {
+  const e = err as { name?: string; message?: string } | null;
+  if (!e) return false;
+  if (e.name && DATABASE_ERROR_NAMES.has(e.name)) return true;
+  // Mongoose rejects buffered operations with a plain MongooseError carrying this message.
+  return e.name === 'MongooseError' && /buffering timed out|not connected/i.test(e.message ?? '');
+}

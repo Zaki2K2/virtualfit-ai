@@ -9,6 +9,8 @@ import type {
 } from '@virtualfit/shared';
 import { apiRequest, jsonBody } from '@/lib/api-client';
 
+const UPLOAD_TIMEOUT_MS = 120_000; // two photos of up to 8 MB over a slow connection
+
 export const api = {
   health: () => apiRequest<HealthStatus>('/health'),
 
@@ -22,13 +24,17 @@ export const api = {
     );
   },
   createClothing: (form: FormData) =>
-    apiRequest<{ item: ClothingItem }>('/clothing', { method: 'POST', body: form }).then(
-      (r) => r.item,
-    ),
+    apiRequest<{ item: ClothingItem }>(
+      '/clothing',
+      { method: 'POST', body: form },
+      UPLOAD_TIMEOUT_MS,
+    ).then((r) => r.item),
   deleteClothing: (id: string) => apiRequest<void>(`/clothing/${id}`, { method: 'DELETE' }),
 
   createTryOn: (form: FormData) =>
-    apiRequest<{ tryOn: TryOn }>('/try-on', { method: 'POST', body: form }).then((r) => r.tryOn),
+    apiRequest<{ tryOn: TryOn }>('/try-on', { method: 'POST', body: form }, UPLOAD_TIMEOUT_MS).then(
+      (r) => r.tryOn,
+    ),
   getTryOn: (id: string) => apiRequest<{ tryOn: TryOn }>(`/try-on/${id}`).then((r) => r.tryOn),
 
   listHistory: () => apiRequest<{ items: TryOn[] }>('/history').then((r) => r.items),

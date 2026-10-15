@@ -1,0 +1,50 @@
+[
+  {
+    "id": "eval-kurta-white",
+    "name": "White cotton kurta",
+    "category": "tops",
+    "description": "White traditional kurta for casual summer spring."
+  },
+  {
+    "id": "eval-shalwar-white",
+    "name": "White shalwar",
+    "category": "bottoms",
+    "description": "White shalwar for casual summer spring."
+  },
+  {
+    "id": "eval-kameez-green",
+    "name": "Green kameez",
+    "category": "tops",
+    "description": "Green kameez for formal spring autumn."
+  },
+  {
+    "id": "eval-shalwar-black",
+    "name": "Black shalwar",
+    "category": "bottoms",
+    "description": "Black shalwar for formal spring autumn winter."
+  },
+  {
+    "id": "eval-sherwani-navy",
+    "name": "Navy sherwani",
+    "category": "outerwear",
+    "description": "Navy sherwani for formal winter autumn."
+  },
+  {
+    "id": "eval-coat-black",
+    "name": "Black wool coat",
+    "category": "outerwear",
+    "description": "Black coat for casual winter."
+  },
+  {
+    "id": "eval-shirt-red",
+    "name": "Red summer shirt",
+    "category": "tops",
+    "description": "Red casual shirt for summer."
+  },
+  {
+    "id": "eval-pants-blue",
+    "name": "Blue winter trousers",
+    "category": "bottoms",
+    "description": "Blue casual trousers for winter."
+  }
+]

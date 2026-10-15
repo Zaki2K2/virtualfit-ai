@@ -2,7 +2,9 @@ import { AppError } from '../../../utils/errors';
 import { sanitizeImage, type SanitizedImage } from '../../../utils/image';
 import type { TryOnInput, VirtualTryOnProvider } from '../interfaces/virtual-try-on-provider';
 
-const MAX_RESULT_BYTES = 20 * 1024 * 1024;
+import { MAX_RESULT_BYTES, readImageResponse } from '../../../utils/image-response';
+
+export type GeneratedImage = SanitizedImage & { modelLabel?: string };
 
 /**
  * Runs a provider with a hard timeout, normalises every failure into an AppError and validates
@@ -18,7 +20,7 @@ export class GenerationService {
     return this.provider;
   }
 
-  async generate(input: Omit<TryOnInput, 'signal'>): Promise<SanitizedImage> {
+  async generate(input: Omit<TryOnInput, 'signal'>): Promise<GeneratedImage> {
     if (!this.provider.isConfigured()) {
       throw new AppError(
         503,
@@ -36,14 +38,19 @@ export class GenerationService {
     const timer = setTimeout(() => controller.abort(timeoutError), this.timeoutMs);
 
     try {
-      const output = await Promise.race([
-        this.provider.generate({ ...input, signal: controller.signal }),
+      return await Promise.race([
+        (async () => {
+          const output = await this.provider.generate({ ...input, signal: controller.signal });
+          const buffer =
+            output.imageBuffer ?? (await this.fetchUrl(output.imageUrl, controller.signal));
+          if (buffer.length > MAX_RESULT_BYTES)
+            throw new AppError(502, 'AI_FAILED', 'Generated image too large.');
+          return { ...(await sanitizeImage(buffer, 'AI result')), modelLabel: output.modelLabel };
+        })(),
         new Promise<never>((_, reject) =>
           controller.signal.addEventListener('abort', () => reject(controller.signal.reason)),
         ),
       ]);
-      const buffer = output.imageBuffer ?? (await this.fetchUrl(output.imageUrl));
-      return await sanitizeImage(buffer, 'AI result');
     } catch (err) {
       if (err instanceof AppError) {
         // A provider returning garbage is a provider failure, not the user's bad upload.
@@ -58,7 +65,7 @@ export class GenerationService {
     }
   }
 
-  private async fetchUrl(url?: string): Promise<Buffer> {
+  private async fetchUrl(url: string | undefined, signal: AbortSignal): Promise<Buffer> {
     if (!url) throw new AppError(502, 'AI_FAILED', 'The AI service returned no image.');
     const parsed = new URL(url);
     const hostOk = this.provider.allowedImageHosts.some(
@@ -71,11 +78,8 @@ export class GenerationService {
         'The AI service returned an image from an untrusted host.',
       );
     }
-    const res = await fetch(parsed);
+    const res = await fetch(parsed, { signal, redirect: 'error' });
     if (!res.ok) throw new AppError(502, 'AI_FAILED', 'Could not download the generated image.');
-    const buf = Buffer.from(await res.arrayBuffer());
-    if (buf.length > MAX_RESULT_BYTES)
-      throw new AppError(502, 'AI_FAILED', 'Generated image too large.');
-    return buf;
+    return readImageResponse(res);
   }
 }

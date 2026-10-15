@@ -13,7 +13,7 @@ export const keys = {
 };
 
 export const useHealth = () =>
-  useQuery({ queryKey: keys.health, queryFn: api.health, staleTime: 60_000, retry: 1 });
+  useQuery({ queryKey: keys.health, queryFn: api.health, staleTime: 60_000 });
 
 export const useClothing = (category: ClothingCategory | 'all', q: string) =>
   useQuery({

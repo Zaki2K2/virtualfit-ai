@@ -12,3 +12,28 @@ apps/api/uploads/*
 *.log
 .DS_Store
 next-env.d.ts
+
+# Python engine
+ai-engine/.venv/
+ai-engine/*.log
+ai-engine/runs/
+ai-engine/data/
+ai-engine/checkpoints/
+ai-engine/*.egg-info/
+__pycache__/
+.pytest_cache/
+*.safetensors
+*.ckpt
+*.pt
+*.bin
+
+# Local language model weights/runtime and training outputs
+slm-engine/models/
+slm-engine/runtime/
+slm-engine/.venv/
+slm-engine/runs/
+slm-engine/*.egg-info/
+*.gguf
+
+# Machine-local custom model registration
+slm-engine/configs/custom-model.json

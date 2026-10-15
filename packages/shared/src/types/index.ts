@@ -1,4 +1,11 @@
-import type { AiProviderId, ClothingCategory, ErrorCode, Gender, TryOnStatus } from '../constants';
+import type {
+  AiProviderId,
+  ClothingCategory,
+  ErrorCode,
+  Gender,
+  ModelOptionId,
+  TryOnStatus,
+} from '../constants';
 
 export interface ApiErrorBody {
   error: { code: ErrorCode; message: string; details?: unknown };
@@ -54,16 +61,33 @@ export interface Profile {
   updatedAt: string | null;
 }
 
+export interface ModelOption {
+  id: ModelOptionId;
+  label: string;
+  /** true only if the model can run right now (service reachable, checkpoint present, ...). */
+  available: boolean;
+  /** Why it is unavailable (shown to the user); "ok" when available. */
+  reason: string;
+  simulated: boolean;
+  externalProcessing: boolean;
+}
+
 export interface HealthStatus {
-  status: 'ok';
+  /** 'degraded' = the API runs but its database connection is down. */
+  status: 'ok' | 'degraded';
   time: string;
   database: 'mongodb' | 'memory';
+  /** Live connection state (always true for the in-memory store). */
+  databaseUp: boolean;
   ai: {
     provider: AiProviderId;
     simulated: boolean;
     /** true when uploaded photos leave this server for a third-party AI service */
     externalProcessing: boolean;
     configured: boolean;
+    /** Option used when the client does not choose one. */
+    defaultOption: ModelOptionId;
+    options: ModelOption[];
   };
   limits: { maxUploadMb: number; resultRetentionHours: number };
 }

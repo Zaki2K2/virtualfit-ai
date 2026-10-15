@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { ClothingCategory, TryOn } from '@virtualfit/shared';
+import type { ClothingCategory, ModelOptionId, TryOn } from '@virtualfit/shared';
 import { keys } from '@/hooks/use-api';
 import { api } from '@/services/api';
 
@@ -13,6 +13,7 @@ export interface GenerateInput {
   garment: GarmentSelection;
   category: ClothingCategory;
   consent: boolean;
+  model: ModelOptionId;
 }
 
 /**
@@ -26,10 +27,11 @@ export function useTryOn() {
   const [elapsed, setElapsed] = useState(0);
 
   const create = useMutation({
-    mutationFn: ({ person, garment, category, consent }: GenerateInput) => {
+    mutationFn: ({ person, garment, category, consent, model }: GenerateInput) => {
       const form = new FormData();
       form.append('category', category);
       form.append('consent', String(consent));
+      form.append('model', model);
       form.append('person', person);
       if (garment.kind === 'catalog') form.append('clothingId', garment.id);
       else form.append('garment', garment.file);
@@ -55,7 +57,8 @@ export function useTryOn() {
   });
 
   const tryOn: TryOn | null = poll.data ?? null;
-  const processing = create.isPending || (!!jobId && (!tryOn || tryOn.status === 'processing'));
+  const processing =
+    create.isPending || (!!jobId && !poll.isError && (!tryOn || tryOn.status === 'processing'));
 
   const finished = useRef(false);
   useEffect(() => {

@@ -1,0 +1,11 @@
+{
+  "version": "fashion-eval-v2",
+  "files": {
+    "development.jsonl": "c71de831ef00b7b7aa7553739cae38bf679e1693393fc7446b851ab720910eb7",
+    "fixtures.json": "0c2e8216fda93951ce8c0cbffd61d71cb2b3d45d414ceb3753cb57ab9cc32227",
+    "heldout.jsonl": "bcd0fa1da6c1e453a010b41e8963f98b5c6907958169b55e72788ff4fa148d5f",
+    "validation.jsonl": "4290857ad7830f2140225effc5ab52a53748d63ad3ae9cfcb801bd4755e0f449"
+  },
+  "heldout_cases": 102,
+  "limitations": "Synthetic suite; scenario families are disjoint across evaluation splits. Paraphrases within each split are correlated. No evaluation row is a training example. Raw model and fallback are reported separately."
+}

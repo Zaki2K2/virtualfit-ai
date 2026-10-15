@@ -1,0 +1,15 @@
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "gguf_repo": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+  "revision": "9217f5db79a29953eb74d5343926648285ec7e67",
+  "filename": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+  "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+  "model_bytes": 491400032,
+  "runtime_tag": "b11643",
+  "runtime_file": "llama-b11643-bin-win-cpu-x64.zip",
+  "runtime_sha256": "7bf670617ed02a54de52fae4637d16cb633b8a2dfeb851469630e827cf9854d5",
+  "context": 2048,
+  "threads": 4,
+  "port": 8081,
+  "alias": "virtualfit-style-base"
+}

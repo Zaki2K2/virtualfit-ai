@@ -1,0 +1,1327 @@
+{
+  "version": "fashion-eval-v2",
+  "split": "validation",
+  "model_selection": "base",
+  "served_models": [
+    "virtualfit-style-base"
+  ],
+  "created_at_utc": "2026-10-15T11:57:36.856448+00:00",
+  "dataset_sha256": "4290857ad7830f2140225effc5ab52a53748d63ad3ae9cfcb801bd4755e0f449",
+  "catalog_sha256": "ddb4f6af5eef0eadeb15af081823f4f246e197017919c33350ec5aedefdede21",
+  "catalog": {
+    "eval-pants-blue": {
+      "name": "Blue winter trousers",
+      "category": "bottoms",
+      "description": "Blue casual trousers for winter."
+    },
+    "eval-shirt-red": {
+      "name": "Red summer shirt",
+      "category": "tops",
+      "description": "Red casual shirt for summer."
+    },
+    "eval-coat-black": {
+      "name": "Black wool coat",
+      "category": "outerwear",
+      "description": "Black coat for casual winter."
+    },
+    "eval-sherwani-navy": {
+      "name": "Navy sherwani",
+      "category": "outerwear",
+      "description": "Navy sherwani for formal winter autumn."
+    },
+    "eval-shalwar-black": {
+      "name": "Black shalwar",
+      "category": "bottoms",
+      "description": "Black shalwar for formal spring autumn winter."
+    },
+    "eval-kameez-green": {
+      "name": "Green kameez",
+      "category": "tops",
+      "description": "Green kameez for formal spring autumn."
+    },
+    "eval-shalwar-white": {
+      "name": "White shalwar",
+      "category": "bottoms",
+      "description": "White shalwar for casual summer spring."
+    },
+    "eval-kurta-white": {
+      "name": "White cotton kurta",
+      "category": "tops",
+      "description": "White traditional kurta for casual summer spring."
+    },
+    "tee-classic-white": {
+      "name": "Classic Crew T-shirt",
+      "category": "tops",
+      "description": "Plain short-sleeve cotton tee in white."
+    },
+    "tee-graphite": {
+      "name": "Graphite T-shirt",
+      "category": "tops",
+      "description": "Relaxed short-sleeve tee in graphite grey."
+    },
+    "shirt-oxford-blue": {
+      "name": "Oxford Button Shirt",
+      "category": "tops",
+      "description": "Long-sleeve collared shirt in sky blue."
+    },
+    "shirt-linen-sand": {
+      "name": "Linen Shirt",
+      "category": "tops",
+      "description": "Lightweight collared shirt in sand."
+    },
+    "jacket-denim": {
+      "name": "Denim Jacket",
+      "category": "outerwear",
+      "description": "Classic indigo denim jacket."
+    },
+    "jacket-bomber-olive": {
+      "name": "Bomber Jacket",
+      "category": "outerwear",
+      "description": "Olive bomber jacket with ribbed hem."
+    },
+    "trousers-chino-khaki": {
+      "name": "Chino Trousers",
+      "category": "bottoms",
+      "description": "Straight-fit chinos in khaki."
+    },
+    "trousers-tailored-charcoal": {
+      "name": "Tailored Trousers",
+      "category": "bottoms",
+      "description": "Charcoal tailored trousers."
+    },
+    "dress-midi-indigo": {
+      "name": "Midi Dress",
+      "category": "dresses",
+      "description": "Sleeveless midi dress in indigo."
+    },
+    "dress-summer-rose": {
+      "name": "Summer Dress",
+      "category": "dresses",
+      "description": "Short-sleeve flared dress in dusty rose."
+    }
+  },
+  "model_config": {
+    "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "gguf_repo": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+    "revision": "9217f5db79a29953eb74d5343926648285ec7e67",
+    "filename": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+    "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+    "model_bytes": 491400032,
+    "runtime_tag": "b11643",
+    "runtime_file": "llama-b11643-bin-win-cpu-x64.zip",
+    "runtime_sha256": "7bf670617ed02a54de52fae4637d16cb633b8a2dfeb851469630e827cf9854d5",
+    "context": 2048,
+    "threads": 4,
+    "port": 8081,
+    "alias": "virtualfit-style-base"
+  },
+  "total": 16,
+  "successful": 16,
+  "metrics": {
+    "intent_accuracy": {
+      "correct": 16,
+      "total": 16,
+      "rate": 1.0
+    },
+    "category_accuracy": {
+      "correct": 16,
+      "total": 16,
+      "rate": 1.0
+    },
+    "color_accuracy": {
+      "correct": 12,
+      "total": 14,
+      "rate": 0.8571428571428571
+    },
+    "valid_catalog_selection": {
+      "correct": 16,
+      "total": 16,
+      "rate": 1.0
+    },
+    "exact_outfit_match": {
+      "correct": 14,
+      "total": 16,
+      "rate": 0.875
+    },
+    "json_schema_valid": {
+      "correct": 16,
+      "total": 16,
+      "rate": 1.0
+    }
+  },
+  "model_calls": 16,
+  "accepted_model_outputs": 8,
+  "fallbacks": 8,
+  "raw_schema_valid": 15,
+  "raw_selection_valid": 8,
+  "latency_seconds": {
+    "mean": 4.06159375,
+    "median": 4.084,
+    "p95": 5.8061
+  },
+  "limitations": "Synthetic scenario suite, correlated paraphrases. Metrics describe the whole pipeline including deterministic policy/fallback, not a trained-model accuracy gain. Memory-isolated API catalog; real CPU inference. No live MongoDB benchmark writes.",
+  "cases": [
+    {
+      "id": "validation-000",
+      "scenario": "case-08",
+      "message": "For this validation request I need a white tee with khaki trousers and an olive jacket.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "tee-classic-white",
+            "trousers-chino-khaki",
+            "jacket-bomber-olive"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms",
+          "outerwear"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "For this validation request, I recommend the following wardrobe items: a classic white tee with khaki trousers and an olive jacket. The outfit is suitable for a casual occasion and can be worn in various seasons. The recommended items include a tee-classic-white, trousers-chino-khaki, and jacket-bomber-olive. The shirt is suitable for a white shirt, the trousers are suitable for khaki trousers, and the jacket is suitable for olive jackets. The outfit is suitable for a casual occasion and can be worn in various seasons. The recommended items include a tee-classic-white, trousers-chino-khaki, a,",
+        "itemIds": [
+          "tee-classic-white",
+          "trousers-chino-khaki",
+          "jacket-bomber-olive"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms",
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "tee-classic-white",
+            "trousers-chino-khaki",
+            "jacket-bomber-olive"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "tee-classic-white",
+            "name": "Classic Crew T-shirt",
+            "category": "tops",
+            "description": "Plain short-sleeve cotton tee in white.",
+            "imageUrl": "/api/v1/clothing/tee-classic-white/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "trousers-chino-khaki",
+            "name": "Chino Trousers",
+            "category": "bottoms",
+            "description": "Straight-fit chinos in khaki.",
+            "imageUrl": "/api/v1/clothing/trousers-chino-khaki/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "jacket-bomber-olive",
+            "name": "Bomber Jacket",
+            "category": "outerwear",
+            "description": "Olive bomber jacket with ribbed hem.",
+            "imageUrl": "/api/v1/clothing/jacket-bomber-olive/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "tee-classic-white",
+        "trousers-chino-khaki",
+        "jacket-bomber-olive"
+      ],
+      "latency_seconds": 4.1109
+    },
+    {
+      "id": "validation-001",
+      "scenario": "case-09",
+      "message": "For this validation request I need a casual white top; no jackets and dresses.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "tee-classic-white"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "tee-classic-white": "white"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider White cotton kurta. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "44b7f4b0dc8e46258a0deca77391cb1f"
+        ],
+        "occasion": "casual",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "44b7f4b0dc8e46258a0deca77391cb1f",
+            "tee-classic-white"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "44b7f4b0dc8e46258a0deca77391cb1f",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/44b7f4b0dc8e46258a0deca77391cb1f/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.670Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": false,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": false,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kurta-white"
+      ],
+      "latency_seconds": 4.8556
+    },
+    {
+      "id": "validation-002",
+      "scenario": "case-10",
+      "message": "For this validation request I need a formal blue shirt; avoid pants and dresses.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "shirt-oxford-blue"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "shirt-oxford-blue": "blue"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Oxford Button Shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "shirt-oxford-blue"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "shirt-oxford-blue"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "shirt-oxford-blue"
+      ],
+      "latency_seconds": 4.0571
+    },
+    {
+      "id": "validation-003",
+      "scenario": "case-11",
+      "message": "For this validation request I need a white kurta with white shalwar for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kurta-white",
+            "eval-shalwar-white"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "eval-kurta-white": "white",
+          "eval-shalwar-white": "white"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "For this validation request, I recommend a white kurta with white shalwar for summer. The outfit includes a white cotton kurta for casual summer spring and a white shalwar for casual summer spring. The selected items are suitable for summer and do not include any excluded categories or colors. The selected outfit is suitable for a summer season. The wardrobe plan includes the selected items. The selected items are white cotton kurta, white shalwar, and white shalwar. The selected items are suitable for a summer season. The wardrobe plan includes the selected items. The selected items are white",
+        "itemIds": [
+          "44b7f4b0dc8e46258a0deca77391cb1f",
+          "a53cd74310c8406dbb2a992a39a1b84c"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "44b7f4b0dc8e46258a0deca77391cb1f",
+            "a53cd74310c8406dbb2a992a39a1b84c"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "44b7f4b0dc8e46258a0deca77391cb1f",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/44b7f4b0dc8e46258a0deca77391cb1f/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.670Z"
+          },
+          {
+            "id": "a53cd74310c8406dbb2a992a39a1b84c",
+            "name": "White shalwar",
+            "category": "bottoms",
+            "description": "White shalwar for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/a53cd74310c8406dbb2a992a39a1b84c/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.697Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kurta-white",
+        "eval-shalwar-white"
+      ],
+      "latency_seconds": 5.6976
+    },
+    {
+      "id": "validation-004",
+      "scenario": "case-12",
+      "message": "For this validation request I need a formal green kameez with black shalwar.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kameez-green",
+            "eval-shalwar-black"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "eval-kameez-green": "green",
+          "eval-shalwar-black": "black"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "For this validation request, I need a formal green kameez with black shalwar.",
+        "itemIds": [
+          "3f43747b71bd4aaca3fbfc61a6ebc1a7",
+          "a4b25486eaa446498ab0eecef5384fbe"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "3f43747b71bd4aaca3fbfc61a6ebc1a7",
+            "a4b25486eaa446498ab0eecef5384fbe"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "3f43747b71bd4aaca3fbfc61a6ebc1a7",
+            "name": "Green kameez",
+            "category": "tops",
+            "description": "Green kameez for formal spring autumn.",
+            "imageUrl": "/api/v1/clothing/3f43747b71bd4aaca3fbfc61a6ebc1a7/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.726Z"
+          },
+          {
+            "id": "a4b25486eaa446498ab0eecef5384fbe",
+            "name": "Black shalwar",
+            "category": "bottoms",
+            "description": "Black shalwar for formal spring autumn winter.",
+            "imageUrl": "/api/v1/clothing/a4b25486eaa446498ab0eecef5384fbe/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.760Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kameez-green",
+        "eval-shalwar-black"
+      ],
+      "latency_seconds": 3.284
+    },
+    {
+      "id": "validation-005",
+      "scenario": "case-13",
+      "message": "For this validation request I need a navy sherwani for winter.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-sherwani-navy"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {
+          "eval-sherwani-navy": "navy"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Navy sherwani. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "e3011588c73e4cd491fe855b6fa498ed"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "e3011588c73e4cd491fe855b6fa498ed"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "e3011588c73e4cd491fe855b6fa498ed",
+            "name": "Navy sherwani",
+            "category": "outerwear",
+            "description": "Navy sherwani for formal winter autumn.",
+            "imageUrl": "/api/v1/clothing/e3011588c73e4cd491fe855b6fa498ed/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.789Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-sherwani-navy"
+      ],
+      "latency_seconds": 4.4877
+    },
+    {
+      "id": "validation-006",
+      "scenario": "case-14",
+      "message": "For this validation request I need a casual black coat for winter.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-coat-black"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {
+          "eval-coat-black": "black"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Black wool coat. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "dddf74e8a10c4c13bc4cbefd9de0f297"
+        ],
+        "occasion": "casual",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "invalid-model-output",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": false,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "dddf74e8a10c4c13bc4cbefd9de0f297"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "dddf74e8a10c4c13bc4cbefd9de0f297",
+            "name": "Black wool coat",
+            "category": "outerwear",
+            "description": "Black coat for casual winter.",
+            "imageUrl": "/api/v1/clothing/dddf74e8a10c4c13bc4cbefd9de0f297/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.804Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-coat-black"
+      ],
+      "latency_seconds": 5.6962
+    },
+    {
+      "id": "validation-007",
+      "scenario": "case-15",
+      "message": "For this validation request I need a red shirt for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-shirt-red"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "eval-shirt-red": "red"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Red summer shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "2e7fe7291cb143c5b3ce36930f0ac503"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "2e7fe7291cb143c5b3ce36930f0ac503"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "2e7fe7291cb143c5b3ce36930f0ac503",
+            "name": "Red summer shirt",
+            "category": "tops",
+            "description": "Red casual shirt for summer.",
+            "imageUrl": "/api/v1/clothing/2e7fe7291cb143c5b3ce36930f0ac503/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.820Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-shirt-red"
+      ],
+      "latency_seconds": 2.405
+    },
+    {
+      "id": "validation-008",
+      "scenario": "case-08",
+      "message": "I would like to wear a white tee with khaki trousers and an olive jacket.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "tee-classic-white",
+            "trousers-chino-khaki",
+            "jacket-bomber-olive"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms",
+          "outerwear"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Select the following wardrobe items: tee-classic-white, trousers-chino-khaki, and jacket-bomber-olive. These items match the user's request for a white tee with khaki trousers and an olive jacket. The user should wear these items for their desired occasion and season.",
+        "itemIds": [
+          "tee-classic-white",
+          "trousers-chino-khaki",
+          "jacket-bomber-olive"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms",
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "tee-classic-white",
+            "trousers-chino-khaki",
+            "jacket-bomber-olive"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "tee-classic-white",
+            "name": "Classic Crew T-shirt",
+            "category": "tops",
+            "description": "Plain short-sleeve cotton tee in white.",
+            "imageUrl": "/api/v1/clothing/tee-classic-white/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "trousers-chino-khaki",
+            "name": "Chino Trousers",
+            "category": "bottoms",
+            "description": "Straight-fit chinos in khaki.",
+            "imageUrl": "/api/v1/clothing/trousers-chino-khaki/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "jacket-bomber-olive",
+            "name": "Bomber Jacket",
+            "category": "outerwear",
+            "description": "Olive bomber jacket with ribbed hem.",
+            "imageUrl": "/api/v1/clothing/jacket-bomber-olive/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "tee-classic-white",
+        "trousers-chino-khaki",
+        "jacket-bomber-olive"
+      ],
+      "latency_seconds": 3.3112
+    },
+    {
+      "id": "validation-009",
+      "scenario": "case-09",
+      "message": "I would like to wear a casual white top; no jackets and dresses.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "tee-classic-white"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "tee-classic-white": "white"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider White cotton kurta. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "44b7f4b0dc8e46258a0deca77391cb1f"
+        ],
+        "occasion": "casual",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "44b7f4b0dc8e46258a0deca77391cb1f",
+            "tee-classic-white"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "44b7f4b0dc8e46258a0deca77391cb1f",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/44b7f4b0dc8e46258a0deca77391cb1f/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.670Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": false,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": false,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kurta-white"
+      ],
+      "latency_seconds": 2.3043
+    },
+    {
+      "id": "validation-010",
+      "scenario": "case-10",
+      "message": "I would like to wear a formal blue shirt; avoid pants and dresses.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "shirt-oxford-blue"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "shirt-oxford-blue": "blue"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Oxford Button Shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "shirt-oxford-blue"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "shirt-oxford-blue"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "shirt-oxford-blue"
+      ],
+      "latency_seconds": 3.9792
+    },
+    {
+      "id": "validation-011",
+      "scenario": "case-11",
+      "message": "I would like to wear a white kurta with white shalwar for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kurta-white",
+            "eval-shalwar-white"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "eval-kurta-white": "white",
+          "eval-shalwar-white": "white"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Wear the white cotton kurta and white shalwar for summer.",
+        "itemIds": [
+          "44b7f4b0dc8e46258a0deca77391cb1f",
+          "a53cd74310c8406dbb2a992a39a1b84c"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "44b7f4b0dc8e46258a0deca77391cb1f",
+            "a53cd74310c8406dbb2a992a39a1b84c"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "44b7f4b0dc8e46258a0deca77391cb1f",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/44b7f4b0dc8e46258a0deca77391cb1f/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.670Z"
+          },
+          {
+            "id": "a53cd74310c8406dbb2a992a39a1b84c",
+            "name": "White shalwar",
+            "category": "bottoms",
+            "description": "White shalwar for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/a53cd74310c8406dbb2a992a39a1b84c/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.697Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kurta-white",
+        "eval-shalwar-white"
+      ],
+      "latency_seconds": 3.2612
+    },
+    {
+      "id": "validation-012",
+      "scenario": "case-12",
+      "message": "I would like to wear a formal green kameez with black shalwar.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kameez-green",
+            "eval-shalwar-black"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "eval-kameez-green": "green",
+          "eval-shalwar-black": "black"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Wear the green kameez with the black shalwar for a formal green kameez with black shalwar for a formal green kameez with black shalwar for a formal green kameez with black shalwar for a formal green kameez with black shalwar for a formal green kameez with black shalwar for a formal green kameez with black shalwar for a formal green kameez with black shalwar for a formal green kameez with black shalwar for a formal green kameez with black shalwar for a formal green kameez with black shalwar for a formal green kameez with black shalwar for a formal green kameez with black shalwar for a formal.",
+        "itemIds": [
+          "3f43747b71bd4aaca3fbfc61a6ebc1a7",
+          "a4b25486eaa446498ab0eecef5384fbe"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "3f43747b71bd4aaca3fbfc61a6ebc1a7",
+            "a4b25486eaa446498ab0eecef5384fbe"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "3f43747b71bd4aaca3fbfc61a6ebc1a7",
+            "name": "Green kameez",
+            "category": "tops",
+            "description": "Green kameez for formal spring autumn.",
+            "imageUrl": "/api/v1/clothing/3f43747b71bd4aaca3fbfc61a6ebc1a7/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.726Z"
+          },
+          {
+            "id": "a4b25486eaa446498ab0eecef5384fbe",
+            "name": "Black shalwar",
+            "category": "bottoms",
+            "description": "Black shalwar for formal spring autumn winter.",
+            "imageUrl": "/api/v1/clothing/a4b25486eaa446498ab0eecef5384fbe/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.760Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kameez-green",
+        "eval-shalwar-black"
+      ],
+      "latency_seconds": 5.8061
+    },
+    {
+      "id": "validation-013",
+      "scenario": "case-13",
+      "message": "I would like to wear a navy sherwani for winter.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-sherwani-navy"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {
+          "eval-sherwani-navy": "navy"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Navy sherwani. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "e3011588c73e4cd491fe855b6fa498ed"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "e3011588c73e4cd491fe855b6fa498ed"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "e3011588c73e4cd491fe855b6fa498ed",
+            "name": "Navy sherwani",
+            "category": "outerwear",
+            "description": "Navy sherwani for formal winter autumn.",
+            "imageUrl": "/api/v1/clothing/e3011588c73e4cd491fe855b6fa498ed/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.789Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-sherwani-navy"
+      ],
+      "latency_seconds": 4.5545
+    },
+    {
+      "id": "validation-014",
+      "scenario": "case-14",
+      "message": "I would like to wear a casual black coat for winter.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-coat-black"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {
+          "eval-coat-black": "black"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose the Black wool coat from the wardrobe. It is suitable for casual winter. The outfit includes a black coat. The wardrobe contains 1 item needed for one outfit. The outfit includes 1 item needed for one outfit. The wardrobe contains 1 item needed for one outfit.",
+        "itemIds": [
+          "dddf74e8a10c4c13bc4cbefd9de0f297"
+        ],
+        "occasion": "casual",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "dddf74e8a10c4c13bc4cbefd9de0f297"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "dddf74e8a10c4c13bc4cbefd9de0f297",
+            "name": "Black wool coat",
+            "category": "outerwear",
+            "description": "Black coat for casual winter.",
+            "imageUrl": "/api/v1/clothing/dddf74e8a10c4c13bc4cbefd9de0f297/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.804Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-coat-black"
+      ],
+      "latency_seconds": 2.7267
+    },
+    {
+      "id": "validation-015",
+      "scenario": "case-15",
+      "message": "I would like to wear a red shirt for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-shirt-red"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "eval-shirt-red": "red"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Wear the Red summer shirt from the wardrobe. It's a great choice for summer. It's a top that can be worn in various outfits. It's a casual shirt that can be paired with other summer items like shorts or skirts. It's a versatile piece that can be worn for both casual and formal occasions. It's a great addition to any wardrobe. It's a top that can be worn in various outfits. It's a casual shirt that can be paired with other summer items like shorts or skirts. It's a versatile piece that can be worn for both casual and formal occasions. It's a great addition to any wardrobe. It's a top that can't",
+        "itemIds": [
+          "2e7fe7291cb143c5b3ce36930f0ac503"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "2e7fe7291cb143c5b3ce36930f0ac503"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "2e7fe7291cb143c5b3ce36930f0ac503",
+            "name": "Red summer shirt",
+            "category": "tops",
+            "description": "Red casual shirt for summer.",
+            "imageUrl": "/api/v1/clothing/2e7fe7291cb143c5b3ce36930f0ac503/image",
+            "source": "user",
+            "createdAt": "2026-10-15T11:56:31.820Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-shirt-red"
+      ],
+      "latency_seconds": 4.4482
+    }
+  ]
+}

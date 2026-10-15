@@ -1,0 +1,16 @@
+{
+  "base_model": "booksforcharlie/stable-diffusion-inpainting",
+  "base_revision": "d260cf3646fe94c6d5d70820b77512f836d7cce2",
+  "vae_model": "stabilityai/sd-vae-ft-mse",
+  "vae_revision": "31f26fdeee1355a5c34592e401dd41e45d25a493",
+  "attention_model": "zhengchong/CatVTON",
+  "attention_revision": "2969fcf85fe62f2036605716f0b56f0b81d01d79",
+  "attention_variant": "vitonhd",
+  "seed": 555,
+  "steps": 30,
+  "guidance": 2.5,
+  "height": 512,
+  "width": 384,
+  "minimum_free_vram_gib": 6,
+  "minimum_free_disk_gib": 12
+}

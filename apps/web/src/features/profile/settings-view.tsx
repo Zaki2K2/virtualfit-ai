@@ -7,14 +7,15 @@ import { ErrorState, Spinner } from '@/components/shared/states';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useEraseAllData, useHealth } from '@/hooks/use-api';
+import { describeError } from '@/lib/api-errors';
 
 const FEATURES: Array<{ name: string; done: boolean; note?: string }> = [
   { name: 'Photo-based virtual try-on workflow', done: true },
   { name: 'Wardrobe, favorites, history and profile', done: true },
   {
     name: 'Real AI generation through a Hugging Face Space',
-    done: false,
-    note: 'Needs server configuration - see docs/ai-integration.md',
+    done: true,
+    note: 'Implemented; requires server configuration and external GPU availability',
   },
   { name: 'User accounts and sign-in', done: false, note: 'Guest mode only for now' },
   { name: 'Size recommendations from measurements', done: false, note: 'Not implemented' },
@@ -53,10 +54,33 @@ export function SettingsView() {
                     {h.ai.simulated ? (
                       <Badge variant="warning">Simulation - not real AI</Badge>
                     ) : h.ai.configured ? (
-                      <Badge variant="success">Connected</Badge>
+                      <Badge variant="success">Configured</Badge>
                     ) : (
                       <Badge variant="danger">Not configured</Badge>
                     )}
+                  </dd>
+                </div>
+                <div className="sm:col-span-2">
+                  <dt className="text-muted-foreground">Models</dt>
+                  <dd className="mt-1 space-y-1.5">
+                    {h.ai.options.map((o) => (
+                      <p key={o.id} className="flex flex-wrap items-center gap-2">
+                        <span className="font-medium">{o.label}</span>
+                        {o.available ? (
+                          <Badge variant={o.simulated ? 'warning' : 'success'}>
+                            {o.simulated ? 'Available - simulation' : 'Available'}
+                          </Badge>
+                        ) : (
+                          <Badge variant="neutral">Unavailable</Badge>
+                        )}
+                        {!o.available && (
+                          <span className="text-xs text-muted-foreground">{o.reason}</span>
+                        )}
+                        {o.id === h.ai.defaultOption && (
+                          <span className="text-xs text-muted-foreground">(default)</span>
+                        )}
+                      </p>
+                    ))}
                   </dd>
                 </div>
                 <div>
@@ -168,7 +192,7 @@ export function SettingsView() {
             )}
             {erase.isError && (
               <span role="alert" className="text-sm text-danger">
-                {erase.error.message}
+                {describeError(erase.error).message}
               </span>
             )}
           </CardContent>

@@ -20,6 +20,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useDeleteHistory, useHistory } from '@/hooks/use-api';
 import { formatDate } from '@/lib/utils';
+import { describeError } from '@/lib/api-errors';
 
 function StatusBadge({ status }: { status: TryOn['status'] }) {
   if (status === 'completed')
@@ -151,7 +152,7 @@ export function HistoryView() {
           </div>
           {remove.isError && (
             <p role="alert" className="mt-4 text-sm text-danger">
-              {remove.error.message}
+              {describeError(remove.error).message}
             </p>
           )}
         </>

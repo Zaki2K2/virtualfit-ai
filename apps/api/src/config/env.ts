@@ -19,6 +19,52 @@ const envSchema = z.object({
     .default(24),
   AI_PROVIDER: z.enum(AI_PROVIDER_IDS).default('mock'),
   AI_TIMEOUT_MS: z.coerce.number().int().min(1000).max(600_000).default(180_000),
+  SLM_URL: z
+    .string()
+    .url()
+    .default('http://127.0.0.1:8081')
+    .refine((value) => {
+      let url: URL;
+      try {
+        url = new URL(value);
+      } catch {
+        return false;
+      }
+      return (
+        url.protocol === 'http:' &&
+        ['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname) &&
+        !url.username &&
+        !url.password &&
+        url.pathname === '/' &&
+        !url.search &&
+        !url.hash
+      );
+    }, 'SLM_URL must be an HTTP loopback origin; styling is local-only'),
+  SLM_MODEL: z.string().min(1).max(100).default('virtualfit-style-base'),
+  SLM_CUSTOM_URL: z
+    .string()
+    .url()
+    .default('http://127.0.0.1:8082')
+    .refine((value) => {
+      try {
+        const url = new URL(value);
+        return (
+          url.protocol === 'http:' &&
+          ['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname) &&
+          !url.username &&
+          !url.password &&
+          url.pathname === '/' &&
+          !url.search &&
+          !url.hash
+        );
+      } catch {
+        return false;
+      }
+    }, 'SLM_CUSTOM_URL must be an HTTP loopback origin'),
+  SLM_TIMEOUT_MS: z.coerce.number().int().min(1000).max(120_000).default(60_000),
+  ENGINE_URL: z.preprocess(emptyToUndefined, z.string().url().optional()),
+  ENGINE_API_KEY: z.preprocess(emptyToUndefined, z.string().optional()),
+  ENGINE_DEFAULT_MODEL: z.enum(['pretrained', 'custom']).default('pretrained'),
   GRADIO_PRESET: z.preprocess(emptyToUndefined, z.enum(GRADIO_PRESET_IDS).optional()),
   GRADIO_SPACE_ID: z.preprocess(emptyToUndefined, z.string().optional()),
   GRADIO_API_NAME: z.preprocess(emptyToUndefined, z.string().optional()),

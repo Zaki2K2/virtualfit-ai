@@ -2,7 +2,7 @@ import type { ErrorRequestHandler, RequestHandler } from 'express';
 import multer from 'multer';
 import { ZodError } from 'zod';
 import type { ApiErrorBody } from '@virtualfit/shared';
-import { AppError } from '../utils/errors';
+import { AppError, isDatabaseUnavailable } from '../utils/errors';
 import { logger } from '../utils/logger';
 
 export const notFoundHandler: RequestHandler = (req, res) => {
@@ -13,7 +13,7 @@ export const notFoundHandler: RequestHandler = (req, res) => {
 };
 
 export function createErrorHandler(maxUploadMb: number): ErrorRequestHandler {
-  return (err, _req, res, next) => {
+  return (err, req, res, next) => {
     if (res.headersSent) return next(err);
 
     let status = 500;
@@ -43,15 +43,30 @@ export function createErrorHandler(maxUploadMb: number): ErrorRequestHandler {
         status = 400;
         body = { error: { code: 'VALIDATION_ERROR', message: `Upload rejected: ${err.message}` } };
       }
+    } else if (isDatabaseUnavailable(err)) {
+      status = 503;
+      body = {
+        error: {
+          code: 'DATABASE_UNAVAILABLE',
+          message: 'The database is not reachable right now. Please try again in a moment.',
+        },
+      };
+    } else if ((err as { type?: string })?.type === 'entity.too.large') {
+      status = 413;
+      body = { error: { code: 'VALIDATION_ERROR', message: 'Request body is too large.' } };
     } else if ((err as { type?: string })?.type === 'entity.parse.failed') {
       status = 400;
       body = { error: { code: 'VALIDATION_ERROR', message: 'Malformed JSON body.' } };
     }
 
     if (status >= 500) {
-      logger.error('Unhandled error', {
+      // Technical detail goes to the server log only (never into the response body).
+      logger.error('Request failed', {
+        route: `${req.method} ${req.path}`,
+        status,
         name: (err as Error)?.name,
         message: (err as Error)?.message,
+        ...(process.env.NODE_ENV === 'production' ? {} : { stack: (err as Error)?.stack }),
       });
     }
     res.status(status).json(body);

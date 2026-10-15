@@ -73,3 +73,26 @@ If space, endpoint or template are missing the provider reports `configured: fal
 - Free tier: ZeroGPU queues and quotas apply; generation can wait or fail when the quota is spent. A cold Space can take minutes to wake.
 - Quality caveats: the model works best on a single, front-facing person with plain background; catalog illustrations are simplified garments so details are approximated. Results can contain artifacts and **do not predict physical fit**.
 - Privacy: with a real provider the photo and garment go to Hugging Face and the Space operator. Consent is required. Our server does not keep the original photo.
+
+## Models offered in the studio (v0.3)
+
+| Option       | Provider      | Runs                                        | Needs                                                   |
+| ------------ | ------------- | ------------------------------------------- | ------------------------------------------------------- |
+| `mock`       | mock          | locally, simulation (watermarked)           | nothing                                                 |
+| `hosted`     | gradio        | Hugging Face Space (`yisol/IDM-VTON`)       | `GRADIO_PRESET=idm-vton`                                |
+| `pretrained` | custom-python | our Python engine, original CatVTON weights | `ENGINE_URL` + engine on a CUDA GPU host                |
+| `custom`     | custom-python | our engine, CatVTON + VirtualFit LoRA       | as above + a **genuine** adapter (`ENGINE_ADAPTER_DIR`) |
+
+`GET /api/v1/health` lists every option with `available` and a `reason`; `POST /api/v1/try-on` accepts an optional `model` field (default = the server default: `AI_PROVIDER`). A request for an unavailable model fails with `AI_UNAVAILABLE` **before** any job is created. There is no fallback between models, and the stored try-on records the real provider, model/version string (for the engine: `catvton-vitonhd` or `catvton-vitonhd+virtualfit-lora(N steps)`) and `simulated`.
+
+### Python engine integration
+
+Express -> `POST {ENGINE_URL}/v1/inference/try-on` (multipart, header `X-Engine-Key`), answer = PNG + `X-Model-Version`. Engine error codes map to API codes (`GPU_UNAVAILABLE`/`MODEL_UNAVAILABLE`/`MASKER_UNAVAILABLE` -> `AI_UNAVAILABLE`, `TIMEOUT` -> `AI_TIMEOUT`, `BUSY` -> `RATE_LIMITED`, others -> `AI_FAILED`). Photos are treated as leaving the machine (consent required) unless `ENGINE_URL` is loopback.
+
+Verified here with a real socket: the actual FastAPI engine on a machine without a GPU reports both models unavailable ("no CUDA GPU available"); Express shows them as unavailable and refuses jobs with `AI_UNAVAILABLE`. **Not verified:** a successful inference through the engine (needs a GPU host with the weights, and a CatVTON checkout + DensePose/SCHP checkpoints for automatic masks; `docs/research/experiment-log.md`).
+
+Limitations: the released `vitonhd` weights handle upper-body garments only; the Express adapter sends no mask, so the engine must have its automatic masker configured (`ENGINE_CATVTON_REPO`); a free Colab session cannot be reached from your PC without a tunnel (not automated here).
+
+### Security and privacy
+
+Engine access needs the shared `X-Engine-Key` (required when the engine binds a non-loopback address); the key is read only server side. The engine decodes uploads itself (magic bytes, size/dimension limits), keeps them in memory only, never fetches URLs from requests, and never stores personal images. The web API keeps its own guest-session ownership checks, upload validation and retention purge. Checkpoints (`*.safetensors`, `runs/`, data) are git-ignored; notebooks contain no secrets (tested).

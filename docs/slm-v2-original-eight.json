@@ -1,0 +1,370 @@
+{
+  "total": 8,
+  "successful": 6,
+  "exact_id_rate": 0.75,
+  "mean_precision": 0.75,
+  "mean_recall": 0.75,
+  "cases": [
+    {
+      "id": "test-000",
+      "request": "From my wardrobe, find casual white tee and khaki trousers, no dresses.",
+      "expected": {
+        "answer": "Pair the white cotton tee with khaki chinos for a simple casual outfit.",
+        "itemIds": [
+          "tee-classic-white",
+          "trousers-chino-khaki"
+        ],
+        "occasion": "casual",
+        "categories": [
+          "tops",
+          "bottoms"
+        ]
+      },
+      "success": false,
+      "error": "HTTP Error 504: Gateway Timeout",
+      "seconds": 60.31
+    },
+    {
+      "id": "test-001",
+      "request": "From my wardrobe, find blue shirt with smart charcoal trousers for the office.",
+      "expected": {
+        "answer": "Combine the blue Oxford shirt with charcoal tailored trousers for an office outfit.",
+        "itemIds": [
+          "shirt-oxford-blue",
+          "trousers-tailored-charcoal"
+        ],
+        "occasion": "office",
+        "categories": [
+          "tops",
+          "bottoms"
+        ]
+      },
+      "success": true,
+      "actual": {
+        "answer": "Select the Oxford Button Shirt in sky blue for the Oxford Button Shirt category and the tailored charcoal trousers in charcoal for the bottoms category.",
+        "itemIds": [
+          "shirt-oxford-blue",
+          "trousers-tailored-charcoal"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "shirt-oxford-blue",
+            "trousers-tailored-charcoal"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "trousers-tailored-charcoal",
+            "name": "Tailored Trousers",
+            "category": "bottoms",
+            "description": "Charcoal tailored trousers.",
+            "imageUrl": "/api/v1/clothing/trousers-tailored-charcoal/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "exact_ids": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "categories_exact": true,
+      "seconds": 20.926
+    },
+    {
+      "id": "test-002",
+      "request": "From my wardrobe, find a denim layer over a white top, avoid dresses.",
+      "expected": {
+        "answer": "Layer the blue denim jacket over the white tee for a relaxed look.",
+        "itemIds": [
+          "jacket-denim",
+          "tee-classic-white"
+        ],
+        "occasion": "casual",
+        "categories": [
+          "outerwear",
+          "tops"
+        ]
+      },
+      "success": true,
+      "actual": {
+        "answer": "From my wardrobe, find a denim layer over a white top, avoid dresses.",
+        "itemIds": [
+          "jacket-denim",
+          "tee-classic-white"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear",
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "jacket-denim",
+            "tee-classic-white"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "jacket-denim",
+            "name": "Denim Jacket",
+            "category": "outerwear",
+            "description": "Classic indigo denim jacket.",
+            "imageUrl": "/api/v1/clothing/jacket-denim/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "tee-classic-white",
+            "name": "Classic Crew T-shirt",
+            "category": "tops",
+            "description": "Plain short-sleeve cotton tee in white.",
+            "imageUrl": "/api/v1/clothing/tee-classic-white/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "exact_ids": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "categories_exact": true,
+      "seconds": 18.403
+    },
+    {
+      "id": "test-003",
+      "request": "From my wardrobe, find an indigo dress for dinner, no trousers.",
+      "expected": {
+        "answer": "Choose the indigo midi dress for dinner. Check its appearance in the try-on studio.",
+        "itemIds": [
+          "dress-midi-indigo"
+        ],
+        "occasion": "dinner",
+        "categories": [
+          "dresses"
+        ]
+      },
+      "success": false,
+      "error": "HTTP Error 504: Gateway Timeout",
+      "seconds": 60.092
+    },
+    {
+      "id": "test-004",
+      "request": "From my wardrobe, find a red silk scarf only.",
+      "expected": {
+        "answer": "There is no red silk scarf in the available wardrobe. Add one before requesting a recommendation for it.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": []
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "exact_ids": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "categories_exact": true,
+      "seconds": 0.294
+    },
+    {
+      "id": "test-005",
+      "request": "From my wardrobe, find explain which category a denim jacket belongs to, without picking an outfit.",
+      "expected": {
+        "answer": "A denim jacket belongs to outerwear and can be used as a layer over a top.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ]
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: outerwear. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "jacket-denim"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "exact_ids": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "categories_exact": true,
+      "seconds": 0.106
+    },
+    {
+      "id": "test-006",
+      "request": "From my wardrobe, find a white top only; exclude jackets and dresses.",
+      "expected": {
+        "answer": "The white cotton crew-neck tee matches your preference for a white top.",
+        "itemIds": [
+          "tee-classic-white"
+        ],
+        "occasion": "casual",
+        "categories": [
+          "tops"
+        ]
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Classic Crew T-shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "tee-classic-white"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "tee-classic-white"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "tee-classic-white",
+            "name": "Classic Crew T-shirt",
+            "category": "tops",
+            "description": "Plain short-sleeve cotton tee in white.",
+            "imageUrl": "/api/v1/clothing/tee-classic-white/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "exact_ids": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "categories_exact": true,
+      "seconds": 59.244
+    },
+    {
+      "id": "test-007",
+      "request": "From my wardrobe, find a blue office shirt, avoid pants and dresses.",
+      "expected": {
+        "answer": "The blue Oxford shirt matches your request for an office top.",
+        "itemIds": [
+          "shirt-oxford-blue"
+        ],
+        "occasion": "office",
+        "categories": [
+          "tops"
+        ]
+      },
+      "success": true,
+      "actual": {
+        "answer": "Find a blue Oxford Button Shirt in sky blue. It's a suitable top for a formal occasion. It's a long-sleeve collared shirt in sky blue. It's a top for a formal occasion. It's a top for a formal occasion. It's a top for a formal occasion. It's a top for a formal occasion. It's a top for a formal occasion. It's a top for a formal occasion. It's a top for a formal occasion. It's a top for a formal occasion. It's a top for a formal occasion. It's a top for a formal occasion. It's a top for a formal occasion. It's a top for a formal occasion. It's a top for a formal occasion. It's a top for a formal",
+        "itemIds": [
+          "shirt-oxford-blue"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "shirt-oxford-blue"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "exact_ids": true,
+      "precision": 1.0,
+      "recall": 1.0,
+      "categories_exact": true,
+      "seconds": 49.263
+    }
+  ],
+  "limitations": "Eight synthetic paraphrase scenarios; not an independent fashion-quality benchmark. Includes retrieval and guardrails, not just raw model quality."
+}

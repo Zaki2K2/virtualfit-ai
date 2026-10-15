@@ -1,0 +1,24 @@
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "output_dir": "runs/fashion-lora-v2",
+  "max_length": 1024,
+  "max_steps": 64,
+  "gradient_accumulation": 8,
+  "learning_rate": 0.0002,
+  "rank": 8,
+  "alpha": 16,
+  "seed": 42,
+  "qlora": false,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+  "data_dir": "data/training-v2",
+  "checkpoint_every": 4
+}

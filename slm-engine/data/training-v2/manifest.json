@@ -1,0 +1,9 @@
+{
+  "version": "training-v2",
+  "source": "independently authored synthetic contexts; no evaluation rows imported",
+  "files": {
+    "test.jsonl": "0e9dfdb67008c7f678b3cc11f29ead4ed9021f0e7325b1f9a516d0f2e3fb6517",
+    "train.jsonl": "c25b664a27a90716570fe823b70e7c1b57a681eb4129cad2490cea02b5d8a7f7",
+    "validation.jsonl": "5efc1f045d9dc377aaf70fd1cef258d136819078728a37844db8240e5f59e845"
+  }
+}

@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import type { HealthStatus } from '@virtualfit/shared';
 
-export function healthRoutes(getStatus: () => HealthStatus): Router {
+export function healthRoutes(getStatus: () => Promise<HealthStatus>): Router {
   const r = Router();
-  r.get('/', (_req, res) => {
-    res.json(getStatus());
+  r.get('/', async (_req, res) => {
+    res.json(await getStatus());
   });
   return r;
 }

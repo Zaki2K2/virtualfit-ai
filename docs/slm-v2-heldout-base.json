@@ -1,0 +1,5698 @@
+{
+  "version": "fashion-eval-v2",
+  "split": "heldout",
+  "model_selection": "base",
+  "served_models": [
+    "virtualfit-style-base"
+  ],
+  "created_at_utc": "2026-10-15T12:33:39.621008+00:00",
+  "artifact_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+  "fixture_ids": {
+    "eval-kurta-white": "eval-fixture-0000",
+    "eval-shalwar-white": "eval-fixture-0001",
+    "eval-kameez-green": "eval-fixture-0002",
+    "eval-shalwar-black": "eval-fixture-0003",
+    "eval-sherwani-navy": "eval-fixture-0004",
+    "eval-coat-black": "eval-fixture-0005",
+    "eval-shirt-red": "eval-fixture-0006",
+    "eval-pants-blue": "eval-fixture-0007"
+  },
+  "code_sha256": {
+    "apps\\api\\src\\modules\\styling\\grounding.ts": "e2c75a0ba81c2d317bad6b9059333b87a01e11936fbb394a279f52368e79d1ca",
+    "apps\\api\\src\\modules\\styling\\styling.service.ts": "736177cefd2e15a6a14ce61468674a40fc72360272232c7aa1c2c2bdbc616098",
+    "apps\\api\\src\\integrations\\slm\\llama-cpp.provider.ts": "0c1a6359df402c44507bf96b5a0088277d6d34459e353c9c3392476ccc728f61"
+  },
+  "dataset_sha256": "bcd0fa1da6c1e453a010b41e8963f98b5c6907958169b55e72788ff4fa148d5f",
+  "catalog_sha256": "ddb4f6af5eef0eadeb15af081823f4f246e197017919c33350ec5aedefdede21",
+  "catalog": {
+    "eval-pants-blue": {
+      "name": "Blue winter trousers",
+      "category": "bottoms",
+      "description": "Blue casual trousers for winter."
+    },
+    "eval-shirt-red": {
+      "name": "Red summer shirt",
+      "category": "tops",
+      "description": "Red casual shirt for summer."
+    },
+    "eval-coat-black": {
+      "name": "Black wool coat",
+      "category": "outerwear",
+      "description": "Black coat for casual winter."
+    },
+    "eval-sherwani-navy": {
+      "name": "Navy sherwani",
+      "category": "outerwear",
+      "description": "Navy sherwani for formal winter autumn."
+    },
+    "eval-shalwar-black": {
+      "name": "Black shalwar",
+      "category": "bottoms",
+      "description": "Black shalwar for formal spring autumn winter."
+    },
+    "eval-kameez-green": {
+      "name": "Green kameez",
+      "category": "tops",
+      "description": "Green kameez for formal spring autumn."
+    },
+    "eval-shalwar-white": {
+      "name": "White shalwar",
+      "category": "bottoms",
+      "description": "White shalwar for casual summer spring."
+    },
+    "eval-kurta-white": {
+      "name": "White cotton kurta",
+      "category": "tops",
+      "description": "White traditional kurta for casual summer spring."
+    },
+    "tee-classic-white": {
+      "name": "Classic Crew T-shirt",
+      "category": "tops",
+      "description": "Plain short-sleeve cotton tee in white."
+    },
+    "tee-graphite": {
+      "name": "Graphite T-shirt",
+      "category": "tops",
+      "description": "Relaxed short-sleeve tee in graphite grey."
+    },
+    "shirt-oxford-blue": {
+      "name": "Oxford Button Shirt",
+      "category": "tops",
+      "description": "Long-sleeve collared shirt in sky blue."
+    },
+    "shirt-linen-sand": {
+      "name": "Linen Shirt",
+      "category": "tops",
+      "description": "Lightweight collared shirt in sand."
+    },
+    "jacket-denim": {
+      "name": "Denim Jacket",
+      "category": "outerwear",
+      "description": "Classic indigo denim jacket."
+    },
+    "jacket-bomber-olive": {
+      "name": "Bomber Jacket",
+      "category": "outerwear",
+      "description": "Olive bomber jacket with ribbed hem."
+    },
+    "trousers-chino-khaki": {
+      "name": "Chino Trousers",
+      "category": "bottoms",
+      "description": "Straight-fit chinos in khaki."
+    },
+    "trousers-tailored-charcoal": {
+      "name": "Tailored Trousers",
+      "category": "bottoms",
+      "description": "Charcoal tailored trousers."
+    },
+    "dress-midi-indigo": {
+      "name": "Midi Dress",
+      "category": "dresses",
+      "description": "Sleeveless midi dress in indigo."
+    },
+    "dress-summer-rose": {
+      "name": "Summer Dress",
+      "category": "dresses",
+      "description": "Short-sleeve flared dress in dusty rose."
+    }
+  },
+  "model_config": {
+    "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "gguf_repo": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+    "revision": "9217f5db79a29953eb74d5343926648285ec7e67",
+    "filename": "qwen2.5-0.5b-instruct-q4_k_m.gguf",
+    "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+    "model_bytes": 491400032,
+    "runtime_tag": "b11643",
+    "runtime_file": "llama-b11643-bin-win-cpu-x64.zip",
+    "runtime_sha256": "7bf670617ed02a54de52fae4637d16cb633b8a2dfeb851469630e827cf9854d5",
+    "context": 2048,
+    "threads": 4,
+    "port": 8081,
+    "alias": "virtualfit-style-base"
+  },
+  "total": 102,
+  "successful": 102,
+  "metrics": {
+    "intent_accuracy": {
+      "correct": 102,
+      "total": 102,
+      "rate": 1.0
+    },
+    "category_accuracy": {
+      "correct": 102,
+      "total": 102,
+      "rate": 1.0
+    },
+    "color_accuracy": {
+      "correct": 21,
+      "total": 21,
+      "rate": 1.0
+    },
+    "valid_catalog_selection": {
+      "correct": 102,
+      "total": 102,
+      "rate": 1.0
+    },
+    "exact_outfit_match": {
+      "correct": 102,
+      "total": 102,
+      "rate": 1.0
+    },
+    "json_schema_valid": {
+      "correct": 102,
+      "total": 102,
+      "rate": 1.0
+    }
+  },
+  "model_calls": 42,
+  "accepted_model_outputs": 22,
+  "fallbacks": 20,
+  "raw_schema_valid": 42,
+  "raw_selection_valid": 22,
+  "latency_seconds": {
+    "mean": 1.2221254901960785,
+    "median": 0.02515,
+    "p95": 4.1
+  },
+  "limitations": "Synthetic scenario suite, correlated paraphrases. Metrics describe the whole pipeline including deterministic policy/fallback, not a trained-model accuracy gain. Memory-isolated API catalog; real CPU inference. No live MongoDB benchmark writes.",
+  "cases": [
+    {
+      "id": "heldout-000",
+      "scenario": "case-16",
+      "message": "For today I would like blue trousers for winter.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-pants-blue"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "eval-pants-blue": "blue"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Blue winter trousers. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "eval-fixture-0007"
+        ],
+        "occasion": "",
+        "categories": [
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "eval-fixture-0007"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0007",
+            "name": "Blue winter trousers",
+            "category": "bottoms",
+            "description": "Blue casual trousers for winter.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0007/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.947Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-pants-blue"
+      ],
+      "latency_seconds": 2.9798
+    },
+    {
+      "id": "heldout-001",
+      "scenario": "case-17",
+      "message": "For today I would like a yellow dress.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0227
+    },
+    {
+      "id": "heldout-002",
+      "scenario": "case-18",
+      "message": "For today I would like a purple kurta.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0161
+    },
+    {
+      "id": "heldout-003",
+      "scenario": "case-19",
+      "message": "For today I would like a formal white tee.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "formal",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0037
+    },
+    {
+      "id": "heldout-004",
+      "scenario": "case-20",
+      "message": "For today I would like a winter rose dress.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0289
+    },
+    {
+      "id": "heldout-005",
+      "scenario": "case-21",
+      "message": "For today I would like a red silk scarf only.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Red summer shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0006"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0034
+    },
+    {
+      "id": "heldout-006",
+      "scenario": "case-22",
+      "message": "For today I would like black shoes only.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Black shalwar. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0003",
+            "eval-fixture-0005"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0343
+    },
+    {
+      "id": "heldout-007",
+      "scenario": "case-23",
+      "message": "For today I would like a wedding saree.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0356
+    },
+    {
+      "id": "heldout-008",
+      "scenario": "case-24",
+      "message": "For today I would like a blue suit.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Blue winter trousers. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0007",
+            "eval-fixture-0004",
+            "jacket-denim"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0036
+    },
+    {
+      "id": "heldout-009",
+      "scenario": "case-25",
+      "message": "For today I would like some sneakers.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0159
+    },
+    {
+      "id": "heldout-010",
+      "scenario": "case-26",
+      "message": "For today I would like a traditional white kurta.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kurta-white"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "eval-kurta-white": "white"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "For today, I would like a traditional white kurta. It's a classic summer outfit that can be worn for casual summer spring. The kurta is a versatile piece that can be paired with various other items like a blouse, a skirt, or a pair of sandals. It's perfect for a variety of occasions, from casual outings to more formal events. The kurta is made of cotton, which is comfortable and breathable. It's a great choice for a simple yet stylish outfit. The kurta is available in white, which is a popular color for summer. It's recommended to wear it with a blouse, a skirt, or a pair of sandals. The kurta",
+        "itemIds": [
+          "eval-fixture-0000"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0000"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0000",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0000/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.803Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kurta-white"
+      ],
+      "latency_seconds": 3.453
+    },
+    {
+      "id": "heldout-011",
+      "scenario": "case-27",
+      "message": "For today I would like a Pakistani green kameez.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kameez-green"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "eval-kameez-green": "green"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Green kameez. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "eval-fixture-0002"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "eval-fixture-0002"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0002",
+            "name": "Green kameez",
+            "category": "tops",
+            "description": "Green kameez for formal spring autumn.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0002/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.829Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kameez-green"
+      ],
+      "latency_seconds": 4.1
+    },
+    {
+      "id": "heldout-012",
+      "scenario": "case-28",
+      "message": "For today I would like explain which category a denim jacket belongs to, without picking an outfit.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "category",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: outerwear. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "jacket-denim"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.005
+    },
+    {
+      "id": "heldout-013",
+      "scenario": "case-29",
+      "message": "For today I would like classify a kurta without picking an outfit.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "category",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: tops. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0000"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0185
+    },
+    {
+      "id": "heldout-014",
+      "scenario": "case-30",
+      "message": "For today I would like classify shalwar without picking an outfit.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "category",
+        "categories": [
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: bottoms. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0003",
+            "eval-fixture-0001"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0035
+    },
+    {
+      "id": "heldout-015",
+      "scenario": "case-31",
+      "message": "For today I would like which category contains a dress.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "category",
+        "categories": [
+          "dresses"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: dresses. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "dresses"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "dress-midi-indigo",
+            "dress-summer-rose"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0047
+    },
+    {
+      "id": "heldout-016",
+      "scenario": "case-32",
+      "message": "For today I would like something stylish.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "clarify",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Which garment categories, colors, occasion or season should I use? Please add a little detail.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "clarify",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0033
+    },
+    {
+      "id": "heldout-017",
+      "scenario": "case-33",
+      "message": "For today I would like help me choose clothing.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "clarify",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Which garment categories, colors, occasion or season should I use? Please add a little detail.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "clarify",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0193
+    },
+    {
+      "id": "heldout-018",
+      "scenario": "case-34",
+      "message": "For today I would like an outfit please.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "clarify",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Which garment categories, colors, occasion or season should I use? Please add a little detail.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "clarify",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0155
+    },
+    {
+      "id": "heldout-019",
+      "scenario": "case-35",
+      "message": "For today I would like a nice look.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "clarify",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Which garment categories, colors, occasion or season should I use? Please add a little detail.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "clarify",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0029
+    },
+    {
+      "id": "heldout-020",
+      "scenario": "case-36",
+      "message": "For today I would like a white tee, exclude tops.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0285
+    },
+    {
+      "id": "heldout-021",
+      "scenario": "case-37",
+      "message": "For today I would like a blue shirt, no blue.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0155
+    },
+    {
+      "id": "heldout-022",
+      "scenario": "case-38",
+      "message": "For today I would like a black shalwar for autumn.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-shalwar-black"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "eval-shalwar-black": "black"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "For today, I would like a black shalwar for autumn. It is suitable for formal spring, autumn, and winter. The garment is black, making it suitable for autumn. The recommended item is 'eval-fixture-0003', which is a black shalwar. It is a suitable choice for the given preferences and slots. The garment is suitable for autumn. The recommended item is 'eval-fixture-0003', which is a black shalwar. It is a suitable choice for the given preferences and slots.",
+        "itemIds": [
+          "eval-fixture-0003"
+        ],
+        "occasion": "",
+        "categories": [
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0003"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0003",
+            "name": "Black shalwar",
+            "category": "bottoms",
+            "description": "Black shalwar for formal spring autumn winter.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0003/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.856Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-shalwar-black"
+      ],
+      "latency_seconds": 3.0437
+    },
+    {
+      "id": "heldout-023",
+      "scenario": "case-39",
+      "message": "For today I would like an indigo denim jacket for spring.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "jacket-denim"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {
+          "jacket-denim": "indigo"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Denim Jacket. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "jacket-denim"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "jacket-denim"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "jacket-denim",
+            "name": "Denim Jacket",
+            "category": "outerwear",
+            "description": "Classic indigo denim jacket.",
+            "imageUrl": "/api/v1/clothing/jacket-denim/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "jacket-denim"
+      ],
+      "latency_seconds": 3.324
+    },
+    {
+      "id": "heldout-024",
+      "scenario": "case-40",
+      "message": "For today I would like formal green kameez with charcoal trousers.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kameez-green",
+            "trousers-tailored-charcoal"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "For today, I would like a green kameez with charcoal trousers. The recommended wardrobe items are: eval-fixture-0002 (Green kameez) and trousers-tailored-charcoal (Tailored Trousers). The outfit is suitable for a formal spring autumn occasion. The recommended slots are: top: eval-fixture-0002, bottom: trousers-tailored-charcoal. The outfit is not supported by excluded categories or colors. The occasion is formal, the season is spring, and the season is autumn. The season is not specified. The season is not specified. The season is not specified. The season is not specified. The season is not a",
+        "itemIds": [
+          "eval-fixture-0002",
+          "trousers-tailored-charcoal"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0002",
+            "trousers-tailored-charcoal"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0002",
+            "name": "Green kameez",
+            "category": "tops",
+            "description": "Green kameez for formal spring autumn.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0002/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.829Z"
+          },
+          {
+            "id": "trousers-tailored-charcoal",
+            "name": "Tailored Trousers",
+            "category": "bottoms",
+            "description": "Charcoal tailored trousers.",
+            "imageUrl": "/api/v1/clothing/trousers-tailored-charcoal/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kameez-green",
+        "trousers-tailored-charcoal"
+      ],
+      "latency_seconds": 3.8391
+    },
+    {
+      "id": "heldout-025",
+      "scenario": "case-41",
+      "message": "For today I would like a red shirt with khaki chinos for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-shirt-red",
+            "trousers-chino-khaki"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "For today, I would like a red summer shirt with khaki chinos for summer.",
+        "itemIds": [
+          "eval-fixture-0006",
+          "trousers-chino-khaki"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0006",
+            "trousers-chino-khaki"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0006",
+            "name": "Red summer shirt",
+            "category": "tops",
+            "description": "Red casual shirt for summer.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0006/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.916Z"
+          },
+          {
+            "id": "trousers-chino-khaki",
+            "name": "Chino Trousers",
+            "category": "bottoms",
+            "description": "Straight-fit chinos in khaki.",
+            "imageUrl": "/api/v1/clothing/trousers-chino-khaki/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-shirt-red",
+        "trousers-chino-khaki"
+      ],
+      "latency_seconds": 1.7354
+    },
+    {
+      "id": "heldout-026",
+      "scenario": "case-42",
+      "message": "For today I would like a white kurta with black shalwar for spring.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kurta-white",
+            "eval-shalwar-black"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "For today, I would like a white cotton kurta with black shalwar for spring.",
+        "itemIds": [
+          "eval-fixture-0000",
+          "eval-fixture-0003"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0000",
+            "eval-fixture-0003"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0000",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0000/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.803Z"
+          },
+          {
+            "id": "eval-fixture-0003",
+            "name": "Black shalwar",
+            "category": "bottoms",
+            "description": "Black shalwar for formal spring autumn winter.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0003/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.856Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kurta-white",
+        "eval-shalwar-black"
+      ],
+      "latency_seconds": 1.8825
+    },
+    {
+      "id": "heldout-027",
+      "scenario": "case-43",
+      "message": "For today I would like a navy sherwani with a green kameez for autumn.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-sherwani-navy",
+            "eval-kameez-green"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear",
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "For today, I would like a navy sherwani with a green kameez for autumn.",
+        "itemIds": [
+          "eval-fixture-0004",
+          "eval-fixture-0002"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear",
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0004",
+            "eval-fixture-0002"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0004",
+            "name": "Navy sherwani",
+            "category": "outerwear",
+            "description": "Navy sherwani for formal winter autumn.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0004/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.886Z"
+          },
+          {
+            "id": "eval-fixture-0002",
+            "name": "Green kameez",
+            "category": "tops",
+            "description": "Green kameez for formal spring autumn.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0002/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.829Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-sherwani-navy",
+        "eval-kameez-green"
+      ],
+      "latency_seconds": 2.3355
+    },
+    {
+      "id": "heldout-028",
+      "scenario": "case-44",
+      "message": "For today I would like a gray tee for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "tee-graphite"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "tee-graphite": "gray"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Graphite T-shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "tee-graphite"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "tee-graphite"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "tee-graphite",
+            "name": "Graphite T-shirt",
+            "category": "tops",
+            "description": "Relaxed short-sleeve tee in graphite grey.",
+            "imageUrl": "/api/v1/clothing/tee-graphite/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "tee-graphite"
+      ],
+      "latency_seconds": 3.8395
+    },
+    {
+      "id": "heldout-029",
+      "scenario": "case-45",
+      "message": "For today I would like a green jacket for winter.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "jacket-bomber-olive"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {
+          "jacket-bomber-olive": "green"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Bomber Jacket. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "jacket-bomber-olive"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "jacket-bomber-olive"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "jacket-bomber-olive",
+            "name": "Bomber Jacket",
+            "category": "outerwear",
+            "description": "Olive bomber jacket with ribbed hem.",
+            "imageUrl": "/api/v1/clothing/jacket-bomber-olive/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "jacket-bomber-olive"
+      ],
+      "latency_seconds": 4.1513
+    },
+    {
+      "id": "heldout-030",
+      "scenario": "case-46",
+      "message": "For today I would like a formal shirt for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "shirt-linen-sand"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Linen Shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "shirt-linen-sand"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "shirt-linen-sand"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-linen-sand",
+            "name": "Linen Shirt",
+            "category": "tops",
+            "description": "Lightweight collared shirt in sand.",
+            "imageUrl": "/api/v1/clothing/shirt-linen-sand/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "shirt-linen-sand"
+      ],
+      "latency_seconds": 3.104
+    },
+    {
+      "id": "heldout-031",
+      "scenario": "case-47",
+      "message": "For today I would like a blue shirt with khaki pants.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "shirt-oxford-blue",
+            "trousers-chino-khaki"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Oxford Button Shirt with Chino Trousers. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "shirt-oxford-blue",
+          "trousers-chino-khaki"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "shirt-oxford-blue",
+            "trousers-chino-khaki"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "trousers-chino-khaki",
+            "name": "Chino Trousers",
+            "category": "bottoms",
+            "description": "Straight-fit chinos in khaki.",
+            "imageUrl": "/api/v1/clothing/trousers-chino-khaki/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "shirt-oxford-blue",
+        "trousers-chino-khaki"
+      ],
+      "latency_seconds": 4.6626
+    },
+    {
+      "id": "heldout-032",
+      "scenario": "case-48",
+      "message": "For today I would like a red top and a white kurta.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-shirt-red",
+            "eval-kurta-white"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Red summer shirt with White cotton kurta. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "eval-fixture-0006",
+          "eval-fixture-0000"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "eval-fixture-0006",
+            "eval-fixture-0000"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0006",
+            "name": "Red summer shirt",
+            "category": "tops",
+            "description": "Red casual shirt for summer.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0006/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.916Z"
+          },
+          {
+            "id": "eval-fixture-0000",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0000/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.803Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-shirt-red",
+        "eval-kurta-white"
+      ],
+      "latency_seconds": 2.2718
+    },
+    {
+      "id": "heldout-033",
+      "scenario": "case-49",
+      "message": "For today I would like a summer black coat.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0039
+    },
+    {
+      "id": "heldout-034",
+      "scenario": "case-16",
+      "message": "Please help with blue trousers for winter. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-pants-blue"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "eval-pants-blue": "blue"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose the blue winter trousers from the inventory. They are suitable for the winter season. Please note that they are not available in the selected colors. They are also not in the excluded categories. They are not in the excluded colors. They are not in the season. They are not in the unsupported slots. They are not in the season. They are not in the unsupported slots. They are not in the season. They are not in the unsupported slots. They are not in the season. They are not in the unsupported slots. They are not in the season. They are not in the unsupported slots. They are not in the slot.",
+        "itemIds": [
+          "eval-fixture-0007"
+        ],
+        "occasion": "",
+        "categories": [
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0007"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0007",
+            "name": "Blue winter trousers",
+            "category": "bottoms",
+            "description": "Blue casual trousers for winter.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0007/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.947Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-pants-blue"
+      ],
+      "latency_seconds": 3.758
+    },
+    {
+      "id": "heldout-035",
+      "scenario": "case-17",
+      "message": "Please help with a yellow dress. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0195
+    },
+    {
+      "id": "heldout-036",
+      "scenario": "case-18",
+      "message": "Please help with a purple kurta. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0049
+    },
+    {
+      "id": "heldout-037",
+      "scenario": "case-19",
+      "message": "Please help with a formal white tee. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "formal",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.025
+    },
+    {
+      "id": "heldout-038",
+      "scenario": "case-20",
+      "message": "Please help with a winter rose dress. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0154
+    },
+    {
+      "id": "heldout-039",
+      "scenario": "case-21",
+      "message": "Please help with a red silk scarf only. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Red summer shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0006"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0044
+    },
+    {
+      "id": "heldout-040",
+      "scenario": "case-22",
+      "message": "Please help with black shoes only. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Black shalwar. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0003",
+            "eval-fixture-0005"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0253
+    },
+    {
+      "id": "heldout-041",
+      "scenario": "case-23",
+      "message": "Please help with a wedding saree. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0148
+    },
+    {
+      "id": "heldout-042",
+      "scenario": "case-24",
+      "message": "Please help with a blue suit. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Blue winter trousers. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0007",
+            "eval-fixture-0004",
+            "jacket-denim"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.016
+    },
+    {
+      "id": "heldout-043",
+      "scenario": "case-25",
+      "message": "Please help with some sneakers. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0154
+    },
+    {
+      "id": "heldout-044",
+      "scenario": "case-26",
+      "message": "Please help with a traditional white kurta. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kurta-white"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "eval-kurta-white": "white"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Select the White cotton kurta from the wardrobe. It's a traditional white kurta for casual summer spring. It's a top for the outfit. It's a garment that fits the description. It's a garment that fits the colors. It's a garment that fits the occasion. It's a garment that fits the season. It's a garment that fits the unsupported preferences. It's a garment that fits the excluded categories. It's a garment that fits the excluded colors. It's a garment that fits the season. It's a garment that fits the season. It's a garment that fits the season. It's a garment that fits the season. It's a garment",
+        "itemIds": [
+          "eval-fixture-0000"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0000"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0000",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0000/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.803Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kurta-white"
+      ],
+      "latency_seconds": 3.9051
+    },
+    {
+      "id": "heldout-045",
+      "scenario": "case-27",
+      "message": "Please help with a Pakistani green kameez. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kameez-green"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "eval-kameez-green": "green"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Green kameez. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "eval-fixture-0002"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "eval-fixture-0002"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0002",
+            "name": "Green kameez",
+            "category": "tops",
+            "description": "Green kameez for formal spring autumn.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0002/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.829Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kameez-green"
+      ],
+      "latency_seconds": 1.7873
+    },
+    {
+      "id": "heldout-046",
+      "scenario": "case-28",
+      "message": "Please help with explain which category a denim jacket belongs to, without picking an outfit. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "category",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: outerwear. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "jacket-denim"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0044
+    },
+    {
+      "id": "heldout-047",
+      "scenario": "case-29",
+      "message": "Please help with classify a kurta without picking an outfit. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "category",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: tops. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0000"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0186
+    },
+    {
+      "id": "heldout-048",
+      "scenario": "case-30",
+      "message": "Please help with classify shalwar without picking an outfit. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "category",
+        "categories": [
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: bottoms. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0003",
+            "eval-fixture-0001"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0044
+    },
+    {
+      "id": "heldout-049",
+      "scenario": "case-31",
+      "message": "Please help with which category contains a dress. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "category",
+        "categories": [
+          "dresses"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: dresses. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "dresses"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "dress-midi-indigo",
+            "dress-summer-rose"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0266
+    },
+    {
+      "id": "heldout-050",
+      "scenario": "case-32",
+      "message": "Please help with something stylish. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "clarify",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Which garment categories, colors, occasion or season should I use? Please add a little detail.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "clarify",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0035
+    },
+    {
+      "id": "heldout-051",
+      "scenario": "case-33",
+      "message": "Please help with help me choose clothing. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "clarify",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Which garment categories, colors, occasion or season should I use? Please add a little detail.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "clarify",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0033
+    },
+    {
+      "id": "heldout-052",
+      "scenario": "case-34",
+      "message": "Please help with an outfit please. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "clarify",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Which garment categories, colors, occasion or season should I use? Please add a little detail.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "clarify",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0034
+    },
+    {
+      "id": "heldout-053",
+      "scenario": "case-35",
+      "message": "Please help with a nice look. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "clarify",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Which garment categories, colors, occasion or season should I use? Please add a little detail.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "clarify",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0222
+    },
+    {
+      "id": "heldout-054",
+      "scenario": "case-36",
+      "message": "Please help with a white tee, exclude tops. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0295
+    },
+    {
+      "id": "heldout-055",
+      "scenario": "case-37",
+      "message": "Please help with a blue shirt, no blue. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0148
+    },
+    {
+      "id": "heldout-056",
+      "scenario": "case-38",
+      "message": "Please help with a black shalwar for autumn. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-shalwar-black"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "eval-shalwar-black": "black"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Black shalwar. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "eval-fixture-0003"
+        ],
+        "occasion": "",
+        "categories": [
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "eval-fixture-0003"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0003",
+            "name": "Black shalwar",
+            "category": "bottoms",
+            "description": "Black shalwar for formal spring autumn winter.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0003/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.856Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-shalwar-black"
+      ],
+      "latency_seconds": 4.5155
+    },
+    {
+      "id": "heldout-057",
+      "scenario": "case-39",
+      "message": "Please help with an indigo denim jacket for spring. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "jacket-denim"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {
+          "jacket-denim": "indigo"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Denim Jacket. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "jacket-denim"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "jacket-denim"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "jacket-denim",
+            "name": "Denim Jacket",
+            "category": "outerwear",
+            "description": "Classic indigo denim jacket.",
+            "imageUrl": "/api/v1/clothing/jacket-denim/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "jacket-denim"
+      ],
+      "latency_seconds": 2.1742
+    },
+    {
+      "id": "heldout-058",
+      "scenario": "case-40",
+      "message": "Please help with formal green kameez with charcoal trousers. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kameez-green",
+            "trousers-tailored-charcoal"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "For a formal green kameez with charcoal trousers, select the following wardrobe items: Green kameez, Tailored Trousers. Please note that this is a verified complete outfit, and you can use it as needed for one outfit. The selected items are essential for the outfit. Please follow the instructions to complete the selection. If you have any other questions or need further assistance, feel free to ask. The selected items are essential for the outfit. Please follow the instructions to complete the selection. If you have any other questions or need further assistance, feel free to ask. The selected",
+        "itemIds": [
+          "eval-fixture-0002",
+          "trousers-tailored-charcoal"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0002",
+            "trousers-tailored-charcoal"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0002",
+            "name": "Green kameez",
+            "category": "tops",
+            "description": "Green kameez for formal spring autumn.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0002/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.829Z"
+          },
+          {
+            "id": "trousers-tailored-charcoal",
+            "name": "Tailored Trousers",
+            "category": "bottoms",
+            "description": "Charcoal tailored trousers.",
+            "imageUrl": "/api/v1/clothing/trousers-tailored-charcoal/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kameez-green",
+        "trousers-tailored-charcoal"
+      ],
+      "latency_seconds": 3.8843
+    },
+    {
+      "id": "heldout-059",
+      "scenario": "case-41",
+      "message": "Please help with a red shirt with khaki chinos for summer. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-shirt-red",
+            "trousers-chino-khaki"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "For a red summer shirt with khaki chinos, choose the red summer shirt from the first wardrobe item. For chinos, select the straight-fit khaki chinos from the second wardrobe item. Both items are suitable for the summer season.",
+        "itemIds": [
+          "eval-fixture-0006",
+          "trousers-chino-khaki"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0006",
+            "trousers-chino-khaki"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0006",
+            "name": "Red summer shirt",
+            "category": "tops",
+            "description": "Red casual shirt for summer.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0006/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.916Z"
+          },
+          {
+            "id": "trousers-chino-khaki",
+            "name": "Chino Trousers",
+            "category": "bottoms",
+            "description": "Straight-fit chinos in khaki.",
+            "imageUrl": "/api/v1/clothing/trousers-chino-khaki/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-shirt-red",
+        "trousers-chino-khaki"
+      ],
+      "latency_seconds": 2.5513
+    },
+    {
+      "id": "heldout-060",
+      "scenario": "case-42",
+      "message": "Please help with a white kurta with black shalwar for spring. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kurta-white",
+            "eval-shalwar-black"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "For a white kurta with black shalwar for spring, wear the White cotton kurta. It's a traditional summer outfit. For a black shalwar, choose the Black shalwar. Both are suitable for a formal spring autumn winter occasion. For a complete outfit, select both garments. This will give you a white kurta with black shalwar for spring. Please note that this is a verified complete outfit, and you can use it as is. If you need any more assistance, please let me know.",
+        "itemIds": [
+          "eval-fixture-0000",
+          "eval-fixture-0003"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0000",
+            "eval-fixture-0003"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0000",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0000/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.803Z"
+          },
+          {
+            "id": "eval-fixture-0003",
+            "name": "Black shalwar",
+            "category": "bottoms",
+            "description": "Black shalwar for formal spring autumn winter.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0003/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.856Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kurta-white",
+        "eval-shalwar-black"
+      ],
+      "latency_seconds": 3.7442
+    },
+    {
+      "id": "heldout-061",
+      "scenario": "case-43",
+      "message": "Please help with a navy sherwani with a green kameez for autumn. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-sherwani-navy",
+            "eval-kameez-green"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear",
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "For a navy sherwani with a green kameez for autumn, wear the navy sherwani and the green kameez. Ensure the sherwani is in a formal winter autumn style and the kameez is in a formal spring autumn style. The outfit is suitable for autumn. The wardrobe items needed are the navy sherwani and the green kameez. The selection plan is [eval-fixture-0004, eval-fixture-0002]. The season is autumn, and the unsupported category is colors. The season is autumn, and the unsupported category is colors. The season is autumn, and the unsupported category is colors. The season is autumn, and the unsupported is",
+        "itemIds": [
+          "eval-fixture-0004",
+          "eval-fixture-0002"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear",
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0004",
+            "eval-fixture-0002"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0004",
+            "name": "Navy sherwani",
+            "category": "outerwear",
+            "description": "Navy sherwani for formal winter autumn.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0004/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.886Z"
+          },
+          {
+            "id": "eval-fixture-0002",
+            "name": "Green kameez",
+            "category": "tops",
+            "description": "Green kameez for formal spring autumn.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0002/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.829Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-sherwani-navy",
+        "eval-kameez-green"
+      ],
+      "latency_seconds": 4.5207
+    },
+    {
+      "id": "heldout-062",
+      "scenario": "case-44",
+      "message": "Please help with a gray tee for summer. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "tee-graphite"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "tee-graphite": "gray"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Select the graphite tee from the wardrobe. It's a relaxed short-sleeve tee in graphite grey. It's perfect for summer. Please let me know if you need any more assistance.",
+        "itemIds": [
+          "tee-graphite"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "tee-graphite"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "tee-graphite",
+            "name": "Graphite T-shirt",
+            "category": "tops",
+            "description": "Relaxed short-sleeve tee in graphite grey.",
+            "imageUrl": "/api/v1/clothing/tee-graphite/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "tee-graphite"
+      ],
+      "latency_seconds": 1.8053
+    },
+    {
+      "id": "heldout-063",
+      "scenario": "case-45",
+      "message": "Please help with a green jacket for winter. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "jacket-bomber-olive"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {
+          "jacket-bomber-olive": "green"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose the Bomber Jacket for a green jacket for winter. It's a great option as it's both green and has a ribbed hem for a stylish look. The Bomber Jacket is a versatile outerwear option that can be worn for various occasions. It's recommended to select the Bomber Jacket for a green jacket for winter. The Bomber Jacket is a great choice as it's both green and has a ribbed hem for a stylish look. The Bomber Jacket is a versatile outerwear option that can be worn for various occasions. It's recommended to select the Bomber Jacket for a green jacket for winter. The Bomber Jacket is a great choice.",
+        "itemIds": [
+          "jacket-bomber-olive"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "jacket-bomber-olive"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "jacket-bomber-olive",
+            "name": "Bomber Jacket",
+            "category": "outerwear",
+            "description": "Olive bomber jacket with ribbed hem.",
+            "imageUrl": "/api/v1/clothing/jacket-bomber-olive/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "jacket-bomber-olive"
+      ],
+      "latency_seconds": 3.7101
+    },
+    {
+      "id": "heldout-064",
+      "scenario": "case-46",
+      "message": "Please help with a formal shirt for summer. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "shirt-linen-sand"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Linen Shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "shirt-linen-sand"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "shirt-linen-sand"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-linen-sand",
+            "name": "Linen Shirt",
+            "category": "tops",
+            "description": "Lightweight collared shirt in sand.",
+            "imageUrl": "/api/v1/clothing/shirt-linen-sand/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "shirt-linen-sand"
+      ],
+      "latency_seconds": 4.4765
+    },
+    {
+      "id": "heldout-065",
+      "scenario": "case-47",
+      "message": "Please help with a blue shirt with khaki pants. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "shirt-oxford-blue",
+            "trousers-chino-khaki"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose the Oxford Button Shirt for the top and the Chino Trousers for the bottoms. These items are suitable for a blue shirt with khaki pants. They are long-sleeve collared shirts in sky blue and straight-fit chinos in khaki, respectively. They are perfect for a blue shirt with khaki pants. They are suitable for a blue shirt with khaki pants.",
+        "itemIds": [
+          "shirt-oxford-blue",
+          "trousers-chino-khaki"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "shirt-oxford-blue",
+            "trousers-chino-khaki"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "trousers-chino-khaki",
+            "name": "Chino Trousers",
+            "category": "bottoms",
+            "description": "Straight-fit chinos in khaki.",
+            "imageUrl": "/api/v1/clothing/trousers-chino-khaki/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "shirt-oxford-blue",
+        "trousers-chino-khaki"
+      ],
+      "latency_seconds": 3.2783
+    },
+    {
+      "id": "heldout-066",
+      "scenario": "case-48",
+      "message": "Please help with a red top and a white kurta. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-shirt-red",
+            "eval-kurta-white"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Red summer shirt with White cotton kurta. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "eval-fixture-0006",
+          "eval-fixture-0000"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "eval-fixture-0006",
+            "eval-fixture-0000"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0006",
+            "name": "Red summer shirt",
+            "category": "tops",
+            "description": "Red casual shirt for summer.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0006/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.916Z"
+          },
+          {
+            "id": "eval-fixture-0000",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0000/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.803Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-shirt-red",
+        "eval-kurta-white"
+      ],
+      "latency_seconds": 3.9143
+    },
+    {
+      "id": "heldout-067",
+      "scenario": "case-49",
+      "message": "Please help with a summer black coat. Thank you.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0199
+    },
+    {
+      "id": "heldout-068",
+      "scenario": "case-16",
+      "message": "From the available wardrobe, choose blue trousers for winter.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-pants-blue"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "eval-pants-blue": "blue"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Blue winter trousers. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "eval-fixture-0007"
+        ],
+        "occasion": "",
+        "categories": [
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "eval-fixture-0007"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0007",
+            "name": "Blue winter trousers",
+            "category": "bottoms",
+            "description": "Blue casual trousers for winter.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0007/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.947Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-pants-blue"
+      ],
+      "latency_seconds": 1.7804
+    },
+    {
+      "id": "heldout-069",
+      "scenario": "case-17",
+      "message": "From the available wardrobe, choose a yellow dress.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.014
+    },
+    {
+      "id": "heldout-070",
+      "scenario": "case-18",
+      "message": "From the available wardrobe, choose a purple kurta.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0152
+    },
+    {
+      "id": "heldout-071",
+      "scenario": "case-19",
+      "message": "From the available wardrobe, choose a formal white tee.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "formal",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0162
+    },
+    {
+      "id": "heldout-072",
+      "scenario": "case-20",
+      "message": "From the available wardrobe, choose a winter rose dress.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0043
+    },
+    {
+      "id": "heldout-073",
+      "scenario": "case-21",
+      "message": "From the available wardrobe, choose a red silk scarf only.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Red summer shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0006"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0282
+    },
+    {
+      "id": "heldout-074",
+      "scenario": "case-22",
+      "message": "From the available wardrobe, choose black shoes only.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Black shalwar. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0003",
+            "eval-fixture-0005"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0036
+    },
+    {
+      "id": "heldout-075",
+      "scenario": "case-23",
+      "message": "From the available wardrobe, choose a wedding saree.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0037
+    },
+    {
+      "id": "heldout-076",
+      "scenario": "case-24",
+      "message": "From the available wardrobe, choose a blue suit.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Blue winter trousers. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0007",
+            "eval-fixture-0004",
+            "jacket-denim"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0235
+    },
+    {
+      "id": "heldout-077",
+      "scenario": "case-25",
+      "message": "From the available wardrobe, choose some sneakers.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "unsupported",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "unsupported",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.014
+    },
+    {
+      "id": "heldout-078",
+      "scenario": "case-26",
+      "message": "From the available wardrobe, choose a traditional white kurta.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kurta-white"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "eval-kurta-white": "white"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider White cotton kurta. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "eval-fixture-0000"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "eval-fixture-0000"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0000",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0000/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.803Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kurta-white"
+      ],
+      "latency_seconds": 1.7853
+    },
+    {
+      "id": "heldout-079",
+      "scenario": "case-27",
+      "message": "From the available wardrobe, choose a Pakistani green kameez.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kameez-green"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "eval-kameez-green": "green"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Green kameez. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "eval-fixture-0002"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "eval-fixture-0002"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0002",
+            "name": "Green kameez",
+            "category": "tops",
+            "description": "Green kameez for formal spring autumn.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0002/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.829Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kameez-green"
+      ],
+      "latency_seconds": 1.5265
+    },
+    {
+      "id": "heldout-080",
+      "scenario": "case-28",
+      "message": "From the available wardrobe, choose explain which category a denim jacket belongs to, without picking an outfit.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "category",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: outerwear. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "jacket-denim"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.004
+    },
+    {
+      "id": "heldout-081",
+      "scenario": "case-29",
+      "message": "From the available wardrobe, choose classify a kurta without picking an outfit.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "category",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: tops. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0000"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0243
+    },
+    {
+      "id": "heldout-082",
+      "scenario": "case-30",
+      "message": "From the available wardrobe, choose classify shalwar without picking an outfit.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "category",
+        "categories": [
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: bottoms. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "eval-fixture-0003",
+            "eval-fixture-0001"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0158
+    },
+    {
+      "id": "heldout-083",
+      "scenario": "case-31",
+      "message": "From the available wardrobe, choose which category contains a dress.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "category",
+        "categories": [
+          "dresses"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "This clothing belongs to: dresses. No outfit has been selected.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [
+          "dresses"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "category",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [
+            "dress-midi-indigo",
+            "dress-summer-rose"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0038
+    },
+    {
+      "id": "heldout-084",
+      "scenario": "case-32",
+      "message": "From the available wardrobe, choose something stylish.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "clarify",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Which garment categories, colors, occasion or season should I use? Please add a little detail.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "clarify",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.003
+    },
+    {
+      "id": "heldout-085",
+      "scenario": "case-33",
+      "message": "From the available wardrobe, choose help me choose clothing.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "clarify",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Which garment categories, colors, occasion or season should I use? Please add a little detail.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "clarify",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0235
+    },
+    {
+      "id": "heldout-086",
+      "scenario": "case-34",
+      "message": "From the available wardrobe, choose an outfit please.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "clarify",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Which garment categories, colors, occasion or season should I use? Please add a little detail.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "clarify",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0035
+    },
+    {
+      "id": "heldout-087",
+      "scenario": "case-35",
+      "message": "From the available wardrobe, choose a nice look.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "clarify",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Which garment categories, colors, occasion or season should I use? Please add a little detail.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "clarify",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.028
+    },
+    {
+      "id": "heldout-088",
+      "scenario": "case-36",
+      "message": "From the available wardrobe, choose a white tee, exclude tops.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0174
+    },
+    {
+      "id": "heldout-089",
+      "scenario": "case-37",
+      "message": "From the available wardrobe, choose a blue shirt, no blue.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0169
+    },
+    {
+      "id": "heldout-090",
+      "scenario": "case-38",
+      "message": "From the available wardrobe, choose a black shalwar for autumn.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-shalwar-black"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "bottoms"
+        ],
+        "colorsByItem": {
+          "eval-shalwar-black": "black"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Black shalwar. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "eval-fixture-0003"
+        ],
+        "occasion": "",
+        "categories": [
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "eval-fixture-0003"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0003",
+            "name": "Black shalwar",
+            "category": "bottoms",
+            "description": "Black shalwar for formal spring autumn winter.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0003/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.856Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-shalwar-black"
+      ],
+      "latency_seconds": 3.6299
+    },
+    {
+      "id": "heldout-091",
+      "scenario": "case-39",
+      "message": "From the available wardrobe, choose an indigo denim jacket for spring.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "jacket-denim"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {
+          "jacket-denim": "indigo"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Denim Jacket. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "jacket-denim"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "jacket-denim"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "jacket-denim",
+            "name": "Denim Jacket",
+            "category": "outerwear",
+            "description": "Classic indigo denim jacket.",
+            "imageUrl": "/api/v1/clothing/jacket-denim/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "jacket-denim"
+      ],
+      "latency_seconds": 1.5564
+    },
+    {
+      "id": "heldout-092",
+      "scenario": "case-40",
+      "message": "From the available wardrobe, choose formal green kameez with charcoal trousers.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kameez-green",
+            "trousers-tailored-charcoal"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose a formal green kameez with charcoal trousers.",
+        "itemIds": [
+          "eval-fixture-0002",
+          "trousers-tailored-charcoal"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0002",
+            "trousers-tailored-charcoal"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0002",
+            "name": "Green kameez",
+            "category": "tops",
+            "description": "Green kameez for formal spring autumn.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0002/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.829Z"
+          },
+          {
+            "id": "trousers-tailored-charcoal",
+            "name": "Tailored Trousers",
+            "category": "bottoms",
+            "description": "Charcoal tailored trousers.",
+            "imageUrl": "/api/v1/clothing/trousers-tailored-charcoal/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kameez-green",
+        "trousers-tailored-charcoal"
+      ],
+      "latency_seconds": 1.9879
+    },
+    {
+      "id": "heldout-093",
+      "scenario": "case-41",
+      "message": "From the available wardrobe, choose a red shirt with khaki chinos for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-shirt-red",
+            "trousers-chino-khaki"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose a red shirt with khaki chinos for summer.",
+        "itemIds": [
+          "eval-fixture-0006",
+          "trousers-chino-khaki"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0006",
+            "trousers-chino-khaki"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0006",
+            "name": "Red summer shirt",
+            "category": "tops",
+            "description": "Red casual shirt for summer.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0006/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.916Z"
+          },
+          {
+            "id": "trousers-chino-khaki",
+            "name": "Chino Trousers",
+            "category": "bottoms",
+            "description": "Straight-fit chinos in khaki.",
+            "imageUrl": "/api/v1/clothing/trousers-chino-khaki/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-shirt-red",
+        "trousers-chino-khaki"
+      ],
+      "latency_seconds": 1.9264
+    },
+    {
+      "id": "heldout-094",
+      "scenario": "case-42",
+      "message": "From the available wardrobe, choose a white kurta with black shalwar for spring.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-kurta-white",
+            "eval-shalwar-black"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose a white cotton kurta with black shalwar for spring.",
+        "itemIds": [
+          "eval-fixture-0000",
+          "eval-fixture-0003"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0000",
+            "eval-fixture-0003"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0000",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0000/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.803Z"
+          },
+          {
+            "id": "eval-fixture-0003",
+            "name": "Black shalwar",
+            "category": "bottoms",
+            "description": "Black shalwar for formal spring autumn winter.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0003/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.856Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-kurta-white",
+        "eval-shalwar-black"
+      ],
+      "latency_seconds": 1.9661
+    },
+    {
+      "id": "heldout-095",
+      "scenario": "case-43",
+      "message": "From the available wardrobe, choose a navy sherwani with a green kameez for autumn.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-sherwani-navy",
+            "eval-kameez-green"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear",
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose a navy sherwani with a green kameez for autumn.",
+        "itemIds": [
+          "eval-fixture-0004",
+          "eval-fixture-0002"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear",
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "eval-fixture-0004",
+            "eval-fixture-0002"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0004",
+            "name": "Navy sherwani",
+            "category": "outerwear",
+            "description": "Navy sherwani for formal winter autumn.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0004/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.886Z"
+          },
+          {
+            "id": "eval-fixture-0002",
+            "name": "Green kameez",
+            "category": "tops",
+            "description": "Green kameez for formal spring autumn.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0002/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.829Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-sherwani-navy",
+        "eval-kameez-green"
+      ],
+      "latency_seconds": 2.0452
+    },
+    {
+      "id": "heldout-096",
+      "scenario": "case-44",
+      "message": "From the available wardrobe, choose a gray tee for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "tee-graphite"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {
+          "tee-graphite": "gray"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Graphite T-shirt. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "tee-graphite"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "tee-graphite"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "tee-graphite",
+            "name": "Graphite T-shirt",
+            "category": "tops",
+            "description": "Relaxed short-sleeve tee in graphite grey.",
+            "imageUrl": "/api/v1/clothing/tee-graphite/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "tee-graphite"
+      ],
+      "latency_seconds": 1.6236
+    },
+    {
+      "id": "heldout-097",
+      "scenario": "case-45",
+      "message": "From the available wardrobe, choose a green jacket for winter.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "jacket-bomber-olive"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "outerwear"
+        ],
+        "colorsByItem": {
+          "jacket-bomber-olive": "green"
+        }
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose a green jacket for winter. The Bomber Jacket is a great option with its ribbed hem for added warmth. The Bomber Jacket is a great option with its ribbed hem for added warmth. The Bomber Jacket is a great option with its ribbed hem for added warmth. The Bomber Jacket is a great option with its ribbed hem for added warmth. The Bomber Jacket is a great option with its ribbed hem for added warmth. The Bomber Jacket is a great option with its ribbed hem for added warmth. The Bomber Jacket is a great option with its ribbed hem for added warmth. The Bomber Jacket is a great option with its rib",
+        "itemIds": [
+          "jacket-bomber-olive"
+        ],
+        "occasion": "",
+        "categories": [
+          "outerwear"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "jacket-bomber-olive"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "jacket-bomber-olive",
+            "name": "Bomber Jacket",
+            "category": "outerwear",
+            "description": "Olive bomber jacket with ribbed hem.",
+            "imageUrl": "/api/v1/clothing/jacket-bomber-olive/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": true,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "jacket-bomber-olive"
+      ],
+      "latency_seconds": 3.5708
+    },
+    {
+      "id": "heldout-098",
+      "scenario": "case-46",
+      "message": "From the available wardrobe, choose a formal shirt for summer.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "shirt-linen-sand"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose a light, collared shirt in linen for a formal summer outfit. The shirt is suitable for a casual look. The wardrobe item is shirt-linen-sand. The selection plan is to choose a shirt from the wardrobe. The preferred categories are tops. The wardrobe item is shirt-linen-sand. The selection plan is to choose a shirt from the wardrobe. The preferred categories are tops. The wardrobe item is shirt-linen-sand. The selection plan is to choose a shirt from the wardrobe. The preferred categories are tops. The wardrobe item is shirt-linen-sand. The selection plan is to choose a shirt from the top.",
+        "itemIds": [
+          "shirt-linen-sand"
+        ],
+        "occasion": "formal",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "shirt-linen-sand"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-linen-sand",
+            "name": "Linen Shirt",
+            "category": "tops",
+            "description": "Lightweight collared shirt in sand.",
+            "imageUrl": "/api/v1/clothing/shirt-linen-sand/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "shirt-linen-sand"
+      ],
+      "latency_seconds": 3.6824
+    },
+    {
+      "id": "heldout-099",
+      "scenario": "case-47",
+      "message": "From the available wardrobe, choose a blue shirt with khaki pants.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "shirt-oxford-blue",
+            "trousers-chino-khaki"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Choose the Oxford Button Shirt in sky blue and the straight-fit chinos in khaki for a stylish outfit.",
+        "itemIds": [
+          "shirt-oxford-blue",
+          "trousers-chino-khaki"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops",
+          "bottoms"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "model",
+        "fallbackReason": null,
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": true,
+          "candidateIds": [
+            "shirt-oxford-blue",
+            "trousers-chino-khaki"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "shirt-oxford-blue",
+            "name": "Oxford Button Shirt",
+            "category": "tops",
+            "description": "Long-sleeve collared shirt in sky blue.",
+            "imageUrl": "/api/v1/clothing/shirt-oxford-blue/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          },
+          {
+            "id": "trousers-chino-khaki",
+            "name": "Chino Trousers",
+            "category": "bottoms",
+            "description": "Straight-fit chinos in khaki.",
+            "imageUrl": "/api/v1/clothing/trousers-chino-khaki/image",
+            "source": "catalog",
+            "createdAt": "1970-01-01T00:00:00.000Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "shirt-oxford-blue",
+        "trousers-chino-khaki"
+      ],
+      "latency_seconds": 1.9087
+    },
+    {
+      "id": "heldout-100",
+      "scenario": "case-48",
+      "message": "From the available wardrobe, choose a red top and a white kurta.",
+      "expected": {
+        "acceptableItemSets": [
+          [
+            "eval-shirt-red",
+            "eval-kurta-white"
+          ]
+        ],
+        "intent": "outfit",
+        "categories": [
+          "tops"
+        ],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "Consider Red summer shirt with White cotton kurta. These items match the catalog attributes in your request; check the preview before deciding.",
+        "itemIds": [
+          "eval-fixture-0006",
+          "eval-fixture-0000"
+        ],
+        "occasion": "",
+        "categories": [
+          "tops"
+        ],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "deterministic-fallback",
+        "fallbackReason": "constraint-violation",
+        "modelUsed": true,
+        "diagnostics": {
+          "rawSchemaValid": true,
+          "rawSelectionValid": false,
+          "candidateIds": [
+            "eval-fixture-0006",
+            "eval-fixture-0000"
+          ],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": [
+          {
+            "id": "eval-fixture-0006",
+            "name": "Red summer shirt",
+            "category": "tops",
+            "description": "Red casual shirt for summer.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0006/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.916Z"
+          },
+          {
+            "id": "eval-fixture-0000",
+            "name": "White cotton kurta",
+            "category": "tops",
+            "description": "White traditional kurta for casual summer spring.",
+            "imageUrl": "/api/v1/clothing/eval-fixture-0000/image",
+            "source": "user",
+            "createdAt": "2026-10-15T12:31:34.803Z"
+          }
+        ]
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [
+        "eval-shirt-red",
+        "eval-kurta-white"
+      ],
+      "latency_seconds": 2.0576
+    },
+    {
+      "id": "heldout-101",
+      "scenario": "case-49",
+      "message": "From the available wardrobe, choose a summer black coat.",
+      "expected": {
+        "acceptableItemSets": [
+          []
+        ],
+        "intent": "outfit",
+        "categories": [],
+        "colorsByItem": {}
+      },
+      "success": true,
+      "actual": {
+        "answer": "No complete combination matches the available catalog attributes. Try different preferences or add a matching garment.",
+        "itemIds": [],
+        "occasion": "",
+        "categories": [],
+        "model": "virtualfit-style-base",
+        "simulated": false,
+        "intent": "outfit",
+        "source": "catalog-policy",
+        "fallbackReason": null,
+        "modelUsed": false,
+        "diagnostics": {
+          "rawSchemaValid": null,
+          "rawSelectionValid": null,
+          "candidateIds": [],
+          "pipelineVersion": "grounding-v2"
+        },
+        "items": []
+      },
+      "intent_accuracy": true,
+      "category_accuracy": true,
+      "color_accuracy": null,
+      "valid_catalog_selection": true,
+      "exact_outfit_match": true,
+      "json_schema_valid": true,
+      "selected_stable_ids": [],
+      "latency_seconds": 0.0233
+    }
+  ]
+}

@@ -9,7 +9,7 @@ import { SimulationBanner } from '@/components/shared/ai-notices';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useAddFavorite } from '@/hooks/use-api';
-import { ApiError } from '@/lib/api-client';
+import { describeError } from '@/lib/api-errors';
 
 interface Props {
   tryOn: TryOn | null;
@@ -33,12 +33,7 @@ export function ResultPanel({
   if (processing) return <Progress elapsed={elapsed} />;
 
   if (requestError) {
-    return (
-      <Failure
-        message={requestError instanceof ApiError ? requestError.message : 'Something went wrong.'}
-        onRetry={onRetry}
-      />
-    );
+    return <Failure message={describeError(requestError).message} onRetry={onRetry} />;
   }
   if (tryOn?.status === 'failed') {
     return (
@@ -185,7 +180,7 @@ function Completed({
       </div>
       {addFavorite.isError && (
         <p role="alert" className="text-sm text-danger">
-          {addFavorite.error.message}
+          {describeError(addFavorite.error).message}
         </p>
       )}
       <p className="text-xs text-muted-foreground">

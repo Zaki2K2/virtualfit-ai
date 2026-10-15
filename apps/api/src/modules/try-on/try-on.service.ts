@@ -1,6 +1,7 @@
 import type { CreateTryOnInput, TryOn } from '@virtualfit/shared';
 import type { Collection } from '../../db/collection';
 import type { GenerationService } from '../../integrations/ai/services/generation.service';
+import type { ModelRegistry } from '../../integrations/ai/services/model-registry';
 import type { FileStore } from '../../storage/file-store';
 import { AppError } from '../../utils/errors';
 import { newId } from '../../utils/ids';
@@ -22,7 +23,7 @@ export class TryOnService {
     private readonly docs: Collection<TryOnDoc>,
     private readonly files: FileStore,
     private readonly clothing: ClothingService,
-    private readonly generation: GenerationService,
+    private readonly models: ModelRegistry,
     private readonly timeoutMs: number,
   ) {}
 
@@ -52,7 +53,9 @@ export class TryOnService {
    * The client polls GET /try-on/:id; real models can take over a minute.
    */
   async create(guestId: string, input: CreateTryOnInput, uploads: TryOnFiles): Promise<TryOn> {
-    const provider = this.generation.info;
+    // Unavailable models fail here with AI_UNAVAILABLE; they are never swapped for another model.
+    const { generation } = await this.models.resolve(input.model);
+    const provider = generation.info;
     if (provider.externalProcessing && !input.consent) {
       throw new AppError(
         400,
@@ -111,13 +114,23 @@ export class TryOnService {
     await this.docs.insert(doc);
 
     // Fire and forget: errors are captured on the document, never thrown into the request.
-    void this.run(doc, person.buffer, garmentBuffer);
+    void this.run(doc, generation, person.buffer, garmentBuffer).catch((err: unknown) => {
+      logger.error('Could not persist try-on failure', {
+        id: doc.id,
+        message: err instanceof Error ? err.message : String(err),
+      });
+    });
     return this.toDto(doc);
   }
 
-  private async run(doc: TryOnDoc, personImage: Buffer, garmentImage: Buffer) {
+  private async run(
+    doc: TryOnDoc,
+    generation: GenerationService,
+    personImage: Buffer,
+    garmentImage: Buffer,
+  ) {
     try {
-      const result = await this.generation.generate({
+      const result = await generation.generate({
         personImage,
         garmentImage,
         category: doc.category,
@@ -127,6 +140,7 @@ export class TryOnService {
       await this.docs.update(doc.id, {
         status: 'completed',
         resultExt: ext,
+        model: result.modelLabel ?? doc.model,
         durationMs: Date.now() - doc.createdAt.getTime(),
         updatedAt: new Date(),
       });
@@ -206,6 +220,31 @@ export class TryOnService {
         removed.push(doc.id);
       }
     }
+    // Result files whose record no longer exists (restart of the in-memory store, manual DB
+    // cleanup, ...) would otherwise stay on disk forever: they are personal images.
+    const orphans = await this.files.purgeOlderThan('results', maxAgeMs, async (id) =>
+      Boolean(await this.docs.get(id)),
+    );
+    if (orphans.length) logger.info('Removed orphaned result files', { count: orphans.length });
     return removed;
+  }
+
+  /**
+   * Jobs run inside this process, so after a (re)start every record still "processing" belongs to
+   * a job that died with the previous process. Mark them failed right away instead of leaving
+   * clients polling "Generating..." until the age-based sweep.
+   */
+  async failInterrupted(): Promise<number> {
+    const stale = await this.docs.find({ status: 'processing' } as Partial<TryOnDoc>);
+    for (const doc of stale) {
+      await this.docs.update(doc.id, {
+        status: 'failed',
+        errorCode: 'AI_FAILED',
+        errorMessage:
+          'The server restarted while this try-on was being generated. Please try again.',
+        updatedAt: new Date(),
+      });
+    }
+    return stale.length;
   }
 }

@@ -18,6 +18,7 @@ import {
 import { FieldError, Input, Label, Select } from '@/components/ui/input';
 import { ImageDropzone } from '@/components/shared/image-dropzone';
 import { api } from '@/services/api';
+import { describeError } from '@/lib/api-errors';
 
 const formSchema = z.object({
   name: z.string().trim().min(1, 'Give the garment a name').max(80),
@@ -69,7 +70,7 @@ export function AddGarmentDialog({ maxMb }: { maxMb: number }) {
       await qc.invalidateQueries({ queryKey: ['clothing'] });
       close(false);
     } catch (err) {
-      setServerError(err instanceof Error ? err.message : 'Upload failed.');
+      setServerError(describeError(err).message);
     }
   }
 

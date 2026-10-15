@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { FieldError, Input, Label } from '@/components/ui/input';
 import { useProfile, useUpdateProfile } from '@/hooks/use-api';
+import { describeError } from '@/lib/api-errors';
 
 /** Optional number held as text in the form; empty string means "not provided". */
 const measurement = (label: string, min: number, max: number) =>
@@ -247,7 +248,7 @@ export function ProfileForm() {
             )}
             {update.isError && (
               <span role="alert" className="text-sm text-danger">
-                {update.error.message}
+                {describeError(update.error).message}
               </span>
             )}
           </div>

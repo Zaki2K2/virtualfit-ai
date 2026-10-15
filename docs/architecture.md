@@ -52,3 +52,18 @@ IDs are string UUIDs (`_id`). In-memory mode mirrors the same shapes.
 ## Frontend layout (`apps/web/src`)
 
 `app/` routes -> `features/*` (feature components/hooks) -> `components/{ui,layout,shared,clothing,try-on}`; `services/api.ts` (typed fetchers), `hooks/use-api.ts` (TanStack Query), `lib/` helpers. Types and Zod schemas come from `@virtualfit/shared`.
+
+## Python engine (v0.3)
+
+```
+Express provider "custom-python" --HTTP multipart--> FastAPI (ai-engine/service) --> resident CatVTON UNet (+ optional LoRA)
+Express ModelRegistry: mock | hosted (gradio) | pretrained | custom   (availability probed from /health, cached 15 s)
+```
+
+Training is separate from runtime inference: training runs in notebooks/CLI (`ai-engine/virtualfit_engine/training`), inference serves a finished adapter. See `ai-engine/README.md`.
+
+## Language styling system
+
+A separate `StylingProvider` port under `apps/api/src/integrations/slm/` and `StylingService` under `modules/styling/` handles language. The composition root injects the production `LlamaCppStylingProvider` or explicit test doubles. Existing MongoDB collection adapters and clothing ownership checks supply the wardrobe. The frontend `/stylist` page calls Express through the same Next proxy as other features. Native llama.cpp binds only 127.0.0.1:8081 with local bearer authentication, CPU-only Q4 inference, disabled runtime UI and restricted CORS. It is a necessary model runtime, not a duplicate application backend.
+
+The `slm-engine/` directory owns the resource-checked launcher, language dataset, configuration, LoRA/QLoRA code, evaluator and Colab training walkthrough. `ai-engine/` remains the independent vision research engine. The shipped language weights are pretrained; prompt and retrieval customization is distinct from trained adapters. The native runtime is optional for ordinary `npm run dev`; `npm run dev:slm` starts both stacks. See [the SLM implementation report](slm-integration-report.md) for measured quality and remaining gaps.

@@ -1,0 +1,28 @@
+{
+  "inputs_equal": {
+    "dataset_sha256": true,
+    "catalog_sha256": true,
+    "artifact_sha256": true,
+    "fixture_ids": true,
+    "code_sha256": true
+  },
+  "selected_item_sets_equal": true,
+  "metrics_equal": true,
+  "raw_acceptance_counts": [
+    22,
+    22
+  ],
+  "raw_source_changed_cases": [
+    "heldout-000",
+    "heldout-010",
+    "heldout-022",
+    "heldout-028",
+    "heldout-031",
+    "heldout-098"
+  ],
+  "prose_changed_cases": 13,
+  "latency_means": [
+    1.2221254901960785,
+    1.1305117647058824
+  ]
+}

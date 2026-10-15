@@ -12,16 +12,19 @@
   },
   "scripts": {
     "build:shared": "npm run build -w @virtualfit/shared",
-    "dev": "npm run build:shared && concurrently -n api,web -c blue,magenta \"npm run dev -w @virtualfit/api\" \"npm run dev -w @virtualfit/web\"",
+    "dev": "npm run build:shared && concurrently --kill-others -n api,web -c blue,magenta \"npm run dev -w @virtualfit/api\" \"npm run dev -w @virtualfit/web\"",
     "build": "npm run build:shared && npm run build -w @virtualfit/api && npm run build -w @virtualfit/web",
-    "start": "concurrently -n api,web \"npm run start -w @virtualfit/api\" \"npm run start -w @virtualfit/web\"",
+    "start": "concurrently --kill-others -n api,web \"npm run start -w @virtualfit/api\" \"npm run start -w @virtualfit/web\"",
     "typecheck": "npm run build:shared && npm run typecheck -w @virtualfit/api && npm run typecheck -w @virtualfit/web",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "npm run build:shared && npm run test -w @virtualfit/shared && npm run test -w @virtualfit/api",
+    "test": "npm run build:shared && npm run test -w @virtualfit/shared && npm run test -w @virtualfit/api && npm run test -w @virtualfit/web",
     "generate:catalog": "npm run generate:catalog -w @virtualfit/api",
-    "ai:inspect": "npm run ai:inspect -w @virtualfit/api --"
+    "ai:inspect": "npm run ai:inspect -w @virtualfit/api --",
+    "slm:setup": "python slm-engine/tools/runtime.py setup",
+    "slm:serve": "python slm-engine/tools/runtime.py serve",
+    "dev:slm": "concurrently --kill-others -n slm,app \"npm run slm:serve\" \"npm run dev\""
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",

@@ -32,8 +32,16 @@ export const DEFAULT_MAX_UPLOAD_MB = 8;
 export const TRY_ON_STATUSES = ['processing', 'completed', 'failed'] as const;
 export type TryOnStatus = (typeof TRY_ON_STATUSES)[number];
 
-export const AI_PROVIDER_IDS = ['mock', 'gradio'] as const;
+export const AI_PROVIDER_IDS = ['mock', 'gradio', 'custom-python'] as const;
 export type AiProviderId = (typeof AI_PROVIDER_IDS)[number];
+
+/**
+ * Model choices offered in the studio. They map onto providers:
+ *  mock = local simulation, hosted = Hugging Face Space (gradio),
+ *  pretrained / custom = our Python engine (original CatVTON weights / VirtualFit LoRA fine-tune).
+ */
+export const MODEL_OPTION_IDS = ['mock', 'hosted', 'pretrained', 'custom'] as const;
+export type ModelOptionId = (typeof MODEL_OPTION_IDS)[number];
 
 /** Stable machine-readable error codes returned by the API. */
 export const ERROR_CODES = [
@@ -47,6 +55,7 @@ export const ERROR_CODES = [
   'AI_TIMEOUT',
   'AI_FAILED',
   'RATE_LIMITED',
+  'DATABASE_UNAVAILABLE',
   'INTERNAL_ERROR',
 ] as const;
 export type ErrorCode = (typeof ERROR_CODES)[number];

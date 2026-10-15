@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CLOTHING_CATEGORIES, GENDERS } from '../constants';
+import { CLOTHING_CATEGORIES, GENDERS, MODEL_OPTION_IDS } from '../constants';
 
 export const categorySchema = z.enum(CLOTHING_CATEGORIES);
 
@@ -19,6 +19,8 @@ export const createTryOnSchema = z
   .object({
     category: categorySchema,
     clothingId: z.string().trim().min(1).max(64).optional(),
+    /** Model to use; omitted = the server default. Unavailable models fail, they are never swapped for the mock. */
+    model: z.enum(MODEL_OPTION_IDS).optional(),
     // multipart fields arrive as strings
     consent: z
       .enum(['true', 'false'])

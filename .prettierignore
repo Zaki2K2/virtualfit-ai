@@ -5,3 +5,11 @@ coverage
 package-lock.json
 apps/api/uploads
 apps/api/assets
+
+ai-engine
+
+# Local SLM artifacts and environments
+slm-engine/models
+slm-engine/runtime
+slm-engine/runs
+slm-engine/.venv

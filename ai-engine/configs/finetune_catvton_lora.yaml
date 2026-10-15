@@ -1,0 +1,36 @@
+# CatVTON self-attention LoRA fine-tuning on VITON-HD (noncommercial research use).
+# Paths are placeholders; notebook 03 rewrites them for your Google Drive layout.
+dataset_root: /content/drive/MyDrive/virtualfit/VITON-HD
+train_manifest: /content/drive/MyDrive/virtualfit/runs/exp1/data/train.jsonl
+val_manifest: /content/drive/MyDrive/virtualfit/runs/exp1/data/val.jsonl
+output_dir: /content/drive/MyDrive/virtualfit/runs/exp1/train
+
+# Pretrained weights stay frozen; only LoRA matrices on attn1 (self-attention) are trained.
+base_model: booksforcharlie/stable-diffusion-inpainting
+vae_model: stabilityai/sd-vae-ft-mse
+attn_repo: zhengchong/CatVTON
+attn_version: vitonhd   # released 512px VITON-HD attention weights (starting point)
+height: 512
+width: 384
+
+method: lora
+lora_rank: 16
+lora_alpha: 16
+
+# Memory plan for a 16 GB T4: fp16 frozen base, fp32 LoRA, grad checkpointing, batch 1.
+mixed_precision: fp16
+gradient_checkpointing: true
+batch_size: 1
+grad_accum: 8
+use_8bit_adam: false
+
+learning_rate: 1.0e-4
+max_steps: 300          # optimizer steps (= 2400 samples seen with grad_accum 8)
+warmup_steps: 20
+save_every: 50          # resumable checkpoints (free runtimes disconnect)
+keep_checkpoints: 2
+val_every: 50
+val_batches: 20
+sample_count: 4
+sample_steps: 30
+seed: 42

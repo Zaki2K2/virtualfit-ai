@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const NAV = [
+  { href: '/stylist', label: 'AI Stylist', icon: Sparkles },
   { href: '/try-on', label: 'Try-On Studio', icon: Sparkles },
   { href: '/wardrobe', label: 'Wardrobe', icon: Shirt },
   { href: '/favorites', label: 'Favorites', icon: Heart },

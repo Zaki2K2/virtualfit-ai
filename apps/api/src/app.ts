@@ -18,6 +18,7 @@ import { TryOnController } from './modules/try-on/try-on.controller';
 import { tryOnRoutes } from './modules/try-on/try-on.routes';
 import { UsersController } from './modules/users/users.controller';
 import { usersRoutes } from './modules/users/users.routes';
+import { stylingRequestSchema } from '@virtualfit/shared';
 
 export function createApp(c: Container) {
   const { env } = c;
@@ -48,6 +49,16 @@ export function createApp(c: Container) {
           legacyHeaders: false,
           message: limitedMessage,
         });
+  const stylingLimiter =
+    env.NODE_ENV === 'test'
+      ? noLimit
+      : rateLimit({
+          windowMs: 60 * 60 * 1000,
+          limit: 30,
+          standardHeaders: 'draft-8',
+          legacyHeaders: false,
+          message: limitedMessage,
+        });
 
   const app = express();
   app.disable('x-powered-by');
@@ -61,6 +72,13 @@ export function createApp(c: Container) {
   api.use(generalLimiter);
   api.use('/health', healthRoutes(c.health));
   api.use(guestSession(isProd));
+  api.get('/styling/status', async (_req, res) => {
+    res.json(await c.styling.status());
+  });
+  api.post('/styling/recommend', stylingLimiter, async (req, res) => {
+    const { message, model } = stylingRequestSchema.parse(req.body);
+    res.json(await c.styling.recommend(req.guestId, message, model));
+  });
   api.use('/clothing', clothingRoutes(new ClothingController(c.clothing), upload.single('image')));
   api.use(
     '/try-on',

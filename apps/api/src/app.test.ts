@@ -307,13 +307,14 @@ describe('try-on (external provider behaviour)', () => {
     expect(done.error.code).toBe('AI_FAILED');
   });
 
-  it('fails cleanly when the provider is not configured', async () => {
+  it('refuses to start a job when the selected model is not available (no silent fallback)', async () => {
     const { agent, req } = await run(
       stubProvider({ isConfigured: () => false, generate: async () => ({}) }),
     );
     const res = await req.field('consent', 'true');
-    const done = await waitForTryOn(agent, res.body.tryOn.id);
-    expect(done.error.code).toBe('AI_UNAVAILABLE');
+    expect(res.status).toBe(503);
+    expect(res.body.error.code).toBe('AI_UNAVAILABLE');
+    expect((await agent.get('/api/v1/history')).body.items).toHaveLength(0);
   });
 });
 

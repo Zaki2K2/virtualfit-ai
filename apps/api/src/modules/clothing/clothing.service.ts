@@ -21,6 +21,7 @@ export class ClothingService {
     private readonly files: FileStore,
     private readonly catalogDir: string,
     private readonly apiPrefix = '/api/v1',
+    private readonly idFactory: () => string = newId,
   ) {}
 
   private imageUrl(id: string) {
@@ -93,7 +94,7 @@ export class ClothingService {
     const image = await sanitizeImage(file, 'Garment image');
     const imageExt = image.mime === 'image/png' ? 'png' : 'jpg';
     const doc: ClothingDoc = {
-      id: newId(),
+      id: this.idFactory(),
       name: input.name,
       category: input.category,
       description: input.description,

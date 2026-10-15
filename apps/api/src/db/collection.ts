@@ -74,7 +74,7 @@ class MongoCollection<T extends Doc> implements Collection<T> {
   }
   async update(id: string, patch: Partial<T>) {
     const row = await this.model
-      .findByIdAndUpdate(id, { $set: this.toRow(patch) }, { new: true })
+      .findByIdAndUpdate(id, { $set: this.toRow(patch) }, { returnDocument: 'after' })
       .lean<Record<string, unknown>>();
     return this.toDomain(row);
   }

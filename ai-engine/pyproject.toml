@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "virtualfit-engine"
+version = "0.1.0"
+description = "VirtualFit AI Python engine: dataset tools, CatVTON LoRA fine-tuning, evaluation and inference service"
+requires-python = ">=3.10"
+license = { text = "CC-BY-NC-SA-4.0" }
+dependencies = ["numpy", "pillow", "pydantic>=2", "pyyaml"]
+
+[project.optional-dependencies]
+# Inference service (CPU machines can run it; it reports GPU_UNAVAILABLE instead of inferring)
+serve = ["fastapi", "uvicorn[standard]", "python-multipart"]
+# Training / inference with the real model (GPU strongly recommended)
+train = ["torch", "diffusers>=0.31", "transformers>=4.46", "accelerate>=0.31", "peft>=0.13", "safetensors"]
+eval = ["scikit-image", "opencv-python-headless", "lpips"]
+dev = ["pytest", "httpx", "nbformat"]
+
+[tool.setuptools.packages.find]
+include = ["virtualfit_engine*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "torch: needs the train extra (torch/diffusers/peft); runs on CPU with tiny random models",
+  "gpu: needs a CUDA GPU and real checkpoints; skipped otherwise",
+]

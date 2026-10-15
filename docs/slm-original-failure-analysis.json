@@ -1,0 +1,105 @@
+{
+  "original_exact": 3,
+  "total": 8,
+  "original_category_exact": 1,
+  "findings": "Five selection failures; no invalid JSON or invented IDs in those responses. All eight API requests succeeded. Correct ID membership is not sufficient semantic grounding.",
+  "failures": [
+    {
+      "id": "test-001",
+      "request": "From my wardrobe, find blue shirt with smart charcoal trousers for the office.",
+      "expected_ids": [
+        "shirt-oxford-blue",
+        "trousers-tailored-charcoal"
+      ],
+      "actual_ids": [
+        "shirt-oxford-blue",
+        "trousers-tailored-charcoal",
+        "shirt-linen-sand",
+        "jacket-bomber-olive"
+      ],
+      "categories": [
+        "incorrect garment selection",
+        "incorrect color",
+        "incorrect clothing category"
+      ],
+      "root_cause": "Retrieved irrelevant items; model over-selected; post-processing checked IDs but not outfit slots or category consistency.",
+      "json_valid": true,
+      "invented_catalog_ids": false
+    },
+    {
+      "id": "test-002",
+      "request": "From my wardrobe, find a denim layer over a white top, avoid dresses.",
+      "expected_ids": [
+        "jacket-denim",
+        "tee-classic-white"
+      ],
+      "actual_ids": [
+        "tee-classic-white",
+        "shirt-oxford-blue",
+        "jacket-denim",
+        "jacket-bomber-olive"
+      ],
+      "categories": [
+        "incorrect garment selection",
+        "incorrect color",
+        "incorrect clothing category"
+      ],
+      "root_cause": "Two correct garments plus unrelated shirt/jacket; no per-slot color/type filtering or cardinality validation.",
+      "json_valid": true,
+      "invented_catalog_ids": false
+    },
+    {
+      "id": "test-004",
+      "request": "From my wardrobe, find a red silk scarf only.",
+      "expected_ids": [],
+      "actual_ids": [
+        "shirt-oxford-blue",
+        "shirt-linen-sand",
+        "dress-midi-indigo"
+      ],
+      "categories": [
+        "catalog grounding problems",
+        "model reasoning limitations"
+      ],
+      "root_cause": "Scarf unavailable, but retrieval had no no-match threshold and no unsupported-intent branch; real unrelated IDs were accepted.",
+      "json_valid": true,
+      "invented_catalog_ids": false
+    },
+    {
+      "id": "test-005",
+      "request": "From my wardrobe, find explain which category a denim jacket belongs to, without picking an outfit.",
+      "expected_ids": [],
+      "actual_ids": [
+        "jacket-denim"
+      ],
+      "categories": [
+        "model reasoning limitations",
+        "ambiguous user requests"
+      ],
+      "root_cause": "A category question, with an awkward generated prefix but explicit no-outfit instruction, was treated as outfit selection.",
+      "json_valid": true,
+      "invented_catalog_ids": false
+    },
+    {
+      "id": "test-007",
+      "request": "From my wardrobe, find a blue office shirt, avoid pants and dresses.",
+      "expected_ids": [
+        "shirt-oxford-blue"
+      ],
+      "actual_ids": [
+        "shirt-oxford-blue",
+        "shirt-linen-sand",
+        "tee-classic-white",
+        "tee-graphite"
+      ],
+      "categories": [
+        "incorrect color",
+        "incorrect garment selection",
+        "incorrect clothing category"
+      ],
+      "root_cause": "Blue office shirt request returned three other tops; positive attributes were not enforced.",
+      "json_valid": true,
+      "invented_catalog_ids": false
+    }
+  ]
+}

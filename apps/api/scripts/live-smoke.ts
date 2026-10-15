@@ -32,6 +32,7 @@ async function main() {
       `OK ${out.width}x${out.height} ${out.mime} in ${Math.round((Date.now() - started) / 1000)}s`,
     );
   } catch (err) {
+    process.exitCode = 1;
     const e = err as { code?: string; message: string };
     console.log(
       `FAILED after ${Math.round((Date.now() - started) / 1000)}s: [${e.code}] ${e.message}`,

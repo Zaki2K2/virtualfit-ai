@@ -39,8 +39,15 @@ export class FileStore {
     await rm(this.resolve(bucket, id, ext).full, { force: true });
   }
 
-  /** Deletes files older than maxAgeMs in a bucket. Returns the removed file ids. */
-  async purgeOlderThan(bucket: StoreBucket, maxAgeMs: number): Promise<string[]> {
+  /**
+   * Deletes files older than maxAgeMs in a bucket, except those `keep(id)` says are still
+   * referenced. Returns the removed file ids.
+   */
+  async purgeOlderThan(
+    bucket: StoreBucket,
+    maxAgeMs: number,
+    keep: (id: string) => Promise<boolean> = async () => false,
+  ): Promise<string[]> {
     const dir = path.join(this.root, bucket);
     let names: string[];
     try {
@@ -52,9 +59,10 @@ export class FileStore {
     for (const name of names) {
       const full = path.join(dir, name);
       const info = await stat(full);
-      if (Date.now() - info.mtimeMs > maxAgeMs) {
+      const id = path.parse(name).name;
+      if (Date.now() - info.mtimeMs > maxAgeMs && !(await keep(id))) {
         await rm(full, { force: true });
-        removed.push(path.parse(name).name);
+        removed.push(id);
       }
     }
     return removed;
