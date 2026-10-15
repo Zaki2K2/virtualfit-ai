@@ -1,0 +1,59 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: #f6f5f2;
+  --color-surface: #ffffff;
+  --color-foreground: #17171a;
+  --color-muted: #ecebe7;
+  --color-muted-foreground: #5f5f66;
+  --color-border: #deddd8;
+  --color-ring: #4f46e5;
+
+  --color-primary: #17171a;
+  --color-primary-foreground: #ffffff;
+  --color-accent: #4f46e5; /* indigo: reserved for AI-related emphasis */
+  --color-accent-soft: #eceafd;
+  --color-accent-foreground: #ffffff;
+  --color-danger: #b42318;
+  --color-danger-soft: #fdecea;
+  --color-warning-soft: #fff6e0;
+  --color-warning: #8a5a00;
+  --color-success: #17794a;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  --shadow-card: 0 1px 2px rgb(23 23 26 / 0.04), 0 4px 16px rgb(23 23 26 / 0.05);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.next/
+coverage/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+# User photographs and generated results must never be committed
+apps/api/uploads/*
+!apps/api/uploads/.gitkeep
+*.log
+.DS_Store
+next-env.d.ts

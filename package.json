@@ -1,0 +1,36 @@
+{
+  "name": "virtualfit-ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "VirtualFit AI - Intelligent Virtual Dressing Room (noncommercial university project)",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "build:shared": "npm run build -w @virtualfit/shared",
+    "dev": "npm run build:shared && concurrently -n api,web -c blue,magenta \"npm run dev -w @virtualfit/api\" \"npm run dev -w @virtualfit/web\"",
+    "build": "npm run build:shared && npm run build -w @virtualfit/api && npm run build -w @virtualfit/web",
+    "start": "concurrently -n api,web \"npm run start -w @virtualfit/api\" \"npm run start -w @virtualfit/web\"",
+    "typecheck": "npm run build:shared && npm run typecheck -w @virtualfit/api && npm run typecheck -w @virtualfit/web",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "npm run build:shared && npm run test -w @virtualfit/shared && npm run test -w @virtualfit/api",
+    "generate:catalog": "npm run generate:catalog -w @virtualfit/api",
+    "ai:inspect": "npm run ai:inspect -w @virtualfit/api --"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "concurrently": "^10.0.6",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.1",
+    "prettier": "^3.9.10",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.71.2",
+    "vitest": "^5.0.4"
+  }
+}
