@@ -27,6 +27,8 @@ const envSchema = z.object({
   NOVA_IMAGE_KEY: z.preprocess(emptyToUndefined, z.string().optional()),
   NOVA_IMAGE_MODEL: z.string().default('segmind/SSD-1B'),
   NOVA_IMAGE_EXTERNAL: z.enum(['true', 'false']).optional(),
+  /** Comma-separated tool names the operator allows. Empty means every tool is denied. */
+  NOVA_TOOLS_ENABLED: z.preprocess(emptyToUndefined, z.string().max(500).optional()),
   NOVA_CONCURRENCY: z.coerce.number().int().min(1).max(4).default(1),
   NOVA_QUEUE_SIZE: z.coerce.number().int().min(1).max(100).default(8),
   NOVA_TIMEOUT_MS: z.coerce.number().int().min(1000).max(600_000).default(120_000),

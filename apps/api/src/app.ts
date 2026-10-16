@@ -75,7 +75,7 @@ export function createApp(c: Container) {
   );
   api.use('/health', healthRoutes(c.health));
   api.use(guestSession(isProd));
-  api.use('/nova', novaRoutes(c.nova, env));
+  api.use('/nova', novaRoutes(c.nova, env, c.orchestrator));
   api.get('/styling/status', async (_req, res) => {
     res.json(await c.styling.status());
   });

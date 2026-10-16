@@ -25,6 +25,7 @@ import { StylingService } from './modules/styling/styling.service';
 import { RegisteredCustomProvider } from './integrations/slm/registered-custom.provider';
 import { NovaStore } from './modules/nova/models';
 import { NovaService } from './modules/nova/service';
+import { Orchestrator } from './modules/orchestrator';
 import {
   LocalNovaLanguage,
   CompatibleVision,
@@ -101,9 +102,17 @@ export function createContainer(env: Env, options: ContainerOptions = {}) {
     options.novaImages ?? new CompatibleImages(env),
     database,
   );
+  const orchestrator = new Orchestrator(env, {
+    collections,
+    textStatus: async () => {
+      const s = await styling.status();
+      return { available: s.available, reason: s.reason };
+    },
+  });
   const eraser = {
     async eraseAll(guestId: string) {
       await nova.erase(guestId);
+      await orchestrator.knowledge.erase(guestId);
       await favorites.removeAllFor(guestId);
       await tryOns.removeAllFor(guestId);
       await clothing.removeAllFor(guestId);
@@ -158,6 +167,7 @@ export function createContainer(env: Env, options: ContainerOptions = {}) {
     users,
     styling,
     nova,
+    orchestrator,
     eraser,
     health,
     purge,

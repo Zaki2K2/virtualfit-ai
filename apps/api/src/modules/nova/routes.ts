@@ -12,8 +12,10 @@ import { AppError } from '../../utils/errors';
 import type { Env } from '../../config/env';
 import { publicDoc } from './models';
 import type { NovaService } from './service';
+import type { Orchestrator } from '../orchestrator';
+import { orchestratorRoutes } from '../orchestrator/routes';
 
-export function novaRoutes(service: NovaService, env: Env) {
+export function novaRoutes(service: NovaService, env: Env, orchestrator: Orchestrator) {
   const router = Router();
   const id = (req: Request) => z.string().uuid().parse(req.params.id);
   if (env.NODE_ENV !== 'test')
@@ -39,6 +41,7 @@ export function novaRoutes(service: NovaService, env: Env) {
       );
     next();
   });
+  router.use(orchestratorRoutes(orchestrator));
   router.get('/status', async (req, res) => {
     res.json(await service.status(req.guestId));
   });
