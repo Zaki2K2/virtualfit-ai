@@ -53,6 +53,7 @@ export class StylingService {
     message: string,
     model: 'base' | 'custom' = 'base',
     history: string[] = [],
+    signal?: AbortSignal,
   ) {
     const provider = model === 'custom' ? this.customProvider : this.provider;
     if (!provider || (model === 'custom' && !(await provider.status()).available))
@@ -174,7 +175,7 @@ export class StylingService {
             selectionPlan: canonical.itemIds,
             selectionCategories: canonical.categories,
             preferences,
-          }),
+          }, signal),
         );
         diagnostics.rawSchemaValid = true;
       } catch (err) {

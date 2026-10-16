@@ -27,6 +27,8 @@ The browser only talks to the Next.js server; it proxies `/api/*` to the API (`A
 
 ## Local AI styling assistant (language model)
 
+**Nova AI — Powered by NovaCTO:** open http://localhost:3000/nova after `npm run dev:ai` for streamed local chat, MongoDB conversations, approved memory and configurable separate image tools. `/stylist` remains available for grounded wardrobe recommendations. See [Nova platform setup, verified features and GPU limitations](docs/nova-platform.md). No new fine-tuned model or real image-generation success is claimed.
+
 Local hosting and measured results: [Local SLM hosting](docs/local-slm-hosting.md). Training progress: [Phase 3 report](docs/slm-finetuning-progress.md).
 
 The **AI Stylist** at http://localhost:3000/stylist uses a real CPU-only Qwen2.5-0.5B-Instruct Q4_K_M language model through llama.cpp. It recommends current-guest wardrobe items and stays separate from the vision model. Start the complete local stack with `npm run dev:ai`; it verifies real inference before reporting ready and reuses a healthy existing Qwen server. If the model is missing, run `npm run slm:setup` once. If the app is already running through the unchanged `npm run dev`, start only `npm run slm:serve` in another terminal. Setup checks RAM/disk and verifies downloads; it needs no NVIDIA GPU or paid API.

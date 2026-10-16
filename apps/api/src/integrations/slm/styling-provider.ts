@@ -15,5 +15,5 @@ export interface StylingContext {
 /** Language-only port. Never invokes or substitutes the vision providers. */
 export interface StylingProvider {
   status(): Promise<StylingStatus>;
-  recommend(context: StylingContext): Promise<StylingOutput>;
+  recommend(context: StylingContext, signal?: AbortSignal): Promise<StylingOutput>;
 }

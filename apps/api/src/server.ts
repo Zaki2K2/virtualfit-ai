@@ -49,6 +49,11 @@ async function main() {
       simulated: ai.simulated,
     });
   });
+  // Node's default 5s keep-alive is shorter than most proxies' idle reuse, which produces
+  // sporadic ECONNRESET on the next request. Inference deadlines are enforced per-request via
+  // AbortSignal, so no socket-level request timeout is needed for long responses.
+  server.keepAliveTimeout = 65_000;
+  server.headersTimeout = 66_000;
   server.on('error', (err: NodeJS.ErrnoException) => {
     logger.error(
       err.code === 'EADDRINUSE'

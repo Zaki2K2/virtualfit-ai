@@ -19,6 +19,7 @@ import { tryOnRoutes } from './modules/try-on/try-on.routes';
 import { UsersController } from './modules/users/users.controller';
 import { usersRoutes } from './modules/users/users.routes';
 import { stylingRequestSchema } from '@virtualfit/shared';
+import { novaRoutes } from './modules/nova/routes';
 
 export function createApp(c: Container) {
   const { env } = c;
@@ -69,9 +70,12 @@ export function createApp(c: Container) {
   app.use(cookieParser());
 
   const api = express.Router();
-  api.use(generalLimiter);
+  api.use((req, res, next) =>
+    req.path.startsWith('/nova') ? next() : generalLimiter(req, res, next),
+  );
   api.use('/health', healthRoutes(c.health));
   api.use(guestSession(isProd));
+  api.use('/nova', novaRoutes(c.nova, env));
   api.get('/styling/status', async (_req, res) => {
     res.json(await c.styling.status());
   });

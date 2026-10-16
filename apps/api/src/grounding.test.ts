@@ -141,7 +141,17 @@ describe('disclosed fallback and model version boundaries', () => {
     expect(calls).toBe(4);
   });
   it('keeps an unregistered custom checkpoint unavailable and preserves original selection', async () => {
-    const { app } = buildTestApp();
+    const { app } = buildTestApp(
+      {},
+      {
+        stylingProvider: {
+          status: async () => ({ ...status, model: 'virtualfit-style-base' }),
+          recommend: async () => {
+            throw new Error('This readiness test must not generate');
+          },
+        },
+      },
+    );
     const agent = browser(app);
     const res = await agent.get('/api/v1/styling/status');
     expect(res.body.models.find((o: { id: string }) => o.id === 'custom').available).toBe(false);

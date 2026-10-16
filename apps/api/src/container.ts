@@ -23,8 +23,21 @@ import { LlamaCppStylingProvider } from './integrations/slm/llama-cpp.provider';
 import type { StylingProvider } from './integrations/slm/styling-provider';
 import { StylingService } from './modules/styling/styling.service';
 import { RegisteredCustomProvider } from './integrations/slm/registered-custom.provider';
+import { NovaStore } from './modules/nova/models';
+import { NovaService } from './modules/nova/service';
+import {
+  LocalNovaLanguage,
+  CompatibleVision,
+  CompatibleImages,
+  type NovaLanguageProvider,
+  type NovaVisionProvider,
+  type NovaImageProvider,
+} from './modules/nova/providers';
 
 export interface ContainerOptions {
+  novaLanguage?: NovaLanguageProvider;
+  novaVision?: NovaVisionProvider;
+  novaImages?: NovaImageProvider;
   collections?: CollectionFactory;
   database?: HealthStatus['database'];
   /** Live database connection check (MongoDB). Defaults to always up (in-memory store). */
@@ -78,8 +91,19 @@ export function createContainer(env: Env, options: ContainerOptions = {}) {
       ),
   );
 
+  const nova = new NovaService(
+    new NovaStore(collections),
+    env,
+    files,
+    styling,
+    options.novaLanguage ?? new LocalNovaLanguage(env),
+    options.novaVision ?? new CompatibleVision(env),
+    options.novaImages ?? new CompatibleImages(env),
+    database,
+  );
   const eraser = {
     async eraseAll(guestId: string) {
+      await nova.erase(guestId);
       await favorites.removeAllFor(guestId);
       await tryOns.removeAllFor(guestId);
       await clothing.removeAllFor(guestId);
@@ -110,6 +134,7 @@ export function createContainer(env: Env, options: ContainerOptions = {}) {
 
   /** Deletes expired results (favorites are kept). */
   const purge = async () => {
+    await nova.purge();
     const removed = await tryOns.purgeExpired(env.RESULT_RETENTION_HOURS * 3_600_000, (id) =>
       favorites.isFavorited(id),
     );
@@ -118,6 +143,7 @@ export function createContainer(env: Env, options: ContainerOptions = {}) {
 
   /** Call once at startup, before accepting requests. */
   const recoverInterruptedJobs = async () => {
+    await nova.recover();
     const n = await tryOns.failInterrupted();
     if (n) logger.warn('Marked interrupted try-ons as failed', { count: n });
   };
@@ -131,6 +157,7 @@ export function createContainer(env: Env, options: ContainerOptions = {}) {
     history,
     users,
     styling,
+    nova,
     eraser,
     health,
     purge,

@@ -37,3 +37,10 @@ slm-engine/*.egg-info/
 
 # Machine-local custom model registration
 slm-engine/configs/custom-model.json
+
+# Optional Nova media caches, private exports and environments
+nova-engine/.venv/
+nova-engine/cache/
+nova-engine/runs/
+nova-engine/*.egg-info/
+slm-engine/data/reviewed/

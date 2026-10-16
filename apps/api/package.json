@@ -10,7 +10,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "generate:catalog": "tsx scripts/generate-catalog.ts",
-    "ai:inspect": "tsx scripts/inspect-space.ts"
+    "ai:inspect": "tsx scripts/inspect-space.ts",
+    "nova:training": "tsx --env-file-if-exists=../../.env scripts/nova-training.ts"
   },
   "dependencies": {
     "@gradio/client": "^2.7.1",

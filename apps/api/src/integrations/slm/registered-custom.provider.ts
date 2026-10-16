@@ -35,13 +35,13 @@ export class RegisteredCustomProvider implements StylingProvider {
       };
     return this.delegate.status();
   }
-  recommend(context: StylingContext) {
+  recommend(context: StylingContext, signal?: AbortSignal) {
     if (!this.registered())
       throw new AppError(
         503,
         'AI_UNAVAILABLE',
         'Custom checkpoint has not passed registration. The original model remains available.',
       );
-    return this.delegate.recommend(context);
+    return this.delegate.recommend(context, signal);
   }
 }

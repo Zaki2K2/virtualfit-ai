@@ -48,6 +48,7 @@ export default function StylistPage() {
         description={`${nova.tagline}. Your VirtualFit AI fashion assistant, powered by local Qwen inference.`}
       />
       <div className="mx-auto max-w-3xl space-y-6">
+        <p className="text-sm"><Link className="underline underline-offset-4" href="/nova">Open Nova chat, history and memory ↗</Link></p>
         <Card>
           <CardContent className="space-y-4 pt-6">
             <p className="text-sm text-muted-foreground">

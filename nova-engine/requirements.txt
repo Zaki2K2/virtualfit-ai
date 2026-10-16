@@ -1,0 +1,9 @@
+# Optional media host only. Install CUDA PyTorch appropriate to that GPU separately.
+fastapi>=0.115,<1
+uvicorn>=0.34,<1
+pillow>=11,<13
+transformers>=4.51,<6
+diffusers>=0.35,<1
+accelerate>=1.6,<2
+safetensors>=0.5,<1
+sentencepiece>=0.2,<1

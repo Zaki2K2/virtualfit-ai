@@ -1,0 +1,57 @@
+{
+  "status": {
+    "language": {
+      "available": true,
+      "model": "virtualfit-style-base",
+      "reason": "Local Qwen is ready; an inference request succeeded."
+    },
+    "vision": {
+      "configured": false,
+      "model": "HuggingFaceTB/SmolVLM-256M-Instruct",
+      "external": false
+    },
+    "images": {
+      "configured": false,
+      "model": "segmind/SSD-1B",
+      "external": false,
+      "cancellation": "connection-abort; remote compute cancellation is not guaranteed"
+    },
+    "persistence": "mongodb",
+    "resources": {
+      "active": 0,
+      "queued": 0,
+      "concurrency": 1,
+      "storageBytes": 0,
+      "storageLimitBytes": 536870912,
+      "freeDiskBytes": 141653319680
+    },
+    "settings": {
+      "memoryEnabled": false,
+      "retentionDays": 30
+    }
+  },
+  "realReply": "I'm Nova, your AI styling assistant from NovaCTO.",
+  "refreshRecovery": true,
+  "rename": true,
+  "regeneration": true,
+  "memoryReply": "You have shared the preference that you prefer black formal outfits.",
+  "memoryRetrieved": true,
+  "memoryDeleted": true,
+  "uploadValidated": true,
+  "visionUnavailableCorrectly": true,
+  "guestIsolation": true,
+  "imageGenerationUnavailableCorrectly": true,
+  "stopGeneration": true,
+  "mobileAndThemes": true,
+  "expressProxyOnly": true,
+  "actualMediaInference": false,
+  "verifiedDate": "2026-10-16",
+  "javascriptTests": 163,
+  "pythonTests": 35,
+  "productionBuild": "passed",
+  "lint": "passed",
+  "typecheck": "passed",
+  "ggufSha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+  "gpuTrainingPerformed": false,
+  "proxyTimeoutMs": 610000
+}

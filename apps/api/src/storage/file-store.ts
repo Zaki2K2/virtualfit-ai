@@ -3,7 +3,7 @@ import path from 'node:path';
 import { isSafeId } from '../utils/ids';
 import { AppError } from '../utils/errors';
 
-export type StoreBucket = 'results' | 'clothing';
+export type StoreBucket = 'results' | 'clothing' | 'nova';
 
 /**
  * Stores files under generated names only. Callers pass an id (never a path); the id is

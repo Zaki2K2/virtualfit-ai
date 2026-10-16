@@ -1,0 +1,12 @@
+{
+  "vision": {
+    "model": "HuggingFaceTB/SmolVLM-256M-Instruct",
+    "revision": "7e3e67edbbed1bf9888184d9df282b700a323964",
+    "license": "apache-2.0"
+  },
+  "images": {
+    "model": "segmind/SSD-1B",
+    "revision": "60987f37e94cd59c36b1cba832b9f97b57395a10",
+    "license": "apache-2.0"
+  }
+}

@@ -19,6 +19,20 @@ const envSchema = z.object({
     .default(24),
   AI_PROVIDER: z.enum(AI_PROVIDER_IDS).default('mock'),
   AI_TIMEOUT_MS: z.coerce.number().int().min(1000).max(600_000).default(180_000),
+  NOVA_VISION_URL: z.preprocess(emptyToUndefined, z.string().url().optional()),
+  NOVA_VISION_KEY: z.preprocess(emptyToUndefined, z.string().optional()),
+  NOVA_VISION_MODEL: z.string().default('HuggingFaceTB/SmolVLM-256M-Instruct'),
+  NOVA_VISION_EXTERNAL: z.enum(['true', 'false']).optional(),
+  NOVA_IMAGE_URL: z.preprocess(emptyToUndefined, z.string().url().optional()),
+  NOVA_IMAGE_KEY: z.preprocess(emptyToUndefined, z.string().optional()),
+  NOVA_IMAGE_MODEL: z.string().default('segmind/SSD-1B'),
+  NOVA_IMAGE_EXTERNAL: z.enum(['true', 'false']).optional(),
+  NOVA_CONCURRENCY: z.coerce.number().int().min(1).max(4).default(1),
+  NOVA_QUEUE_SIZE: z.coerce.number().int().min(1).max(100).default(8),
+  NOVA_TIMEOUT_MS: z.coerce.number().int().min(1000).max(600_000).default(120_000),
+  NOVA_STORAGE_MB: z.coerce.number().min(10).max(100000).default(512),
+  NOVA_MIN_FREE_DISK_MB: z.coerce.number().min(0).default(256),
+  NOVA_REQUESTS_PER_MINUTE: z.coerce.number().int().min(1).default(180),
   SLM_URL: z
     .string()
     .url()

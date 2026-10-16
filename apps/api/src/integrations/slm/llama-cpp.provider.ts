@@ -11,8 +11,7 @@ import {
 import type { Env } from '../../config/env';
 import { AppError } from '../../utils/errors';
 import type { StylingContext, StylingProvider } from './styling-provider';
-import { readFileSync } from 'node:fs';
-import path from 'node:path';
+import { runtimeKey } from './runtime-files';
 
 // Fixed schema, never supplied by the user. Dynamic enum prevents invented wardrobe IDs.
 export function recommendationSchema(
@@ -55,9 +54,11 @@ export function stylingMessages(context: StylingContext) {
   return [
     {
       role: 'system',
-      content: novaStylingSystem + (novaIdentityGuidance(context.message)
-        ? ` For this identity question, use these verified facts: ${novaIdentityGuidance(context.message)}`
-        : ''),
+      content:
+        novaStylingSystem +
+        (novaIdentityGuidance(context.message)
+          ? ` For this identity question, use these verified facts: ${novaIdentityGuidance(context.message)}`
+          : ''),
     },
     { role: 'user', content: JSON.stringify(current) },
   ];
@@ -134,10 +135,7 @@ export class LlamaCppStylingProvider implements StylingProvider {
 
   private headers(): Record<string, string> {
     try {
-      const key = readFileSync(
-        path.resolve(__dirname, '../../../../../slm-engine/runtime/api-key.txt'),
-        'utf8',
-      ).trim();
+      const key = runtimeKey();
       return { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` };
     } catch {
       return { 'Content-Type': 'application/json' };
@@ -186,8 +184,11 @@ export class LlamaCppStylingProvider implements StylingProvider {
     }
   }
 
-  async recommend(context: StylingContext): Promise<StylingOutput> {
-    const signal = AbortSignal.timeout(this.env.SLM_TIMEOUT_MS);
+  async recommend(context: StylingContext, callerSignal?: AbortSignal): Promise<StylingOutput> {
+    const signal = AbortSignal.any([
+      AbortSignal.timeout(this.env.SLM_TIMEOUT_MS),
+      ...(callerSignal ? [callerSignal] : []),
+    ]);
     let schemaValid = false;
     this.generating = true;
     try {
