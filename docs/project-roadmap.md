@@ -20,6 +20,24 @@
 - Verified without a GPU: released attention checkpoint loads into the right layers, sampler = reference (<=1 px), tiny-model training step/resume/reload, Express <-> FastAPI over real sockets
 - Express `custom-python` provider, model registry, studio model selector, no silent fallbacks
 
+## Done (v0.4 - Nova AI platform foundation)
+
+- Nova chat at `/nova`: streaming local Qwen, persisted conversations, consented memory, guest-scoped ownership, validated image uploads
+- Opt-in vision / image-generation adapters and a separate `nova-engine` worker (nothing loads by default; unconfigured media returns explicit unavailable errors)
+- Consent-gated, operator-approved, versioned training export tooling (no automatic weight updates)
+- Proxy timeout fix (see `docs/nova-platform.md`, "Stabilization report")
+
+## Next milestone (Nova media): real image understanding and generation on a remote GPU
+
+Goal: enable and verify genuine image understanding (SmolVLM-256M-Instruct) and image generation (SSD-1B) on a compatible remote GPU, while local Qwen text inference stays unchanged on this CPU machine.
+
+1. Provision a GPU host you control (CUDA PyTorch), deploy `nova-engine/` in its own environment, set a private `NOVA_WORKER_API_KEY` (24+ chars), and enable vision/images explicitly.
+2. Download the pinned model revisions deliberately (`NOVA_MEDIA_ALLOW_DOWNLOADS=1` once), and re-check the full model licenses before deployment.
+3. Expose the worker only over authenticated TLS or an SSH tunnel; point `NOVA_VISION_*` / `NOVA_IMAGE_*` at it with external-processing consent left on.
+4. Verify with real inputs: a genuine caption for a real clothing photo, a genuine generated image (inspect the bytes, model revision, persisted status), cancel and retry, and unavailable states when the worker is stopped.
+5. Benchmark cold start, latency and peak GPU memory; record results in `docs/nova-platform.md`. Do not claim image features work until this evidence exists.
+6. Keep the Qwen server, its key and the model weights untouched; confirm text chat is unaffected with the worker on and off.
+
 ## Next (research, needs a cloud GPU)
 
 1. Run notebooks 01-03: measure real memory, **complete the first real training step**, produce and evaluate a genuine adapter; write `docs/research/experiment-log.md`.
