@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_training_v2_and_evaluation_are_separate():
-    assert validate_splits(ROOT / 'data/training-v2') == {'train': 64, 'validation': 8, 'test': 8}
+    assert validate_splits(ROOT / 'data/training-v2') == {'train': 72, 'validation': 11, 'test': 17}
     scenarios, messages = set(), set()
     for split, count in [('development', 16), ('validation', 16), ('heldout', 102)]:
         rows = [json.loads(line) for line in (ROOT / 'evaluation' / f'{split}.jsonl').read_text().splitlines()]

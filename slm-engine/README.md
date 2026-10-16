@@ -1,8 +1,10 @@
 # VirtualFit language engine
 
-**Phase 3 update:** attribute-grounded retrieval, disclosed deterministic fallbacks, scenario-disjoint 16/16/102 evaluation splits, independent 64/8/8 training data, persistent smoke/resume checkpoints and gated base/custom selection are now implemented. Read [the current progress report](../docs/slm-finetuning-progress.md). Earlier 3/8 metrics below describe the original pipeline, not the latest one. No real GPU fine-tune has run.
+**Phase 3 update:** attribute-grounded retrieval, disclosed deterministic fallbacks, scenario-disjoint 16/16/102 evaluation splits, independent 72/11/17 training data including Nova identity examples, persistent smoke/resume checkpoints and gated base/custom selection are now implemented. Read [the current progress report](../docs/slm-finetuning-progress.md). Earlier 3/8 metrics below describe the original pipeline, not the latest one. No real GPU fine-tune has run.
 
 This directory owns **language recommendations**, dataset preparation, LoRA training and evaluation. `../ai-engine/` continues to own realistic virtual try-on vision. No language model generates clothing images.
+
+The assistant is **Nova AI / Powered by NovaCTO**, configured centrally without changing Qwen weights. See [Nova identity and verified browser results](../docs/nova-ai-identity.md). No Nova fine-tuning has completed.
 
 ## Local CPU inference (Windows x64)
 
@@ -17,7 +19,7 @@ npm run dev:slm
 
 If `npm run dev` is already running, keep it running and use `npm run slm:serve` in another terminal. Open http://localhost:3000/stylist. Avoid starting two copies on the same ports.
 
-The native runtime binds only 127.0.0.1:8081, uses four CPU threads, 2048 tokens of context, one slot, small batches, and zero GPU layers. Its web UI is disabled. It creates a random local API key at ignored `runtime/api-key.txt`; Express reads this file server-side. The browser never receives the key or calls llama.cpp directly. Model files and runtime binaries are ignored by Git.
+The native runtime binds only 127.0.0.1:8081, uses four CPU threads, 2048 tokens of context, one slot, small batches, and zero GPU layers. Its official web UI is enabled at http://127.0.0.1:8081/. It creates a random local API key at ignored `runtime/api-key.txt`; Express reads this file server-side. The Stylist browser uses Express only. Direct native chat requires the local user to enter that existing key manually. Model files and runtime binaries are ignored by Git.
 
 The existing root `.env` may contain:
 

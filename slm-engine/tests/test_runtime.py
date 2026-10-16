@@ -21,6 +21,7 @@ def test_serve_enables_official_ui_without_relaxing_security(tmp_path, monkeypat
     monkeypatch.setattr(runtime, 'sha256', lambda path: runtime.CONFIG['model_sha256'])
     monkeypatch.setattr(runtime, 'free_ram', lambda: 2 * 1024**3)
     monkeypatch.setattr(runtime, 'reserve_port', lambda port: nullcontext())
+    monkeypatch.setattr(runtime, 'prepare_identity', lambda: ('nova-template', 'nova-ui'))
     monkeypatch.setenv('LLAMA_SERVER_PATH', sys.executable)
     commands = []
     monkeypatch.setattr(runtime, 'supervise', lambda command, *callbacks: commands.append(command) or 0)
@@ -33,7 +34,34 @@ def test_serve_enables_official_ui_without_relaxing_security(tmp_path, monkeypat
                         ('--api-key-file', str(tmp_path / 'runtime/api-key.txt'))]:
         assert command[command.index(flag) + 1] == value
     assert '--api-key' not in command
+    assert command[command.index('--chat-template-file') + 1] == 'nova-template'
+    assert command[command.index('--ui-config-file') + 1] == 'nova-ui'
     assert (tmp_path / 'runtime/api-key.txt').read_text()
+
+
+def test_nova_native_template_uses_central_identity_and_keeps_qwen_format(tmp_path, monkeypatch):
+    import json
+    import shutil
+    source = runtime.ROOT
+    root = tmp_path / 'slm-engine'
+    (root / 'runtime').mkdir(parents=True)
+    (root / 'configs').mkdir()
+    config = tmp_path / 'packages/shared/src'
+    config.mkdir(parents=True)
+    shutil.copy(source.parent / 'packages/shared/src/nova.json', config / 'nova.json')
+    shutil.copy(source / 'configs/nova-qwen.jinja.in', root / 'configs')
+    monkeypatch.setattr(runtime, 'ROOT', root)
+    template, ui = runtime.prepare_identity()
+    text = template.read_text(encoding='utf8')
+    assert '__NOVA_' not in text
+    assert 'NovaCTO' in text and 'Alibaba Cloud' in text
+    assert '<|im_start|>' in text and '<|im_end|>' in text
+    assert 'tool_call' in text  # Preserve the installed model template's formatting.
+    settings = json.loads(ui.read_text(encoding='utf8'))
+    assert settings['systemMessage'] == 'Nova AI — Powered by NovaCTO'
+    assert not settings['useHuggingFaceHub']
+    assert settings['temperature'] == 0
+    assert 'apiKey' not in settings
 
 
 @pytest.mark.parametrize('native, expected', [(0, 1), (7, 7)])

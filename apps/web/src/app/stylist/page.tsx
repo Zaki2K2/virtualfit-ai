@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import type { StylingRecommendation, StylingStatus } from '@virtualfit/shared';
+import { nova, type StylingRecommendation, type StylingStatus } from '@virtualfit/shared';
 import { apiRequest, jsonBody } from '@/lib/api-client';
 import { PageContainer, PageHeader } from '@/components/shared/page-header';
 import { ClothingCard } from '@/components/clothing/clothing-card';
@@ -44,8 +44,8 @@ export default function StylistPage() {
   return (
     <PageContainer>
       <PageHeader
-        title="AI Styling Assistant"
-        description="Describe an outfit and get suggestions from your available wardrobe. Language recommendations run locally on your CPU."
+        title={nova.label}
+        description={`${nova.tagline}. Your VirtualFit AI fashion assistant, powered by local Qwen inference.`}
       />
       <div className="mx-auto max-w-3xl space-y-6">
         <Card>
@@ -114,7 +114,7 @@ export default function StylistPage() {
                 ).map((option) => (
                   <option key={option.id} value={option.id} disabled={!option.available}>
                     {option.id === 'base'
-                      ? 'Qwen2.5-0.5B Q4 (default / rollback)'
+                      ? `${nova.name} / Qwen2.5-0.5B Q4 (default / rollback)`
                       : 'Custom checkpoint'}{' '}
                     / {option.available ? 'Available' : option.reason}
                   </option>
@@ -151,7 +151,7 @@ export default function StylistPage() {
                   message.trim().length < 3
                 }
               >
-                {recommendation.isPending ? 'Generating locally...' : 'Ask local Qwen'}
+                {recommendation.isPending ? 'Generating locally...' : `Ask ${nova.name}`}
               </Button>
               {turns.length > 0 && (
                 <Button
@@ -182,7 +182,7 @@ export default function StylistPage() {
                 <p className="font-medium">You: {turn.message}</p>
                 <p className="mt-2">{turn.result.answer}</p>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  {turn.result.source === 'model' ? 'Local Qwen' : 'Catalog fallback'}
+                  {turn.result.source === 'model' ? nova.name : 'Catalog fallback'}
                 </p>
               </div>
             ))}
@@ -216,7 +216,7 @@ export default function StylistPage() {
                   />
                 ))}
               </div>
-            ) : (
+            ) : recommendation.data.intent === 'advice' ? null : (
               <p>
                 No matching wardrobe items were selected. Try another request or add a garment in
                 Wardrobe.

@@ -1,9 +1,14 @@
 {
-  "version": "training-v2",
+  "version": "training-v2-nova-identity-v1",
   "source": "independently authored synthetic contexts; no evaluation rows imported",
   "files": {
-    "test.jsonl": "0e9dfdb67008c7f678b3cc11f29ead4ed9021f0e7325b1f9a516d0f2e3fb6517",
-    "train.jsonl": "c25b664a27a90716570fe823b70e7c1b57a681eb4129cad2490cea02b5d8a7f7",
-    "validation.jsonl": "5efc1f045d9dc377aaf70fd1cef258d136819078728a37844db8240e5f59e845"
+    "test.jsonl": "9754f0ac86a8673f8f29fb3bf3730cec3b695a2e6dee0d5ad7c06df72062ddf3",
+    "train.jsonl": "5f6105eaff66f59fa25029d075212260787e299c452126843db616ee2659ae56",
+    "validation.jsonl": "3948879d71af3415b09f12f9d448f7a65b54ce067787df2b08474eda48549372"
+  },
+  "counts": {
+    "test": 17,
+    "train": 72,
+    "validation": 11
   }
 }

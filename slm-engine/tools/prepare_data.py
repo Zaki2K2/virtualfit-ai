@@ -9,7 +9,8 @@ from virtualfit_slm.data import validate_splits
 
 
 def main():
-    system = json.loads((ROOT / "configs/prompt.json").read_text())["system"]
+    identity = json.loads((ROOT.parent / 'packages/shared/src/nova.json').read_text(encoding='utf8'))
+    system = identity['system'] + ' ' + identity['stylingRules']
     # Own authored catalog descriptions; no scraped/personally identifiable content.
     items = [
         ("tee-classic-white", "Classic Crew T-shirt", "tops", "Plain cotton tee in white."),

@@ -22,6 +22,32 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG = json.loads((ROOT / "configs/local.json").read_text())
 
 
+def prepare_identity():
+    """Generate local launch assets from the one version-controlled Nova configuration."""
+    identity = json.loads((ROOT.parent / 'packages/shared/src/nova.json').read_text(encoding='utf8'))
+    template = (ROOT / 'configs/nova-qwen.jinja.in').read_text(encoding='utf8')
+    template_path = ROOT / 'runtime/nova-qwen.jinja'
+    ui_path = ROOT / 'runtime/nova-ui.json'
+    setup = ['{%- set nova_base = ' + json.dumps(identity['system']) + ' %}',
+             '{%- set nova_system = nova_base %}',
+             "{%- set nova_example_answer = '' %}",
+             "{%- set nova_example_question = '' %}",
+             "{%- set nova_query = ' ' + (messages[-1]['content'] | lower | replace('?', ' ') | replace('!', ' ') | replace('.', ' ') | replace('\"', ' ') | replace(':', ' ') | replace(',', ' ')) + ' ' %}"]
+    for index, topic in enumerate(identity['identityTopics']):
+        condition = ' or '.join(json.dumps(' ' + needle + ' ') + ' in nova_query' for needle in topic['needles'])
+        setup.append('{%- ' + ('if' if index == 0 else 'elif') + ' ' + condition + ' %}')
+        setup.append('{%- set nova_example_answer = ' + json.dumps(topic['answer']) + ' %}')
+        setup.append('{%- set nova_example_question = ' + json.dumps(topic['question']) + ' %}')
+        setup.append('{%- set nova_system = nova_base + ' + json.dumps('\nAnswer the current identity question directly, using this answer: ' + topic['answer']) + ' %}')
+    setup.append('{%- endif %}')
+    template_path.write_text(template.replace('__NOVA_IDENTITY_SETUP__', '\n'.join(setup)), encoding='utf8')
+    # Identity is enforced in the chat template even if a browser has old UI settings.
+    ui_path.write_text(json.dumps({'systemMessage': identity['label'] + ' — ' + identity['tagline'],
+                                   'showSystemMessage': True, 'useHuggingFaceHub': False,
+                                   'temperature': identity['nativeTemperature'], 'max_tokens': 260}), encoding='utf8')
+    return template_path, ui_path
+
+
 
 class NoLocalRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
@@ -296,8 +322,10 @@ def serve(variant="base", candidate_path=None, port_override=None, threads=None,
     if not keyfile.exists():
         keyfile.write_text(secrets.token_urlsafe(32))
         keyfile.chmod(0o600)
+    template_path, ui_path = prepare_identity()
     command = [executable, "-m", str(model), "--host", "127.0.0.1", "--port", str(port),
                "--api-key-file", str(keyfile), "--cors-origins", "http://localhost:3000", "--ui",
+               "--chat-template-file", str(template_path), "--ui-config-file", str(ui_path),
                "--alias", alias, "-c", str(c["context"]),
                "-t", str(c["threads"]), "-ngl", "0", "--parallel", "1", "-b", "128", "-ub", "64"]
     if port_override is not None:

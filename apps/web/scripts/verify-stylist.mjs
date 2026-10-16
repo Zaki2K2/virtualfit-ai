@@ -34,7 +34,7 @@ try {
       (r) => r.url().endsWith('/api/v1/styling/recommend') && r.request().method() === 'POST',
       { timeout: 90_000 },
     );
-    await page.getByRole('button', { name: 'Ask local Qwen' }).click();
+    await page.getByRole('button', { name: 'Ask Nova' }).click();
     const actual = await response;
     assert.equal(actual.status(), 200);
     const result = await actual.json();
@@ -98,7 +98,7 @@ try {
   await page
     .getByText('Local Qwen is unavailable. Start npm run dev:ai.', { exact: true })
     .waitFor();
-  assert.equal(await page.getByRole('button', { name: 'Ask local Qwen' }).isDisabled(), true);
+  assert.equal(await page.getByRole('button', { name: 'Ask Nova' }).isDisabled(), true);
   const output = path.resolve('slm-engine/runs');
   mkdirSync(output, { recursive: true });
   await page.screenshot({

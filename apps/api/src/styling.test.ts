@@ -43,6 +43,17 @@ function testProvider(): StylingProvider {
 }
 
 describe('local SLM configuration and protocol', () => {
+  it('rejects a valid JSON reply that falsely attributes the foundation model', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(JSON.stringify({
+      model: 'virtualfit-style-base', choices: [{ finish_reason: 'stop', message: {
+        content: JSON.stringify({ answer: 'Yes, NovaCTO created Qwen.', itemIds: [], occasion: '', categories: [] }),
+      } }],
+    }))));
+    await expect(new LlamaCppStylingProvider(loadEnv({})).recommend({ ...context,
+      message: 'Did NovaCTO create your underlying foundation model?',
+      responseMode: 'advice', selectionPlan: [], selectionCategories: [],
+    })).rejects.toMatchObject({ code: 'AI_FAILED', details: { invalidOutput: true } });
+  });
   it('decodes a valid grounded completion and rejects a different served model', async () => {
     for (const model of ['virtualfit-style-base', 'unexpected-model']) {
       vi.stubGlobal(
@@ -300,6 +311,20 @@ describe('verified readiness and language privacy', () => {
 });
 
 describe('grounded language response contracts', () => {
+  it('answers identity questions through the model with no selected garments', async () => {
+    const provider = testProvider();
+    const recommend = vi.spyOn(provider, 'recommend').mockResolvedValue({
+      answer: "I'm Nova, your AI styling assistant from NovaCTO.",
+      itemIds: [], occasion: '', categories: [],
+    });
+    const { app } = buildTestApp({}, { stylingProvider: provider });
+    const response = await browser(app).post('/api/v1/styling/recommend')
+      .send({ message: 'What is your name?', history: ['Choose an office shirt'] });
+    expect(response.status).toBe(200);
+    expect(response.body).toMatchObject({ source: 'model', modelUsed: true, itemIds: [], categories: [] });
+    expect(recommend.mock.calls[0]?.[0]).toMatchObject({ responseMode: 'advice', selectionPlan: [] });
+    expect(recommend.mock.calls[0]?.[0].instructions).toContain('Nova identity');
+  });
   it('constrains empty selections and exact verified category counts in the native schema', () => {
     const schema = recommendationSchema([], ['outerwear'], 0);
     expect(schema.properties.itemIds).toMatchObject({ minItems: 0, maxItems: 0 });

@@ -6,6 +6,8 @@ ROOT = Path(__file__).resolve().parents[1]
 destination = ROOT / "runs/virtualfit-slm-training.zip"
 destination.parent.mkdir(parents=True, exist_ok=True)
 with zipfile.ZipFile(destination, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
+    identity = ROOT.parent / 'packages/shared/src/nova.json'
+    archive.write(identity, 'packages/shared/src/nova.json')
     for directory in ['virtualfit_slm', 'configs', 'data/training-v2', 'evaluation', 'notebooks']:
         for file in (ROOT / directory).rglob('*'):
             if file.is_file() and '__pycache__' not in file.parts and file.name != 'custom-model.json':

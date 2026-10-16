@@ -1,4 +1,4 @@
-import { stylingOutputSchema, type StylingOutput } from '@virtualfit/shared';
+import { stylingOutputSchema, novaIdentityGuidance, novaIdentityQuestion, type StylingOutput } from '@virtualfit/shared';
 import { ZodError } from 'zod';
 import { parsePreferences, conversationPreferences, ground, validSelection } from './grounding';
 import type { StylingProvider } from '../../integrations/slm/styling-provider';
@@ -75,6 +75,12 @@ export class StylingService {
         this.users.get(guestId),
       ]);
       const preferences = conversationPreferences(message, history);
+      const identityQuestion = novaIdentityQuestion(message);
+      if (identityQuestion) {
+        preferences.intent = 'advice';
+        preferences.slots = [];
+        preferences.occasion = '';
+      }
       const grounded = ground(items, preferences, profile.preferredCategories);
       const status = await provider.status();
       const common = { model: status.model, simulated: false as const, intent: preferences.intent };
@@ -121,6 +127,8 @@ export class StylingService {
         canonical.categories = [];
         canonical.answer =
           'Try a neutral base with one accent color. Tell me which garment and occasion you have in mind.';
+        if (identityQuestion)
+          canonical.answer = novaIdentityGuidance(message)!;
       }
       if (preferences.intent === 'clarify') {
         canonical.itemIds = [];
@@ -141,8 +149,9 @@ export class StylingService {
           await provider.recommend({
             message,
             history,
-            instructions:
-              preferences.intent === 'advice'
+            instructions: identityQuestion
+              ? 'Answer the identity or capability question directly using your configured Nova identity. This is not a missing-garment request. Return empty itemIds and categories. Do not claim a fine-tuned checkpoint exists.'
+              : preferences.intent === 'advice'
                 ? 'Give general color or styling advice. Do not assert that unspecified garments exist in this wardrobe. Return empty itemIds and categories.'
                 : undefined,
             responseMode:

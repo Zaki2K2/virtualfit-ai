@@ -2,7 +2,8 @@
 import json,hashlib
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-system=json.loads((ROOT/'configs/prompt.json').read_text())['system']
+identity=json.loads((ROOT.parent/'packages/shared/src/nova.json').read_text(encoding='utf8'))
+system=identity['system']+' '+identity['stylingRules']
 root=ROOT/'data/training-v2';root.mkdir(parents=True,exist_ok=True)
 # Split by disjoint synthetic garment identities, names and color/occasion families.
 settings={'train':(['white','blue','khaki','black'],['casual','formal'],8),
@@ -33,3 +34,5 @@ for split,(colors,occasions,repetitions) in settings.items():
 print({p.stem:len(p.read_text().splitlines()) for p in root.glob('*.jsonl')})
 # The config uses the training-compatible pinned Transformers base, never the GGUF file.
 p=ROOT/'configs/lora.json';cfg=json.loads(p.read_text());cfg.update({'data_dir':'data/training-v2','checkpoint_every':4,'output_dir':'runs/fashion-lora-v2'});p.write_text(json.dumps(cfg,indent=2)+'\n')
+from prepare_nova_data import main as prepare_nova
+prepare_nova()
