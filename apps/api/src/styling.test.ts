@@ -3,12 +3,17 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { loadEnv } from './config/env';
 import { browser, buildTestApp, makeImage } from './test/helpers';
-import { LlamaCppStylingProvider, stylingMessages } from './integrations/slm/llama-cpp.provider';
+import {
+  LlamaCppStylingProvider,
+  recommendationSchema,
+  stylingMessages,
+} from './integrations/slm/llama-cpp.provider';
 import type { StylingContext, StylingProvider } from './integrations/slm/styling-provider';
+import { languageMetadata } from './integrations/slm/privacy';
 import { excludedCategories } from './modules/styling/styling.service';
 
 const output = {
-  answer: 'Pair the white tee with khaki chinos.',
+  answer: 'The white tee is a simple casual choice.',
   itemIds: ['tee-classic-white'],
   occasion: 'casual',
   categories: ['tops'] as const,
@@ -42,16 +47,14 @@ describe('local SLM configuration and protocol', () => {
     for (const model of ['virtualfit-style-base', 'unexpected-model']) {
       vi.stubGlobal(
         'fetch',
-        vi
-          .fn()
-          .mockResolvedValue(
-            new Response(
-              JSON.stringify({
-                model,
-                choices: [{ finish_reason: 'stop', message: { content: JSON.stringify(output) } }],
-              }),
-            ),
+        vi.fn().mockResolvedValue(
+          new Response(
+            JSON.stringify({
+              model,
+              choices: [{ finish_reason: 'stop', message: { content: JSON.stringify(output) } }],
+            }),
           ),
+        ),
       );
       const result = new LlamaCppStylingProvider(loadEnv({})).recommend(context);
       if (model === 'virtualfit-style-base') await expect(result).resolves.toMatchObject(output);
@@ -228,3 +231,122 @@ describe('styling API grounding and isolation', () => {
   });
 });
 
+describe('verified readiness and language privacy', () => {
+  it('does not declare a loaded model ready until actual inference succeeds', async () => {
+    const fetch = vi
+      .fn()
+      .mockImplementation(
+        async (_url: URL, init?: RequestInit) =>
+          new Response(
+            JSON.stringify(
+              init?.method === 'POST'
+                ? {
+                    model: 'virtualfit-style-base',
+                    usage: { completion_tokens: 1 },
+                    choices: [{ message: { content: 'READY' } }],
+                  }
+                : { data: [{ id: 'virtualfit-style-base' }] },
+            ),
+          ),
+      );
+    vi.stubGlobal('fetch', fetch);
+    const provider = new LlamaCppStylingProvider(loadEnv({}));
+    expect(await provider.status()).toMatchObject({ available: true, inferenceVerified: true });
+    expect(await provider.status()).toMatchObject({ available: true, inferenceVerified: true });
+    expect(fetch.mock.calls.filter((c) => c[1]?.method === 'POST')).toHaveLength(1);
+  });
+  it('fails readiness honestly if generation fails despite a matching loaded alias', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockImplementation(async (_url: URL, init?: RequestInit) =>
+          init?.method === 'POST'
+            ? new Response('offline', { status: 503 })
+            : new Response(JSON.stringify({ data: [{ id: 'virtualfit-style-base' }] })),
+        ),
+    );
+    expect(await new LlamaCppStylingProvider(loadEnv({})).status()).toMatchObject({
+      available: false,
+      inferenceVerified: false,
+    });
+  });
+  it('rejects body measurements, image payloads, and unbounded client history before invoking Qwen', async () => {
+    const provider = testProvider();
+    const recommend = vi.spyOn(provider, 'recommend');
+    const { app } = buildTestApp({}, { stylingProvider: provider });
+    const agent = browser(app);
+    for (const body of [
+      { message: 'I am 180 cm and want a shirt' },
+      { message: 'Use data:image/png;base64,xxxx' },
+      { message: 'A white top', history: ['one', 'two', 'three'] },
+      { message: 'A white top', history: ['My weight is 80 kg'] },
+    ]) {
+      expect((await agent.post('/api/v1/styling/recommend').send(body)).status).toBe(400);
+    }
+    expect(recommend).not.toHaveBeenCalled();
+  });
+  it('sends follow-up context while retrieving a fresh permitted wardrobe', async () => {
+    const provider = testProvider();
+    const recommend = vi.spyOn(provider, 'recommend');
+    const { app } = buildTestApp({}, { stylingProvider: provider });
+    const response = await browser(app)
+      .post('/api/v1/styling/recommend')
+      .send({ message: 'Make it blue', history: ['A white top only; no dresses'] });
+    expect(response.status).toBe(200);
+    expect(recommend.mock.calls[0]?.[0].history).toEqual(['A white top only; no dresses']);
+    expect(recommend.mock.calls[0]?.[0].wardrobe.map((i) => i.id)).toEqual(['shirt-oxford-blue']);
+  });
+});
+
+describe('grounded language response contracts', () => {
+  it('constrains empty selections and exact verified category counts in the native schema', () => {
+    const schema = recommendationSchema([], ['outerwear'], 0);
+    expect(schema.properties.itemIds).toMatchObject({ minItems: 0, maxItems: 0 });
+    expect(schema.properties.categories).toMatchObject({
+      minItems: 1,
+      maxItems: 1,
+      items: { enum: ['outerwear'] },
+    });
+  });
+  it('uses resolved preferences instead of forwarding contradictory raw history', () => {
+    const messages = stylingMessages({
+      ...context,
+      history: ['A formal shirt for office'],
+      preferences: { occasion: 'casual' },
+    });
+    const payload = JSON.parse(messages[1]!.content);
+    expect(payload.history).toBeUndefined();
+    expect(payload.preferences.occasion).toBe('casual');
+  });
+  it('removes links and numeric measurements from inventory metadata', () => {
+    expect(languageMetadata('Photo https://example.com/photo.png chest 100 cm')).not.toMatch(
+      /https|100 cm/,
+    );
+  });
+  it('rejects unsupported physical claims instead of showing them as AI advice', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValue(
+          new Response(
+            JSON.stringify({
+              model: 'virtualfit-style-base',
+              choices: [
+                {
+                  finish_reason: 'stop',
+                  message: {
+                    content: JSON.stringify({ ...output, answer: 'This fits your body.' }),
+                  },
+                },
+              ],
+            }),
+          ),
+        ),
+    );
+    await expect(new LlamaCppStylingProvider(loadEnv({})).recommend(context)).rejects.toMatchObject(
+      { details: { invalidOutput: true } },
+    );
+  });
+});

@@ -2,8 +2,12 @@ import type { ClothingCategory, StylingOutput, StylingStatus } from '@virtualfit
 
 export interface StylingContext {
   message: string;
+  instructions?: string;
+  history?: string[];
+  responseMode?: 'outfit' | 'category' | 'clarify' | 'unavailable' | 'advice';
   preferredCategories: ClothingCategory[];
   wardrobe: Array<{ id: string; name: string; category: ClothingCategory; description: string }>;
+  selectionCategories?: ClothingCategory[];
   selectionPlan?: string[];
   preferences?: unknown;
 }

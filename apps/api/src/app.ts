@@ -76,8 +76,8 @@ export function createApp(c: Container) {
     res.json(await c.styling.status());
   });
   api.post('/styling/recommend', stylingLimiter, async (req, res) => {
-    const { message, model } = stylingRequestSchema.parse(req.body);
-    res.json(await c.styling.recommend(req.guestId, message, model));
+    const { message, model, history } = stylingRequestSchema.parse(req.body);
+    res.json(await c.styling.recommend(req.guestId, message, model, history));
   });
   api.use('/clothing', clothingRoutes(new ClothingController(c.clothing), upload.single('image')));
   api.use(

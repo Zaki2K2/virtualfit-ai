@@ -24,7 +24,8 @@
     "ai:inspect": "npm run ai:inspect -w @virtualfit/api --",
     "slm:setup": "python slm-engine/tools/runtime.py setup",
     "slm:serve": "python slm-engine/tools/runtime.py serve",
-    "dev:slm": "concurrently --kill-others -n slm,app \"npm run slm:serve\" \"npm run dev\""
+    "dev:slm": "concurrently --kill-others -n slm,app \"npm run slm:serve\" \"npm run dev\"",
+    "dev:ai": "python slm-engine/tools/dev_ai.py"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",

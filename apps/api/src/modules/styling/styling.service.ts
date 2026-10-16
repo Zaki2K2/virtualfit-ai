@@ -1,9 +1,10 @@
 import { stylingOutputSchema, type StylingOutput } from '@virtualfit/shared';
 import { ZodError } from 'zod';
-import { parsePreferences, ground, validSelection } from './grounding';
+import { parsePreferences, conversationPreferences, ground, validSelection } from './grounding';
 import type { StylingProvider } from '../../integrations/slm/styling-provider';
 import { AppError } from '../../utils/errors';
 import type { ClothingService } from '../clothing/clothing.service';
+import { languageMetadata } from '../../integrations/slm/privacy';
 import type { UsersService } from '../users/users.service';
 
 export function excludedCategories(message: string): Set<string> {
@@ -25,18 +26,34 @@ export class StylingService {
     return {
       ...base,
       models: [
-        { id: 'base' as const, model: base.model, available: base.available, reason: base.reason },
+        {
+          id: 'base' as const,
+          model: base.model,
+          available: base.available,
+          reason: base.reason,
+          displayName: base.displayName,
+          inferenceVerified: base.inferenceVerified,
+          checkedAt: base.checkedAt,
+        },
         {
           id: 'custom' as const,
           model: custom?.model ?? 'virtualfit-fashion-custom',
           available: custom?.available ?? false,
           reason: custom?.reason ?? 'Custom model is not configured.',
+          displayName: custom?.displayName,
+          inferenceVerified: custom?.inferenceVerified,
+          checkedAt: custom?.checkedAt,
         },
       ],
     };
   }
 
-  async recommend(guestId: string, message: string, model: 'base' | 'custom' = 'base') {
+  async recommend(
+    guestId: string,
+    message: string,
+    model: 'base' | 'custom' = 'base',
+    history: string[] = [],
+  ) {
     const provider = model === 'custom' ? this.customProvider : this.provider;
     if (!provider || (model === 'custom' && !(await provider.status()).available))
       throw new AppError(
@@ -57,15 +74,16 @@ export class StylingService {
         this.clothing.list(guestId),
         this.users.get(guestId),
       ]);
-      const preferences = parsePreferences(message);
+      const preferences = conversationPreferences(message, history);
       const grounded = ground(items, preferences, profile.preferredCategories);
       const status = await provider.status();
       const common = { model: status.model, simulated: false as const, intent: preferences.intent };
       const diagnostics = {
         rawSchemaValid: null as boolean | null,
         rawSelectionValid: null as boolean | null,
+        rawExplanationValid: null as boolean | null,
         candidateIds: grounded.candidates.map((i) => i.id),
-        pipelineVersion: 'grounding-v2',
+        pipelineVersion: 'grounding-v3-local',
       };
       const finish = (
         result: StylingOutput,
@@ -97,33 +115,55 @@ export class StylingService {
         canonical.answer = canonical.categories.length
           ? `This clothing belongs to: ${canonical.categories.join(', ')}. No outfit has been selected.`
           : 'That garment is outside the supported catalog categories.';
-        return finish(canonical, 'catalog-policy', null, false);
+      }
+      if (preferences.intent === 'advice') {
+        canonical.itemIds = [];
+        canonical.categories = [];
+        canonical.answer =
+          'Try a neutral base with one accent color. Tell me which garment and occasion you have in mind.';
       }
       if (preferences.intent === 'clarify') {
         canonical.itemIds = [];
         canonical.categories = [];
         canonical.answer =
           'Which garment categories, colors, occasion or season should I use? Please add a little detail.';
-        return finish(canonical, 'catalog-policy', null, false);
       }
-      if (preferences.intent === 'unsupported' || !grounded.complete) {
+      if (
+        preferences.intent === 'unsupported' ||
+        (preferences.intent === 'outfit' && !grounded.complete)
+      ) {
         canonical.itemIds = [];
         canonical.categories = [];
-        return finish(canonical, 'catalog-policy', null, false);
       }
       let result: StylingOutput;
       try {
         result = stylingOutputSchema.parse(
           await provider.recommend({
             message,
+            history,
+            instructions:
+              preferences.intent === 'advice'
+                ? 'Give general color or styling advice. Do not assert that unspecified garments exist in this wardrobe. Return empty itemIds and categories.'
+                : undefined,
+            responseMode:
+              preferences.intent === 'advice'
+                ? 'advice'
+                : preferences.intent === 'category'
+                  ? 'category'
+                  : preferences.intent === 'clarify'
+                    ? 'clarify'
+                    : !grounded.complete || preferences.intent === 'unsupported'
+                      ? 'unavailable'
+                      : 'outfit',
             preferredCategories: profile.preferredCategories,
             wardrobe: grounded.candidates.map(({ id, name, category, description }) => ({
               id,
-              name,
+              name: languageMetadata(name).slice(0, 80),
               category,
-              description: description.slice(0, 120),
+              description: languageMetadata(description).slice(0, 120),
             })),
             selectionPlan: canonical.itemIds,
+            selectionCategories: canonical.categories,
             preferences,
           }),
         );
@@ -143,14 +183,41 @@ export class StylingService {
       const selectedCategories = [
         ...new Set(result.itemIds.flatMap((id) => byId.get(id)?.category ?? [])),
       ];
+      const selecting = preferences.intent === 'outfit' && grounded.complete;
+      const expectedCategories = selecting ? selectedCategories : canonical.categories;
       const valid =
         result.itemIds.every((id) => byId.has(id)) &&
-        validSelection(result.itemIds, grounded.groups) &&
-        [...result.categories].sort().join(',') === [...selectedCategories].sort().join(',');
+        (selecting
+          ? validSelection(result.itemIds, grounded.groups)
+          : result.itemIds.length === 0) &&
+        [...result.categories].sort().join(',') === [...expectedCategories].sort().join(',');
       diagnostics.rawSelectionValid = valid;
+      const explanation = parsePreferences(result.answer);
+      const selectedItems = result.itemIds.flatMap((id) => {
+        const item = byId.get(id);
+        return item ? [item] : [];
+      });
+      const explanationValid =
+        !selecting ||
+        (!explanation.unsupported.length &&
+          explanation.slots.every(
+            (slot) =>
+              ground(selectedItems, {
+                ...explanation,
+                slots: [slot],
+                occasion: '',
+                season: '',
+                excludedCategories: [],
+                excludedColors: [],
+                excludedSlots: [],
+              }).complete,
+          ));
+      diagnostics.rawExplanationValid = explanationValid;
+      if (!explanationValid)
+        return finish(canonical, 'deterministic-fallback', 'ungrounded-explanation', true);
       if (!valid) return finish(canonical, 'deterministic-fallback', 'constraint-violation', true);
       return finish(
-        { ...result, occasion: preferences.occasion, categories: selectedCategories },
+        { ...result, occasion: preferences.occasion, categories: expectedCategories },
         'model',
         null,
         true,

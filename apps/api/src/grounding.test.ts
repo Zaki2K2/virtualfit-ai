@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { attributes, ground, parsePreferences, validSelection } from './modules/styling/grounding';
+import {
+  attributes,
+  conversationPreferences,
+  ground,
+  parsePreferences,
+  validSelection,
+} from './modules/styling/grounding';
 import { browser, buildTestApp } from './test/helpers';
 import { AppError } from './utils/errors';
 import type { StylingProvider } from './integrations/slm/styling-provider';
@@ -103,13 +109,19 @@ describe('disclosed fallback and model version boundaries', () => {
       (await agent.post('/api/v1/styling/recommend').send({ message: 'a white tee' })).status,
     ).toBe(503);
   });
-  it('does not select an outfit for a category question or unsupported request', async () => {
+  it('uses Qwen for category, unsupported and ambiguous requests without selecting inventory', async () => {
     let calls = 0;
     const provider: StylingProvider = {
       status: async () => status,
-      recommend: async () => {
+      recommend: async (context) => {
         calls++;
-        throw new Error('must not generate');
+        expect(context.selectionPlan).toEqual([]);
+        return {
+          answer: 'A denim jacket is outerwear, used as a layer over a top.',
+          itemIds: [],
+          occasion: '',
+          categories: context.responseMode === 'category' ? ['outerwear'] : [],
+        };
       },
     };
     const { app } = buildTestApp({}, { stylingProvider: provider });
@@ -123,10 +135,10 @@ describe('disclosed fallback and model version boundaries', () => {
       const res = await agent.post('/api/v1/styling/recommend').send({ message });
       expect(res.status).toBe(200);
       expect(res.body.itemIds).toEqual([]);
-      expect(res.body.source).toBe('catalog-policy');
-      expect(res.body.modelUsed).toBe(false);
+      expect(res.body.source).toBe('model');
+      expect(res.body.modelUsed).toBe(true);
     }
-    expect(calls).toBe(0);
+    expect(calls).toBe(4);
   });
   it('keeps an unregistered custom checkpoint unavailable and preserves original selection', async () => {
     const { app } = buildTestApp();
@@ -141,4 +153,67 @@ describe('disclosed fallback and model version boundaries', () => {
       ).status,
     ).toBe(503);
   });
+});
+
+describe('bounded styling follow-ups', () => {
+  it('inherits prior garment categories when only changing color or occasion', () => {
+    expect(conversationPreferences('Make it blue', ['A white top only; no dresses']).slots).toEqual(
+      [{ category: 'tops', garment: undefined, colors: ['blue'] }],
+    );
+    const casual = conversationPreferences('Make it casual', ['A white top only; no dresses']);
+    expect(casual.slots).toHaveLength(1);
+    expect(casual.occasion).toBe('casual');
+    expect(casual.excludedCategories).toContain('dresses');
+  });
+  it('starts a fresh selection for an independent request', () => {
+    expect(
+      conversationPreferences('An indigo dress for dinner', ['A white top; no dresses'])
+        .excludedCategories,
+    ).toEqual([]);
+  });
+});
+
+describe('grounding prose as well as IDs', () => {
+  it('labels advice that invents an additional garment as fallback', async () => {
+    const provider: StylingProvider = {
+      status: async () => status,
+      recommend: async () => ({
+        answer: 'Choose the blue shirt and a pair of Oxford Button Shorts.',
+        itemIds: ['shirt-oxford-blue'],
+        occasion: '',
+        categories: ['tops'],
+      }),
+    };
+    const { app } = buildTestApp({}, { stylingProvider: provider });
+    const result = await browser(app)
+      .post('/api/v1/styling/recommend')
+      .send({ message: 'A blue shirt only' });
+    expect(result.body).toMatchObject({
+      source: 'deterministic-fallback',
+      fallbackReason: 'ungrounded-explanation',
+      itemIds: ['shirt-oxford-blue'],
+      diagnostics: { rawSelectionValid: true, rawExplanationValid: false },
+    });
+  });
+});
+
+it('answers general color matching through the local model without inventing wardrobe selections', async () => {
+  const provider: StylingProvider = {
+    status: async () => status,
+    recommend: async (context) => {
+      expect(context.responseMode).toBe('advice');
+      expect(context.selectionPlan).toEqual([]);
+      return {
+        answer: 'Blue works well with white or a neutral beige accent.',
+        itemIds: [],
+        occasion: '',
+        categories: [],
+      };
+    },
+  };
+  const { app } = buildTestApp({}, { stylingProvider: provider });
+  const result = await browser(app)
+    .post('/api/v1/styling/recommend')
+    .send({ message: 'What colors go well with blue?' });
+  expect(result.body).toMatchObject({ source: 'model', intent: 'advice', itemIds: [] });
 });

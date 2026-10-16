@@ -107,3 +107,23 @@ python -m virtualfit_slm.evaluate_suite --split heldout --output docs/slm-v2-hel
 The harness's test environment omits request throttling so a 102-case benchmark can finish; live application rate limits remain enabled. Do not expose the harness. Evaluation reports include dataset/catalog hashes, latencies, intent/category/color/schema/grounding/exact-match scores, raw model validity, and fallback counts. Read final-pipeline scores separately from model quality.
 
 Base/custom serving is explicit. `npm run slm:serve` always uses the original hash-verified rollback model on 8081. For an exported candidate, use `python slm-engine/tools/runtime.py serve --variant candidate --model-path C:/path/custom.gguf` on 8082. Evaluate with `--model custom`, then run `python -m virtualfit_slm.register_custom --help`. Registration requires real training provenance, a matching loaded GGUF, the same held-out dataset/catalog and non-regressing metrics/raw acceptance. Only then does the production frontend enable Custom. `--variant custom` subsequently starts the registered artifact; Original remains available. The old `SLM_MODEL_PATH` approach no longer replaces the base model.
+
+## First real cloud run
+
+Follow [the Colab execution and acceptance guide](../docs/first-cloud-training-run.md). No genuine GPU checkpoint has been produced locally. Build the source ZIP with `python slm-engine/tools/package_training.py` from the repository root; run notebook cells in order. Keep the original production SLM until candidate evaluation and loading gates pass.
+
+## Runtime shutdown diagnostics
+
+`npm run slm:serve` runs one foreground server until you stop it. Keep its terminal open. Run either this command or `npm run dev:slm`; the latter deliberately stops the SLM if its app sibling exits (`concurrently --kill-others`). Do not start both.
+
+The launcher logs wrapper/child PIDs, endpoint, uptime, requested signal and the native exit code in decimal and hexadecimal. Native llama.cpp logs remain visible. Ctrl+C allows up to ten seconds for graceful cleanup; forced cleanup is explicitly logged and returns failure. Unexpected exits, including spontaneous native code 0, fail without restarting. Hard OS process termination can bypass Python cleanup/logging.
+
+Duplicate wrappers are rejected with an OS-held per-port lock, including while loading. Existing listeners are reported with their PID on Windows and are never killed automatically. An old lock file is harmless after its owning process exits; do not delete it to bypass a live owner. For isolated diagnostics use `npm run slm:serve -- --port 8083` and direct a separate test provider to that address; production still defaults to 8081.
+
+See [the investigated shutdown and verification results](../docs/slm-runtime-shutdown-investigation.md). No weight replacement or reinstall is needed for this wrapper fix. Already-running Python processes use the previous wrapper until their next intentional restart.
+
+## Default local hosting
+
+Use `npm run dev:ai` from the repository root for Qwen + Express + Next.js. It reuses an existing server only after health, alias and real generation checks; occupied app ports fail rather than launching another app. Ctrl+C releases owned services and preserves a reused standalone SLM. The original `npm run dev` stays available. See [local hosting, CPU measurements and limitations](../docs/local-slm-hosting.md).
+
+All validated language requests now invoke the local provider, including category questions, general color advice and no-match/clarification replies. Recent requests resolve follow-up constraints in Express; only current intent and safe wardrobe metadata reach Qwen. Failed schema, prose or grounding checks produce an explicitly labeled fallback. Outages/timeouts remain errors. No genuine custom checkpoint exists yet.

@@ -1,0 +1,5 @@
+# Retain Colab's CUDA-enabled torch (>=2.4,<3); do not replace its CUDA wheel.
+transformers==4.51.3
+peft==0.15.2
+accelerate==1.6.0
+safetensors==0.5.3

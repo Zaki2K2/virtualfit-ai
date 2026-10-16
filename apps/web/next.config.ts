@@ -19,6 +19,7 @@ const API_URL = resolveApiUrl(process.env.API_URL ?? apiUrlFromRootEnv());
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  allowedDevOrigins: ['127.0.0.1'],
   agentRules: false,
   turbopack: { root: path.resolve(__dirname, '../..') },
   // The browser only talks to the Next.js origin; /api is proxied to the Express API.

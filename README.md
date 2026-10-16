@@ -4,10 +4,11 @@ Upload a photo, pick a garment, preview how it could look on you. A **noncommerc
 
 - **Web:** Next.js (App Router), React, TypeScript, Tailwind CSS v4, shadcn/ui-style components, TanStack Query, React Hook Form + Zod
 - **API:** Express 5, TypeScript, Multer, Zod, Mongoose (MongoDB optional)
-- **AI:** provider abstraction with a clearly labelled **mock** provider and a configurable **Hugging Face Gradio** adapter
+- **Language:** local CPU Qwen2.5-0.5B Q4 through llama.cpp for the AI Stylist
+- **Vision:** provider abstraction with a clearly labelled **mock** provider and a configurable **Hugging Face Gradio** adapter
 - **Monorepo:** npm workspaces (`apps/web`, `apps/api`, `packages/shared`)
 
-> **AI status:** the real try-on adapter targets a free Hugging Face Space (`yisol/IDM-VTON`) and is **off in the default configuration**. Availability depends on that service and its GPU quota; the October 15, 2026 audit reached the service but inference was quota-blocked. See [the system audit](docs/system-audit-report.md). Default mock mode runs a _simulation_ with a visible "SIMULATION - NOT AI OUTPUT" banner. Turn real AI on with two lines in `.env` - see [Real AI](#real-ai-try-on) and [docs/ai-integration.md](docs/ai-integration.md).
+> **Try-on status:** the real try-on adapter targets a free Hugging Face Space (`yisol/IDM-VTON`) and is **off in the default configuration**. Availability depends on that service and its GPU quota; the October 15, 2026 audit reached the service but inference was quota-blocked. See [the system audit](docs/system-audit-report.md). Default mock mode runs a _simulation_ with a visible "SIMULATION - NOT AI OUTPUT" banner. Turn real AI on with two lines in `.env` - see [Real AI](#real-ai-try-on) and [docs/ai-integration.md](docs/ai-integration.md).
 > Virtual try-on shows how a garment may **look**. It does not predict physical fit or size.
 
 ## Quick start
@@ -26,9 +27,9 @@ The browser only talks to the Next.js server; it proxies `/api/*` to the API (`A
 
 ## Local AI styling assistant (language model)
 
-Latest: [Phase 3 fine-tuning and grounding progress](docs/slm-finetuning-progress.md).
+Local hosting and measured results: [Local SLM hosting](docs/local-slm-hosting.md). Training progress: [Phase 3 report](docs/slm-finetuning-progress.md).
 
-The **AI Stylist** at http://localhost:3000/stylist uses a real CPU-only Qwen2.5-0.5B-Instruct Q4_K_M language model through llama.cpp. It recommends current-guest wardrobe items and stays separate from the vision model. Run `npm run slm:setup` once, then `npm run dev:slm`; if the app is already running, start only `npm run slm:serve` in another terminal. Setup checks RAM/disk and verifies downloads; it needs no NVIDIA GPU or paid API.
+The **AI Stylist** at http://localhost:3000/stylist uses a real CPU-only Qwen2.5-0.5B-Instruct Q4_K_M language model through llama.cpp. It recommends current-guest wardrobe items and stays separate from the vision model. Start the complete local stack with `npm run dev:ai`; it verifies real inference before reporting ready and reuses a healthy existing Qwen server. If the model is missing, run `npm run slm:setup` once. If the app is already running through the unchanged `npm run dev`, start only `npm run slm:serve` in another terminal. Setup checks RAM/disk and verifies downloads; it needs no NVIDIA GPU or paid API.
 
 Current customization is fashion prompting, structured output and wardrobe grounding. The pretrained model is **not yet fine-tuned** and recommendation quality is limited. The project includes an actual LoRA/optional QLoRA pipeline, authored seed datasets, held-out evaluation and a Colab notebook. See [SLM setup/training](slm-engine/README.md), [implementation report](docs/slm-integration-report.md), and [measured baseline](docs/slm-baseline-evaluation.json). Cloud training and custom checkpoint export have not run.
 
@@ -63,17 +64,18 @@ Only one `next dev` can run per checkout (Next 16 locks the directory), so do no
 
 ## Scripts
 
-| Command                             | What it does                                            |
-| ----------------------------------- | ------------------------------------------------------- |
-| `npm run dev`                       | Builds `shared`, then runs API and web together         |
-| `npm run build`                     | Production build of all workspaces                      |
-| `npm start`                         | Runs the built API and web                              |
-| `npm test`                          | Unit + API integration tests (Vitest, Supertest)        |
-| `npm run typecheck`                 | TypeScript checks for all workspaces                    |
-| `npm run lint`                      | ESLint                                                  |
-| `npm run format`                    | Prettier                                                |
-| `npm run generate:catalog`          | Regenerates the sample garment illustrations            |
-| `npm run ai:inspect -- owner/space` | Prints a Hugging Face Space's real API (no images sent) |
+| Command                             | What it does                                                   |
+| ----------------------------------- | -------------------------------------------------------------- |
+| `npm run dev:ai`                    | Local Qwen, API and frontend with verified inference readiness |
+| `npm run dev`                       | Builds `shared`, then runs API and web together                |
+| `npm run build`                     | Production build of all workspaces                             |
+| `npm start`                         | Runs the built API and web                                     |
+| `npm test`                          | Unit + API integration tests (Vitest, Supertest)               |
+| `npm run typecheck`                 | TypeScript checks for all workspaces                           |
+| `npm run lint`                      | ESLint                                                         |
+| `npm run format`                    | Prettier                                                       |
+| `npm run generate:catalog`          | Regenerates the sample garment illustrations                   |
+| `npm run ai:inspect -- owner/space` | Prints a Hugging Face Space's real API (no images sent)        |
 
 ## Environment variables
 

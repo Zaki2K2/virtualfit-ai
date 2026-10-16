@@ -1,0 +1,207 @@
+{
+  "date": "2026-10-16",
+  "api_eight": {
+    "successful": 8,
+    "exact_id_rate": 1.0,
+    "model": 7,
+    "fallback": 1,
+    "model_attempted": 8,
+    "median_seconds": 1.3695,
+    "max_seconds": 2.086,
+    "timeouts": 0
+  },
+  "lifecycle": {
+    "cold": {
+      "mode": "cold",
+      "exit_code": 0,
+      "app_ports_released": true,
+      "reused_slm_preserved": false,
+      "events": [
+        {
+          "time": "2026-10-16T06:06:49.924163+00:00",
+          "event": "launch",
+          "wrapper_pid": 20120,
+          "variant": "base",
+          "endpoint": "http://127.0.0.1:8081",
+          "model": "C:\\virtualfit-ai\\slm-engine\\models\\qwen2.5-0.5b-instruct-q4_k_m.gguf",
+          "threads": 4,
+          "context": 2048,
+          "note": "Run either slm:serve or dev:slm. dev:slm stops this server when its app sibling exits."
+        },
+        {
+          "time": "2026-10-16T06:06:49.928560+00:00",
+          "event": "child_started",
+          "wrapper_pid": 20120,
+          "child_pid": 14204,
+          "executable": "C:\\virtualfit-ai\\slm-engine\\runtime\\b11643\\llama-server.exe",
+          "parent_pid": 7988,
+          "signal_mode": "shared-console"
+        },
+        {
+          "time": "2026-10-16T06:06:50.874981+00:00",
+          "event": "dev_ai_slm_ready",
+          "wrapper_pid": 7988,
+          "inference_verified": true
+        },
+        {
+          "time": "2026-10-16T06:06:56.364119+00:00",
+          "event": "dev_ai_ready",
+          "wrapper_pid": 7988,
+          "frontend": "http://localhost:3000/stylist",
+          "api": "http://127.0.0.1:5000",
+          "slm": "http://127.0.0.1:8081",
+          "inference_verified": true,
+          "reused_slm": false
+        },
+        {
+          "time": "2026-10-16T06:06:56.578263+00:00",
+          "event": "child_exited",
+          "wrapper_pid": 20120,
+          "child_pid": 14204,
+          "child_exit_code": 0,
+          "child_exit_hex": "0x00000000",
+          "exit_description": "Native process returned normally",
+          "uptime_seconds": 6.654,
+          "requested_signal": "SIGINT",
+          "outcome": "intentional-stop",
+          "forced": false,
+          "diagnostic": null
+        },
+        {
+          "time": "2026-10-16T06:06:56.614649+00:00",
+          "event": "dev_ai_stopped",
+          "wrapper_pid": 7988,
+          "intentional": true,
+          "forced": false,
+          "reused_slm_preserved": false
+        }
+      ]
+    },
+    "reuse": {
+      "mode": "reuse",
+      "exit_code": 0,
+      "app_ports_released": true,
+      "reused_slm_preserved": true,
+      "events": [
+        {
+          "time": "2026-10-16T06:07:01.964234+00:00",
+          "event": "dev_ai_reusing_slm",
+          "wrapper_pid": 2104,
+          "endpoint": "http://127.0.0.1:8081",
+          "model": "virtualfit-style-base",
+          "inference_verified": true,
+          "note": "This server is externally owned and will remain running on shutdown."
+        },
+        {
+          "time": "2026-10-16T06:07:06.374166+00:00",
+          "event": "dev_ai_ready",
+          "wrapper_pid": 2104,
+          "frontend": "http://localhost:3000/stylist",
+          "api": "http://127.0.0.1:5000",
+          "slm": "http://127.0.0.1:8081",
+          "inference_verified": true,
+          "reused_slm": true
+        },
+        {
+          "time": "2026-10-16T06:07:06.624687+00:00",
+          "event": "dev_ai_stopped",
+          "wrapper_pid": 2104,
+          "intentional": true,
+          "forced": false,
+          "reused_slm_preserved": true
+        }
+      ]
+    },
+    "failure": {
+      "mode": "failure",
+      "exit_code": 1,
+      "app_ports_released": true,
+      "reused_slm_preserved": false,
+      "events": [
+        {
+          "time": "2026-10-16T06:07:10.512792+00:00",
+          "event": "launch",
+          "wrapper_pid": 7540,
+          "variant": "base",
+          "endpoint": "http://127.0.0.1:8081",
+          "model": "C:\\virtualfit-ai\\slm-engine\\models\\qwen2.5-0.5b-instruct-q4_k_m.gguf",
+          "threads": 4,
+          "context": 2048,
+          "note": "Run either slm:serve or dev:slm. dev:slm stops this server when its app sibling exits."
+        },
+        {
+          "time": "2026-10-16T06:07:10.523009+00:00",
+          "event": "child_started",
+          "wrapper_pid": 7540,
+          "child_pid": 23160,
+          "executable": "C:\\virtualfit-ai\\slm-engine\\runtime\\b11643\\llama-server.exe",
+          "parent_pid": 29400,
+          "signal_mode": "shared-console"
+        },
+        {
+          "time": "2026-10-16T06:07:15.852367+00:00",
+          "event": "dev_ai_ready",
+          "wrapper_pid": 29400,
+          "frontend": "http://localhost:3000/stylist",
+          "api": "http://127.0.0.1:5000",
+          "slm": "http://127.0.0.1:8081",
+          "inference_verified": true,
+          "reused_slm": false
+        },
+        {
+          "time": "2026-10-16T06:07:16.081093+00:00",
+          "event": "child_exited",
+          "wrapper_pid": 7540,
+          "child_pid": 23160,
+          "child_exit_code": 23,
+          "child_exit_hex": "0x00000017",
+          "exit_description": "Native nonzero exit; inspect llama.cpp logs",
+          "uptime_seconds": 5.568,
+          "requested_signal": null,
+          "outcome": "unexpected-exit",
+          "forced": false,
+          "diagnostic": "See native llama.cpp logs above. Check console/supervisor termination, port ownership and Windows crash events. No restart attempted."
+        },
+        {
+          "time": "2026-10-16T06:07:16.102594+00:00",
+          "event": "dev_ai_failed",
+          "wrapper_pid": 29400,
+          "error": "slm exited unexpectedly with code 23; no restart attempted"
+        },
+        {
+          "time": "2026-10-16T06:07:16.102663+00:00",
+          "event": "dev_ai_stopping_owned_tree",
+          "wrapper_pid": 29400,
+          "service": "app",
+          "pid": 22580,
+          "reason": "startup/service failure"
+        },
+        {
+          "time": "2026-10-16T06:07:16.315118+00:00",
+          "event": "dev_ai_stopped",
+          "wrapper_pid": 29400,
+          "intentional": false,
+          "forced": true,
+          "reused_slm_preserved": false
+        }
+      ]
+    }
+  },
+  "mongodb_isolation": {
+    "owner": {
+      "source": "model",
+      "modelUsed": true,
+      "itemIds": ["c91ce096fee64886b4abca40c649f13d"],
+      "candidateIds": ["c91ce096fee64886b4abca40c649f13d"]
+    },
+    "other_guest": {
+      "source": "deterministic-fallback",
+      "modelUsed": true,
+      "itemIds": [],
+      "candidateIds": []
+    },
+    "database": "mongodb",
+    "fixture_deleted": true
+  },
+  "note": "Generated public/synthetic verification evidence; temporary MongoDB garment deleted. Raw language token is never included."
+}

@@ -1,6 +1,6 @@
 import type { ClothingCategory, ClothingItem } from '@virtualfit/shared';
 
-export type Intent = 'outfit' | 'category' | 'clarify' | 'unsupported';
+export type Intent = 'outfit' | 'category' | 'clarify' | 'unsupported' | 'advice';
 export interface Slot {
   category?: ClothingCategory;
   garment?: string;
@@ -36,6 +36,8 @@ const nouns: Record<string, [ClothingCategory, string | undefined]> = {
   trousers: ['bottoms', undefined],
   pants: ['bottoms', undefined],
   chinos: ['bottoms', 'chinos'],
+  shorts: ['bottoms', 'shorts'],
+  jeans: ['bottoms', 'jeans'],
   bottoms: ['bottoms', undefined],
   jacket: ['outerwear', undefined],
   jackets: ['outerwear', undefined],
@@ -123,7 +125,6 @@ export function parsePreferences(message: string): Preferences {
     'socks',
     'jewelry',
     'handbag',
-    'jeans',
     'suit',
     'saree',
   ];
@@ -173,6 +174,12 @@ export function parsePreferences(message: string): Preferences {
     (slot, i, all) => all.findIndex((s) => JSON.stringify(s) === JSON.stringify(slot)) === i,
   );
   if (categoryQuestion) result.intent = 'category';
+  else if (
+    /\b(?:what|which) colou?rs?\b.*\b(?:match|go|work|pair)|\bcolou?r matching\b|\bstyling tips\b|\bhow (?:do|can|should) (?:i|you) (?:match|combine|style)\b/.test(
+      text,
+    )
+  )
+    result.intent = 'advice';
   else if (result.unsupported.length) result.intent = 'unsupported';
   else if (!result.slots.length && /\b(traditional|pakistani)\b/.test(text))
     result.slots = [
@@ -298,4 +305,49 @@ export function validSelection(ids: string[], groups: ClothingItem[][]): boolean
         ),
     );
   return assign(0, ids);
+}
+
+/** Explicit follow-ups inherit clothing constraints, never another guest's inventory. */
+export function conversationPreferences(message: string, history: string[] = []): Preferences {
+  const current = parsePreferences(message);
+  if (
+    !history.length ||
+    !/^(?:and\b|also\b|what about\b|how about\b|instead\b|make\b|change\b|same\b|that\b|it\b|those\b|try\b|why\b|can you explain\b|what colors\b)/i.test(
+      message.trim(),
+    )
+  )
+    return current;
+  const previous = conversationPreferences(history[history.length - 1]!, history.slice(0, -1));
+  // Category/advice questions must not inherit a prior outfit selection.
+  if (
+    current.intent === 'category' ||
+    current.intent === 'unsupported' ||
+    current.intent === 'advice'
+  )
+    return current;
+  let slots = current.slots;
+  if (
+    !slots.length ||
+    (!wordsIn(message.toLowerCase(), Object.keys(nouns)).length &&
+      (current.occasion || current.season))
+  )
+    slots = previous.slots;
+  else if (slots.every((s) => !s.category && s.colors.length))
+    slots = previous.slots.map((s) => ({ ...s, colors: slots.flatMap((c) => c.colors) }));
+  else {
+    const categories = new Set(slots.map((s) => s.category));
+    slots = [...previous.slots.filter((s) => !categories.has(s.category)), ...slots];
+  }
+  return {
+    ...current,
+    intent: slots.length ? 'outfit' : current.intent,
+    slots,
+    occasion: current.occasion || previous.occasion,
+    season: current.season || previous.season,
+    excludedCategories: [
+      ...new Set([...previous.excludedCategories, ...current.excludedCategories]),
+    ],
+    excludedColors: [...new Set([...previous.excludedColors, ...current.excludedColors])],
+    excludedSlots: [...(previous.excludedSlots ?? []), ...(current.excludedSlots ?? [])],
+  };
 }

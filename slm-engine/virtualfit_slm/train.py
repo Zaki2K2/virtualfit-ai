@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import random
+import importlib.metadata
 from pathlib import Path
 
 from .data import load_records, validate_splits
@@ -50,6 +51,10 @@ def train(config, data_root=None, resume=None):
     base.config.use_cache = False
     model = attach_lora(base, config)
     model.print_trainable_parameters()
+    trainable = {n: p.detach().cpu().clone() for n, p in model.named_parameters() if p.requires_grad}
+    if not trainable or any('lora_' not in n for n in trainable):
+        raise RuntimeError("Expected only trainable LoRA parameters")
+    model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
     train_rows = [encode_record(tokenizer, r, config["max_length"]) for r in load_records(Path(data_root) / "train.jsonl")]
     validation = [encode_record(tokenizer, r, config["max_length"]) for r in load_records(Path(data_root) / "validation.jsonl")]
     optimizer = torch.optim.AdamW((p for p in model.parameters() if p.requires_grad), lr=config["learning_rate"])
@@ -65,7 +70,7 @@ def train(config, data_root=None, resume=None):
     if resume:
         state = resume_checkpoint(model, optimizer, scaler, resume, identity)
         first_step, losses, order = state["step"], state["losses"], state["order"]
-        if first_step >= steps: raise ValueError("Resume checkpoint already reached max_steps; increase the target")
+        if first_step > steps: raise ValueError("Resume checkpoint exceeds max_steps")
     for step in range(first_step, steps):
         model.train()
         optimizer.zero_grad(set_to_none=True)
@@ -89,6 +94,8 @@ def train(config, data_root=None, resume=None):
         print(json.dumps({"optimizer_step": step + 1, "loss": loss_value}), flush=True)
         if (step + 1) % config.get("checkpoint_every", 4) == 0 or step + 1 == steps:
             save_checkpoint(model, optimizer, scaler, output, step + 1, order, losses, identity)
+    changed = [n for n, p in model.named_parameters() if n in trainable and not torch.equal(trainable[n], p.detach().cpu())]
+    if not changed: raise RuntimeError("No adapter parameters changed during optimizer steps")
     model.eval()
     with torch.no_grad(), torch.autocast("cuda", dtype=torch.float16):
         validation_loss = sum(model(**{k: torch.tensor([v], device="cuda") for k, v in row.items()}).loss.item() for row in validation) / len(validation)
@@ -101,6 +108,9 @@ def train(config, data_root=None, resume=None):
         "config": config, "optimizer_steps_completed": steps, "training_losses": losses,
         "validation_loss": validation_loss, "dataset_counts": counts,
         "dataset_sha256": dataset_hashes,
+        "package_versions": {name: importlib.metadata.version(name) for name in ["torch", "transformers", "peft", "accelerate", "safetensors"]},
+        "source_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in Path(__file__).parent.glob("*.py")},
+        "changed_adapter_parameters": changed, "peak_cuda_allocated_bytes": torch.cuda.max_memory_allocated(),
         "cuda_device": torch.cuda.get_device_name(0), "torch_version": torch.__version__, "seed_corpus_only": True}
     (output / "training-manifest.json").write_text(json.dumps(manifest, indent=2))
 

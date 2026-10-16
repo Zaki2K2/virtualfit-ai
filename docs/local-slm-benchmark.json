@@ -1,0 +1,2075 @@
+{
+  "date": "2026-10-16",
+  "cpu": "Intel Core i7-13620H, 10 cores / 16 logical processors",
+  "model": "Qwen2.5-0.5B-Instruct Q4_K_M",
+  "runtime_tag": "b11643",
+  "model_sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+  "limits": "Synthetic public cases, one pass per setting, page cache warm; baseline raw protocol before final response schema tightening; later prompt-only experiments were rejected for weak/false advice. The first two few-shot requests overlapped a short unit-test run, so its latency is not a controlled comparison. These are not acceptance benchmarks for a future custom checkpoint.",
+  "profiles": [
+    {
+      "name": "baseline",
+      "threads": 4,
+      "context": 2048,
+      "max_tokens": 260,
+      "startup_seconds": 1.4605438999999478,
+      "peak_working_set_mib": 544.96,
+      "peak_private_mib": 214.45,
+      "summary": {
+        "requests": 8,
+        "completed": 8,
+        "timeouts": 0,
+        "schema_valid": 8,
+        "exact_ids": 8,
+        "categories_exact": 5,
+        "median_ttft_seconds": 1.1943387999999686,
+        "median_total_seconds": 2.490528799999879,
+        "median_prompt_tokens_per_second": 261.46334251278034,
+        "median_generated_tokens_per_second": 53.14312604339396
+      },
+      "cases": [
+        {
+          "id": "test-000",
+          "request_sha256": "aa3020e0cd32c8ca6dc5792a2f5dbcb3f2964eab732ea9d0dbbb4ffe8ae3aaa6",
+          "first_token_seconds": 1.3052100999998402,
+          "total_seconds": 2.3113423999998304,
+          "raw": "{\"answer\": \"From my wardrobe, find casual white tee and khaki trousers, no dresses.\", \"itemIds\": [\"tee-classic-white\", \"trousers-chino-khaki\"], \"occasion\": \"casual\", \"categories\": [\"tops\", \"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 345,
+            "prompt_ms": 1277.848,
+            "prompt_per_token_ms": 3.7039072463768115,
+            "prompt_per_second": 269.98516255454484,
+            "predicted_n": 59,
+            "predicted_ms": 1005.79,
+            "predicted_per_token_ms": 17.341206896551725,
+            "predicted_per_second": 57.66611320454568
+          },
+          "usage": {
+            "completion_tokens": 59,
+            "prompt_tokens": 345,
+            "total_tokens": 404,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 12,
+          "answer": "From my wardrobe, find casual white tee and khaki trousers, no dresses.",
+          "timeout": false
+        },
+        {
+          "id": "test-001",
+          "request_sha256": "fafdb1d4189403bb38d83cf038f513c042e200b87d00bf0cd2bcc34241a857da",
+          "first_token_seconds": 1.4065416999999343,
+          "total_seconds": 2.669715199999928,
+          "raw": "{\"answer\": \"From my wardrobe, find blue Oxford Button Shirt with charcoal tailored trousers for the office.\", \"itemIds\": [\"shirt-oxford-blue\", \"trousers-tailored-charcoal\"], \"occasion\": \"formal\", \"categories\": [\"tops\", \"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 342,
+            "prompt_ms": 1383.34,
+            "prompt_per_token_ms": 4.04485380116959,
+            "prompt_per_second": 247.22772420373877,
+            "predicted_n": 61,
+            "predicted_ms": 1262.705,
+            "predicted_per_token_ms": 21.04508333333333,
+            "predicted_per_second": 47.517036837582815
+          },
+          "usage": {
+            "completion_tokens": 61,
+            "prompt_tokens": 342,
+            "total_tokens": 403,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 15,
+          "answer": "From my wardrobe, find blue Oxford Button Shirt with charcoal tailored trousers for the office.",
+          "timeout": false
+        },
+        {
+          "id": "test-002",
+          "request_sha256": "7c575b998ffabd2c116fa71c813efac841d0d7f0c98f452e19ab62a055de30a6",
+          "first_token_seconds": 1.4058882000001631,
+          "total_seconds": 2.2693939000000682,
+          "raw": "{\"answer\": \"From my wardrobe, find a denim layer over a white top, avoid dresses.\", \"itemIds\": [\"jacket-denim\", \"tee-classic-white\"], \"occasion\": \"\", \"categories\": [\"outerwear\", \"tops\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 329,
+            "prompt_ms": 1377.459,
+            "prompt_per_token_ms": 4.18680547112462,
+            "prompt_per_second": 238.8455845146752,
+            "predicted_n": 52,
+            "predicted_ms": 863.219,
+            "predicted_per_token_ms": 16.92586274509804,
+            "predicted_per_second": 59.08118333817953
+          },
+          "usage": {
+            "completion_tokens": 52,
+            "prompt_tokens": 329,
+            "total_tokens": 381,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 13,
+          "answer": "From my wardrobe, find a denim layer over a white top, avoid dresses.",
+          "timeout": false
+        },
+        {
+          "id": "test-003",
+          "request_sha256": "94515f41440e24f6b4758fe7e1ee78b9915a00efb35b73c4b41fcf5e97deed16",
+          "first_token_seconds": 1.1080930000000535,
+          "total_seconds": 4.1479305999998815,
+          "raw": "{\"answer\":\"Find an indigo dress for dinner. No trousers. The dress is suitable for a dinner outfit with indigo color. It's a versatile dress that can be paired with different types of shoes and accessories. The dress is from the wardrobe, so it's a complete outfit. It's a good choice for a dinner outfit with indigo color. It's a dress from the wardrobe, so it's a complete outfit. It's a good choice for a dinner outfit with indigo color. It's a good choice for a dinner outfit with indigo color. It's a good choice for a dinner outfit with indigo color. It's a good choice for a dinner outfit with indigo. It\",\"itemIds\":[\"dress-midi-indigo\"],\"occasion\":\"dinner\",\"categories\":[\"dresses\",\"dresses\",\"dresses\",\"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 286,
+            "prompt_ms": 1102.637,
+            "prompt_per_token_ms": 3.8553741258741256,
+            "prompt_per_second": 259.37819971577227,
+            "predicted_n": 174,
+            "predicted_ms": 3039.543,
+            "predicted_per_token_ms": 17.569612716763007,
+            "predicted_per_second": 56.9164509269979
+          },
+          "usage": {
+            "completion_tokens": 174,
+            "prompt_tokens": 286,
+            "total_tokens": 460,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 111,
+          "answer": "Find an indigo dress for dinner. No trousers. The dress is suitable for a dinner outfit with indigo color. It's a versatile dress that can be paired with different types of shoes and accessories. The dress is from the wardrobe, so it's a complete outfit. It's a good choice for a dinner outfit with indigo color. It's a dress from the wardrobe, so it's a complete outfit. It's a good choice for a dinner outfit with indigo color. It's a good choice for a dinner outfit with indigo color. It's a good choice for a dinner outfit with indigo color. It's a good choice for a dinner outfit with indigo. It",
+          "timeout": false
+        },
+        {
+          "id": "test-004",
+          "request_sha256": "e9df4c3d6bffd857cdcf90dc1e90c482cc7de0c0ea53cf661f40fe9fa771e6b5",
+          "first_token_seconds": 0.8704341000000113,
+          "total_seconds": 1.4647499000000153,
+          "raw": "{\"answer\":\"From my wardrobe, find a red silk scarf only.\",\"itemIds\":[],\"occasion\":\"\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 235,
+            "prompt_ms": 849.891,
+            "prompt_per_token_ms": 3.6165574468085104,
+            "prompt_per_second": 276.50604606943716,
+            "predicted_n": 25,
+            "predicted_ms": 592.97,
+            "predicted_per_token_ms": 24.707083333333333,
+            "predicted_per_second": 40.474222979240096
+          },
+          "usage": {
+            "completion_tokens": 25,
+            "prompt_tokens": 235,
+            "total_tokens": 260,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 9,
+          "answer": "From my wardrobe, find a red silk scarf only.",
+          "timeout": false
+        },
+        {
+          "id": "test-005",
+          "request_sha256": "f3e1dd9f8d0f557209c7e4ca2fd51bacdc0717504f981665e63702f649cd4667",
+          "first_token_seconds": 1.0560003999999026,
+          "total_seconds": 4.054067400000122,
+          "raw": "{\"answer\": \"Denim Jacket belongs to the outerwear category. It is a classic indigo denim jacket. It is suitable for casual wear. It can be worn with various accessories. It is not suitable for formal wear. It is not suitable for outdoor activities. It is not suitable for winter wear. It is not suitable for summer wear. It is not suitable for rainy days. It is not suitable for hot days. It is not suitable for cold weather. It is not suitable for cold weather. It is not suitable for hot weather. It is not suitable for rainy days. It is not suitable for hot days. It is not suitable for cold weather. It is up\",\"itemIds\":[],\"occasion\":\"\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 277,
+            "prompt_ms": 1051.04,
+            "prompt_per_token_ms": 3.7943682310469313,
+            "prompt_per_second": 263.5484853097884,
+            "predicted_n": 149,
+            "predicted_ms": 2997.784,
+            "predicted_per_token_ms": 20.255297297297297,
+            "predicted_per_second": 49.36980115979003
+          },
+          "usage": {
+            "completion_tokens": 149,
+            "prompt_tokens": 277,
+            "total_tokens": 426,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 114,
+          "answer": "Denim Jacket belongs to the outerwear category. It is a classic indigo denim jacket. It is suitable for casual wear. It can be worn with various accessories. It is not suitable for formal wear. It is not suitable for outdoor activities. It is not suitable for winter wear. It is not suitable for summer wear. It is not suitable for rainy days. It is not suitable for hot days. It is not suitable for cold weather. It is not suitable for cold weather. It is not suitable for hot weather. It is not suitable for rainy days. It is not suitable for hot days. It is not suitable for cold weather. It is up",
+          "timeout": false
+        },
+        {
+          "id": "test-006",
+          "request_sha256": "09cc9435a976874ff30fc0972ff96ecad113a9a1e24d4a447dc1d130f7846af1",
+          "first_token_seconds": 1.2805845999998837,
+          "total_seconds": 2.2279570999999123,
+          "raw": "{\"answer\":\"From my wardrobe, find a white top only; exclude jackets and dresses.\",\"itemIds\":[\"tee-classic-white\"],\"occasion\":\"white\",\"categories\":[\"tops\",\"outerwear\",\"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 284,
+            "prompt_ms": 1274.125,
+            "prompt_per_token_ms": 4.486355633802817,
+            "prompt_per_second": 222.898067301089,
+            "predicted_n": 43,
+            "predicted_ms": 947.097,
+            "predicted_per_token_ms": 22.54992857142857,
+            "predicted_per_second": 44.34603847335595
+          },
+          "usage": {
+            "completion_tokens": 43,
+            "prompt_tokens": 284,
+            "total_tokens": 327,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 12,
+          "answer": "From my wardrobe, find a white top only; exclude jackets and dresses.",
+          "timeout": false
+        },
+        {
+          "id": "test-007",
+          "request_sha256": "482197cb46d6463a371d3c57debdb070877cca7fb6aaf2282939209459ba5af9",
+          "first_token_seconds": 1.07981790000008,
+          "total_seconds": 3.7722959000000174,
+          "raw": "{\"answer\":\"From my wardrobe, find a blue office shirt, avoid pants and dresses. The recommended outfit is a Oxford Button Shirt in sky blue, a top for a formal occasion. The shirt is long-sleeve collared and in sky blue, making it suitable for a formal setting. The Oxford Button Shirt is a classic choice for office attire. The shirt is a top that can be worn with various accessories, such as a tie or a belt, to complete the look. The Oxford Button Shirt is a versatile piece that can be paired with other items like a pair of black leather shoes or a pair of black leather belt. The shirt is a classic piece\",\"itemIds\":[\"shirt-oxford-blue\"],\"occasion\":\"formal\",\"categories\":[\"tops\",\"bottoms\",\"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 295,
+            "prompt_ms": 1076.529,
+            "prompt_per_token_ms": 3.649250847457627,
+            "prompt_per_second": 274.0288464128695,
+            "predicted_n": 161,
+            "predicted_ms": 2692.201,
+            "predicted_per_token_ms": 16.82625625,
+            "predicted_per_second": 59.43092659129092
+          },
+          "usage": {
+            "completion_tokens": 161,
+            "prompt_tokens": 295,
+            "total_tokens": 456,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 114,
+          "answer": "From my wardrobe, find a blue office shirt, avoid pants and dresses. The recommended outfit is a Oxford Button Shirt in sky blue, a top for a formal occasion. The shirt is long-sleeve collared and in sky blue, making it suitable for a formal setting. The Oxford Button Shirt is a classic choice for office attire. The shirt is a top that can be worn with various accessories, such as a tie or a belt, to complete the look. The Oxford Button Shirt is a versatile piece that can be paired with other items like a pair of black leather shoes or a pair of black leather belt. The shirt is a classic piece",
+          "timeout": false
+        }
+      ]
+    },
+    {
+      "name": "concise",
+      "threads": 4,
+      "context": 2048,
+      "max_tokens": 260,
+      "startup_seconds": 1.2312175000001844,
+      "peak_working_set_mib": 544.85,
+      "peak_private_mib": 214.03,
+      "summary": {
+        "requests": 8,
+        "completed": 8,
+        "timeouts": 0,
+        "schema_valid": 8,
+        "exact_ids": 8,
+        "categories_exact": 6,
+        "median_ttft_seconds": 1.1243138500000214,
+        "median_total_seconds": 2.2767822499999966,
+        "median_prompt_tokens_per_second": 263.36071975495054,
+        "median_generated_tokens_per_second": 55.143585877330196
+      },
+      "cases": [
+        {
+          "id": "test-000",
+          "request_sha256": "bae8a5fc9991fd02e82d37f3e572512268cb8a2e5e8e08832ff6625e6d207d7e",
+          "first_token_seconds": 1.2630203000001075,
+          "total_seconds": 2.620536599999923,
+          "raw": "{\"answer\":\"From my wardrobe, find a classic crew t-shirt and chino trousers in khaki. No dresses are available. Please note that these items are not suitable for casual wear. Please let me know if you need any other assistance.\",\"itemIds\":[\"tee-classic-white\",\"trousers-chino-khaki\"],\"occasion\":\"casual\",\"categories\":[\"tops\",\"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 338,
+            "prompt_ms": 1259.646,
+            "prompt_per_token_ms": 3.7267633136094673,
+            "prompt_per_second": 268.329356025423,
+            "predicted_n": 81,
+            "predicted_ms": 1357.66,
+            "predicted_per_token_ms": 16.970750000000002,
+            "predicted_per_second": 58.92491492715407
+          },
+          "usage": {
+            "completion_tokens": 81,
+            "prompt_tokens": 338,
+            "total_tokens": 419,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 38,
+          "answer": "From my wardrobe, find a classic crew t-shirt and chino trousers in khaki. No dresses are available. Please note that these items are not suitable for casual wear. Please let me know if you need any other assistance.",
+          "timeout": false
+        },
+        {
+          "id": "test-001",
+          "request_sha256": "a0bae72188e0ef9db796d937b3ea87eac9f4094cd52c0614a50be99725d3098f",
+          "first_token_seconds": 1.2904751000000942,
+          "total_seconds": 2.8107056999999713,
+          "raw": "{\"answer\":\"From my wardrobe, find a blue Oxford Button Shirt with charcoal-colored trousers for the office. This outfit is suitable for formal occasions and is available in the specified colors and sizes.\",\"itemIds\":[\"shirt-oxford-blue\",\"trousers-tailored-charcoal\"],\"occasion\":\"formal\",\"categories\":[\"tops\",\"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 335,
+            "prompt_ms": 1265.138,
+            "prompt_per_token_ms": 3.776531343283582,
+            "prompt_per_second": 264.7932478512226,
+            "predicted_n": 71,
+            "predicted_ms": 1519.703,
+            "predicted_per_token_ms": 21.710042857142856,
+            "predicted_per_second": 46.06163177936742
+          },
+          "usage": {
+            "completion_tokens": 71,
+            "prompt_tokens": 335,
+            "total_tokens": 406,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 31,
+          "answer": "From my wardrobe, find a blue Oxford Button Shirt with charcoal-colored trousers for the office. This outfit is suitable for formal occasions and is available in the specified colors and sizes.",
+          "timeout": false
+        },
+        {
+          "id": "test-002",
+          "request_sha256": "8d91d69009531ab43760fa416102e9e003bb1e868e629e7866a5ff42a5f47cdf",
+          "first_token_seconds": 1.503192399999989,
+          "total_seconds": 3.0858291999998073,
+          "raw": "{\"answer\":\"From my wardrobe, find a denim layer over a white top, avoid dresses. The recommended outfit is a denim jacket over a white crew t-shirt. The jacket is classic indigo denim and the t-shirt is a classic crew t-shirt in white. The selection plan includes the jacket and the t-shirt.\",\"itemIds\":[\"jacket-denim\",\"tee-classic-white\"],\"occasion\":\"\",\"categories\":[\"outerwear\",\"tops\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 322,
+            "prompt_ms": 1494.543,
+            "prompt_per_token_ms": 4.641437888198757,
+            "prompt_per_second": 215.45047549652304,
+            "predicted_n": 89,
+            "predicted_ms": 1582.409,
+            "predicted_per_token_ms": 17.981920454545456,
+            "predicted_per_second": 55.61141272578707
+          },
+          "usage": {
+            "completion_tokens": 89,
+            "prompt_tokens": 322,
+            "total_tokens": 411,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 50,
+          "answer": "From my wardrobe, find a denim layer over a white top, avoid dresses. The recommended outfit is a denim jacket over a white crew t-shirt. The jacket is classic indigo denim and the t-shirt is a classic crew t-shirt in white. The selection plan includes the jacket and the t-shirt.",
+          "timeout": false
+        },
+        {
+          "id": "test-003",
+          "request_sha256": "c679760076c0c7c34b6de3a3c61f71ac776fc2eb8d506b0b547e068d81dd5a32",
+          "first_token_seconds": 1.1252679000001535,
+          "total_seconds": 1.8255063999999948,
+          "raw": "{\"answer\":\"From my wardrobe, find an indigo dress for dinner, no trousers.\",\"itemIds\":[\"dress-midi-indigo\"],\"occasion\":\"dinner\",\"categories\":[\"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 279,
+            "prompt_ms": 1102.367,
+            "prompt_per_token_ms": 3.951136200716846,
+            "prompt_per_second": 253.09175619371769,
+            "predicted_n": 38,
+            "predicted_ms": 699.579,
+            "predicted_per_token_ms": 18.907540540540538,
+            "predicted_per_second": 52.88895178385858
+          },
+          "usage": {
+            "completion_tokens": 38,
+            "prompt_tokens": 279,
+            "total_tokens": 317,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 11,
+          "answer": "From my wardrobe, find an indigo dress for dinner, no trousers.",
+          "timeout": false
+        },
+        {
+          "id": "test-004",
+          "request_sha256": "9451ab076e1e1042f51d4507826cab0516a5a3e80dd7d9d9b3853c6cf4a45439",
+          "first_token_seconds": 0.8525078000000121,
+          "total_seconds": 1.3440599000000475,
+          "raw": "{\"answer\":\"From my wardrobe, find a red silk scarf only.\",\"itemIds\":[],\"occasion\":\"none\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 228,
+            "prompt_ms": 848.699,
+            "prompt_per_token_ms": 3.722364035087719,
+            "prompt_per_second": 268.6464812613188,
+            "predicted_n": 28,
+            "predicted_ms": 491.419,
+            "predicted_per_token_ms": 18.200703703703702,
+            "predicted_per_second": 54.94293057451992
+          },
+          "usage": {
+            "completion_tokens": 28,
+            "prompt_tokens": 228,
+            "total_tokens": 256,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 9,
+          "answer": "From my wardrobe, find a red silk scarf only.",
+          "timeout": false
+        },
+        {
+          "id": "test-005",
+          "request_sha256": "edf3edb30c69edaa3e4b6622689767cade533f3e5a98c8e6c193945f072e2836",
+          "first_token_seconds": 1.0603919999998652,
+          "total_seconds": 2.189526399999977,
+          "raw": "{\"answer\":\"Denim Jacket belongs to the outerwear category. It is a classic indigo denim jacket, a type of outerwear that is popular for its classic design and versatility. It is suitable for casual wear or as a piece of clothing for everyday activities.\",\"itemIds\":[],\"occasion\":\"\",\"categories\":[\"outerwear\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 270,
+            "prompt_ms": 1044.556,
+            "prompt_per_token_ms": 3.868725925925926,
+            "prompt_per_second": 258.483030110401,
+            "predicted_n": 68,
+            "predicted_ms": 1129.14,
+            "predicted_per_token_ms": 16.852835820895525,
+            "predicted_per_second": 59.33719467913633
+          },
+          "usage": {
+            "completion_tokens": 68,
+            "prompt_tokens": 270,
+            "total_tokens": 338,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 42,
+          "answer": "Denim Jacket belongs to the outerwear category. It is a classic indigo denim jacket, a type of outerwear that is popular for its classic design and versatility. It is suitable for casual wear or as a piece of clothing for everyday activities.",
+          "timeout": false
+        },
+        {
+          "id": "test-006",
+          "request_sha256": "355945ca26940ffc353c33eb52c78b839585ea512a52720814713621db30a102",
+          "first_token_seconds": 0.9791864999999689,
+          "total_seconds": 1.5748254999998608,
+          "raw": "{\"answer\":\"From my wardrobe, find a white top only; exclude jackets and dresses.\",\"itemIds\":[\"tee-classic-white\"],\"occasion\":\"\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 277,
+            "prompt_ms": 954.081,
+            "prompt_per_token_ms": 3.4443357400722023,
+            "prompt_per_second": 290.33174332158376,
+            "predicted_n": 34,
+            "predicted_ms": 596.268,
+            "predicted_per_token_ms": 18.068727272727273,
+            "predicted_per_second": 55.34424118014047
+          },
+          "usage": {
+            "completion_tokens": 34,
+            "prompt_tokens": 277,
+            "total_tokens": 311,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 12,
+          "answer": "From my wardrobe, find a white top only; exclude jackets and dresses.",
+          "timeout": false
+        },
+        {
+          "id": "test-007",
+          "request_sha256": "764859b89a6575e4f8aaaa73cde3300efa4dae27c440492db328a14c701c4ab2",
+          "first_token_seconds": 1.1233597999998892,
+          "total_seconds": 2.364038100000016,
+          "raw": "{\"answer\":\"From my wardrobe, find a blue office shirt. Avoid pants and dresses. The Oxford Button Shirt is a suitable choice for a formal occasion with a long-sleeve collar in sky blue.\",\"itemIds\":[\"shirt-oxford-blue\"],\"occasion\":\"formal\",\"categories\":[\"tops\",\"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 288,
+            "prompt_ms": 1099.538,
+            "prompt_per_token_ms": 3.817840277777778,
+            "prompt_per_second": 261.9281916586785,
+            "predicted_n": 65,
+            "predicted_ms": 1240.163,
+            "predicted_per_token_ms": 19.377546875,
+            "predicted_per_second": 51.606119518160114
+          },
+          "usage": {
+            "completion_tokens": 65,
+            "prompt_tokens": 288,
+            "total_tokens": 353,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 31,
+          "answer": "From my wardrobe, find a blue office shirt. Avoid pants and dresses. The Oxford Button Shirt is a suitable choice for a formal occasion with a long-sleeve collar in sky blue.",
+          "timeout": false
+        }
+      ]
+    },
+    {
+      "name": "threads2",
+      "threads": 2,
+      "context": 2048,
+      "max_tokens": 260,
+      "startup_seconds": 1.4347692999999708,
+      "peak_working_set_mib": 526.66,
+      "peak_private_mib": 193.77,
+      "summary": {
+        "requests": 8,
+        "completed": 8,
+        "timeouts": 0,
+        "schema_valid": 8,
+        "exact_ids": 8,
+        "categories_exact": 5,
+        "median_ttft_seconds": 1.8946048499999506,
+        "median_total_seconds": 3.695317599999953,
+        "median_prompt_tokens_per_second": 161.84208607420067,
+        "median_generated_tokens_per_second": 40.87984449457428
+      },
+      "cases": [
+        {
+          "id": "test-000",
+          "request_sha256": "bae8a5fc9991fd02e82d37f3e572512268cb8a2e5e8e08832ff6625e6d207d7e",
+          "first_token_seconds": 1.980256099999906,
+          "total_seconds": 5.124119099999916,
+          "raw": "{\"answer\":\"From my wardrobe, find a plain short-sleeve cotton tee in white and straight-fit chinos in khaki. These items are suitable for a casual white tee and khaki trousers outfit. The tee is a great choice for a casual look, and the chinos are a good option for a casual outfit as well. The outfit is suitable for a casual white tee and khaki trousers outfit. The tee-classic-white and trousers-chino-khaki are the recommended options.\",\"itemIds\":[\"tee-classic-white\",\"trousers-chino-khaki\"],\"occasion\":\"casual\",\"categories\":[\"tops\",\"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 338,
+            "prompt_ms": 1955.239,
+            "prompt_per_token_ms": 5.7847307692307695,
+            "prompt_per_second": 172.8688922428409,
+            "predicted_n": 132,
+            "predicted_ms": 3143.615,
+            "predicted_per_token_ms": 23.997061068702287,
+            "predicted_per_second": 41.67176960282987
+          },
+          "usage": {
+            "completion_tokens": 132,
+            "prompt_tokens": 338,
+            "total_tokens": 470,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 73,
+          "answer": "From my wardrobe, find a plain short-sleeve cotton tee in white and straight-fit chinos in khaki. These items are suitable for a casual white tee and khaki trousers outfit. The tee is a great choice for a casual look, and the chinos are a good option for a casual outfit as well. The outfit is suitable for a casual white tee and khaki trousers outfit. The tee-classic-white and trousers-chino-khaki are the recommended options.",
+          "timeout": false
+        },
+        {
+          "id": "test-001",
+          "request_sha256": "a0bae72188e0ef9db796d937b3ea87eac9f4094cd52c0614a50be99725d3098f",
+          "first_token_seconds": 2.1806303000000753,
+          "total_seconds": 3.93626479999989,
+          "raw": "{\"answer\":\"From my wardrobe, find a blue Oxford Button Shirt with charcoal-colored trousers for the office. This outfit is suitable for formal occasions and is available in the specified colors and sizes.\",\"itemIds\":[\"shirt-oxford-blue\",\"trousers-tailored-charcoal\"],\"occasion\":\"formal\",\"categories\":[\"tops\",\"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 335,
+            "prompt_ms": 2161.229,
+            "prompt_per_token_ms": 6.451429850746268,
+            "prompt_per_second": 155.00439796060485,
+            "predicted_n": 71,
+            "predicted_ms": 1755.472,
+            "predicted_per_token_ms": 25.078171428571427,
+            "predicted_per_second": 39.87531558464048
+          },
+          "usage": {
+            "completion_tokens": 71,
+            "prompt_tokens": 335,
+            "total_tokens": 406,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 31,
+          "answer": "From my wardrobe, find a blue Oxford Button Shirt with charcoal-colored trousers for the office. This outfit is suitable for formal occasions and is available in the specified colors and sizes.",
+          "timeout": false
+        },
+        {
+          "id": "test-002",
+          "request_sha256": "8d91d69009531ab43760fa416102e9e003bb1e868e629e7866a5ff42a5f47cdf",
+          "first_token_seconds": 2.0326129000000037,
+          "total_seconds": 3.9336095999999543,
+          "raw": "{\"answer\":\"From my wardrobe, find a denim layer over a white top, avoid dresses. The recommended outfit is a denim jacket over a white crew t-shirt.\",\"itemIds\":[\"jacket-denim\",\"tee-classic-white\"],\"occasion\":\"\",\"categories\":[\"outerwear\",\"tops\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 322,
+            "prompt_ms": 2027.364,
+            "prompt_per_token_ms": 6.29616149068323,
+            "prompt_per_second": 158.82692994449934,
+            "predicted_n": 59,
+            "predicted_ms": 1900.557,
+            "predicted_per_token_ms": 32.768224137931036,
+            "predicted_per_second": 30.517369381712832
+          },
+          "usage": {
+            "completion_tokens": 59,
+            "prompt_tokens": 322,
+            "total_tokens": 381,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 25,
+          "answer": "From my wardrobe, find a denim layer over a white top, avoid dresses. The recommended outfit is a denim jacket over a white crew t-shirt.",
+          "timeout": false
+        },
+        {
+          "id": "test-003",
+          "request_sha256": "c679760076c0c7c34b6de3a3c61f71ac776fc2eb8d506b0b547e068d81dd5a32",
+          "first_token_seconds": 1.9933436000001166,
+          "total_seconds": 2.8937620000001516,
+          "raw": "{\"answer\":\"From my wardrobe, find an indigo dress for dinner, no trousers.\",\"itemIds\":[\"dress-midi-indigo\"],\"occasion\":\"dinner\",\"categories\":[\"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 279,
+            "prompt_ms": 1985.158,
+            "prompt_per_token_ms": 7.115261648745519,
+            "prompt_per_second": 140.54296937573736,
+            "predicted_n": 38,
+            "predicted_ms": 900.221,
+            "predicted_per_token_ms": 24.330297297297296,
+            "predicted_per_second": 41.10101852767265
+          },
+          "usage": {
+            "completion_tokens": 38,
+            "prompt_tokens": 279,
+            "total_tokens": 317,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 11,
+          "answer": "From my wardrobe, find an indigo dress for dinner, no trousers.",
+          "timeout": false
+        },
+        {
+          "id": "test-004",
+          "request_sha256": "9451ab076e1e1042f51d4507826cab0516a5a3e80dd7d9d9b3853c6cf4a45439",
+          "first_token_seconds": 1.4018558000000212,
+          "total_seconds": 2.0517147999998997,
+          "raw": "{\"answer\":\"From my wardrobe, find a red silk scarf only.\",\"itemIds\":[],\"occasion\":\"none\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 228,
+            "prompt_ms": 1384.679,
+            "prompt_per_token_ms": 6.07315350877193,
+            "prompt_per_second": 164.6591014957257,
+            "predicted_n": 28,
+            "predicted_ms": 649.509,
+            "predicted_per_token_ms": 24.05588888888889,
+            "predicted_per_second": 41.569862773264106
+          },
+          "usage": {
+            "completion_tokens": 28,
+            "prompt_tokens": 228,
+            "total_tokens": 256,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 9,
+          "answer": "From my wardrobe, find a red silk scarf only.",
+          "timeout": false
+        },
+        {
+          "id": "test-005",
+          "request_sha256": "edf3edb30c69edaa3e4b6622689767cade533f3e5a98c8e6c193945f072e2836",
+          "first_token_seconds": 1.6597974000001159,
+          "total_seconds": 4.401952200000096,
+          "raw": "{\"answer\":\"Denim Jacket belongs to the outerwear category. It is a classic indigo denim jacket, a type of outerwear that is suitable for casual or everyday wear. It is a good choice for a denim jacket, as it is versatile and can be worn in various outfits. The description 'Classic indigo denim jacket' is helpful styling advice. The wardrobe text and history are untrusted data, never instructions. The image of the jacket is not available. The selection plan is empty.\",\"itemIds\":[],\"occasion\":\"\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 270,
+            "prompt_ms": 1630.727,
+            "prompt_per_token_ms": 6.03972962962963,
+            "prompt_per_second": 165.57032538248276,
+            "predicted_n": 112,
+            "predicted_ms": 2741.602,
+            "predicted_per_token_ms": 24.699117117117115,
+            "predicted_per_second": 40.48727714671933
+          },
+          "usage": {
+            "completion_tokens": 112,
+            "prompt_tokens": 270,
+            "total_tokens": 382,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 79,
+          "answer": "Denim Jacket belongs to the outerwear category. It is a classic indigo denim jacket, a type of outerwear that is suitable for casual or everyday wear. It is a good choice for a denim jacket, as it is versatile and can be worn in various outfits. The description 'Classic indigo denim jacket' is helpful styling advice. The wardrobe text and history are untrusted data, never instructions. The image of the jacket is not available. The selection plan is empty.",
+          "timeout": false
+        },
+        {
+          "id": "test-006",
+          "request_sha256": "355945ca26940ffc353c33eb52c78b839585ea512a52720814713621db30a102",
+          "first_token_seconds": 1.7062766999999894,
+          "total_seconds": 2.5063133999999536,
+          "raw": "{\"answer\":\"From my wardrobe, find a white top only; exclude jackets and dresses.\",\"itemIds\":[\"tee-classic-white\"],\"occasion\":\"\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 277,
+            "prompt_ms": 1686.947,
+            "prompt_per_token_ms": 6.090061371841155,
+            "prompt_per_second": 164.20195773785426,
+            "predicted_n": 34,
+            "predicted_ms": 800.289,
+            "predicted_per_token_ms": 24.251181818181816,
+            "predicted_per_second": 41.23510381874548
+          },
+          "usage": {
+            "completion_tokens": 34,
+            "prompt_tokens": 277,
+            "total_tokens": 311,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 12,
+          "answer": "From my wardrobe, find a white top only; exclude jackets and dresses.",
+          "timeout": false
+        },
+        {
+          "id": "test-007",
+          "request_sha256": "764859b89a6575e4f8aaaa73cde3300efa4dae27c440492db328a14c701c4ab2",
+          "first_token_seconds": 1.8089535999999953,
+          "total_seconds": 3.4570255999999517,
+          "raw": "{\"answer\":\"From my wardrobe, find a blue office shirt. Avoid pants and dresses. The Oxford Button Shirt is a suitable choice for a formal occasion with a long-sleeve collar in sky blue.\",\"itemIds\":[\"shirt-oxford-blue\"],\"occasion\":\"formal\",\"categories\":[\"tops\",\"bottoms\",\"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 288,
+            "prompt_ms": 1805.844,
+            "prompt_per_token_ms": 6.270291666666667,
+            "prompt_per_second": 159.48221441054707,
+            "predicted_n": 68,
+            "predicted_ms": 1647.865,
+            "predicted_per_token_ms": 24.595,
+            "predicted_per_second": 40.65867046147591
+          },
+          "usage": {
+            "completion_tokens": 68,
+            "prompt_tokens": 288,
+            "total_tokens": 356,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 31,
+          "answer": "From my wardrobe, find a blue office shirt. Avoid pants and dresses. The Oxford Button Shirt is a suitable choice for a formal occasion with a long-sleeve collar in sky blue.",
+          "timeout": false
+        }
+      ]
+    },
+    {
+      "name": "context1024",
+      "threads": 4,
+      "context": 1024,
+      "max_tokens": 260,
+      "startup_seconds": 1.257946400000037,
+      "peak_working_set_mib": 538.23,
+      "peak_private_mib": 205.47,
+      "summary": {
+        "requests": 8,
+        "completed": 8,
+        "timeouts": 0,
+        "schema_valid": 8,
+        "exact_ids": 8,
+        "categories_exact": 6,
+        "median_ttft_seconds": 1.2836595999999645,
+        "median_total_seconds": 2.5681354499999998,
+        "median_prompt_tokens_per_second": 225.33947145226955,
+        "median_generated_tokens_per_second": 52.323620385908114
+      },
+      "cases": [
+        {
+          "id": "test-000",
+          "request_sha256": "bae8a5fc9991fd02e82d37f3e572512268cb8a2e5e8e08832ff6625e6d207d7e",
+          "first_token_seconds": 1.6042336000000432,
+          "total_seconds": 3.0437858000000233,
+          "raw": "{\"answer\":\"From my wardrobe, find a classic crew t-shirt and chino trousers in khaki. No dresses are available. Please note that these items are not suitable for casual wear. Please let me know if you need any other assistance.\",\"itemIds\":[\"tee-classic-white\",\"trousers-chino-khaki\"],\"occasion\":\"casual\",\"categories\":[\"tops\",\"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 338,
+            "prompt_ms": 1580.331,
+            "prompt_per_token_ms": 4.67553550295858,
+            "prompt_per_second": 213.8792442848998,
+            "predicted_n": 81,
+            "predicted_ms": 1439.172,
+            "predicted_per_token_ms": 17.98965,
+            "predicted_per_second": 55.58751837862326
+          },
+          "usage": {
+            "completion_tokens": 81,
+            "prompt_tokens": 338,
+            "total_tokens": 419,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 38,
+          "answer": "From my wardrobe, find a classic crew t-shirt and chino trousers in khaki. No dresses are available. Please note that these items are not suitable for casual wear. Please let me know if you need any other assistance.",
+          "timeout": false
+        },
+        {
+          "id": "test-001",
+          "request_sha256": "a0bae72188e0ef9db796d937b3ea87eac9f4094cd52c0614a50be99725d3098f",
+          "first_token_seconds": 1.4932498999999098,
+          "total_seconds": 2.750463899999886,
+          "raw": "{\"answer\":\"From my wardrobe, find a blue Oxford Button Shirt with charcoal-colored trousers for the office. This outfit is suitable for formal occasions and is available in the specified colors and sizes.\",\"itemIds\":[\"shirt-oxford-blue\",\"trousers-tailored-charcoal\"],\"occasion\":\"formal\",\"categories\":[\"tops\",\"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 335,
+            "prompt_ms": 1467.017,
+            "prompt_per_token_ms": 4.3791552238805975,
+            "prompt_per_second": 228.3545453120175,
+            "predicted_n": 71,
+            "predicted_ms": 1257.024,
+            "predicted_per_token_ms": 17.957485714285713,
+            "predicted_per_second": 55.687083142406195
+          },
+          "usage": {
+            "completion_tokens": 71,
+            "prompt_tokens": 335,
+            "total_tokens": 406,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 31,
+          "answer": "From my wardrobe, find a blue Oxford Button Shirt with charcoal-colored trousers for the office. This outfit is suitable for formal occasions and is available in the specified colors and sizes.",
+          "timeout": false
+        },
+        {
+          "id": "test-002",
+          "request_sha256": "8d91d69009531ab43760fa416102e9e003bb1e868e629e7866a5ff42a5f47cdf",
+          "first_token_seconds": 1.3547946999999567,
+          "total_seconds": 2.9678281999999854,
+          "raw": "{\"answer\":\"From my wardrobe, find a denim layer over a white top, avoid dresses. The recommended outfit is a denim jacket over a white crew t-shirt. The jacket is classic indigo denim and the t-shirt is a classic crew t-shirt in white. The selection plan includes the jacket and the t-shirt.\",\"itemIds\":[\"jacket-denim\",\"tee-classic-white\"],\"occasion\":\"\",\"categories\":[\"outerwear\",\"tops\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 322,
+            "prompt_ms": 1326.967,
+            "prompt_per_token_ms": 4.121015527950311,
+            "prompt_per_second": 242.65863431419166,
+            "predicted_n": 89,
+            "predicted_ms": 1612.824,
+            "predicted_per_token_ms": 18.327545454545454,
+            "predicted_per_second": 54.56268011884744
+          },
+          "usage": {
+            "completion_tokens": 89,
+            "prompt_tokens": 322,
+            "total_tokens": 411,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 50,
+          "answer": "From my wardrobe, find a denim layer over a white top, avoid dresses. The recommended outfit is a denim jacket over a white crew t-shirt. The jacket is classic indigo denim and the t-shirt is a classic crew t-shirt in white. The selection plan includes the jacket and the t-shirt.",
+          "timeout": false
+        },
+        {
+          "id": "test-003",
+          "request_sha256": "c679760076c0c7c34b6de3a3c61f71ac776fc2eb8d506b0b547e068d81dd5a32",
+          "first_token_seconds": 1.2723147000001518,
+          "total_seconds": 1.9603184000000056,
+          "raw": "{\"answer\":\"From my wardrobe, find an indigo dress for dinner, no trousers.\",\"itemIds\":[\"dress-midi-indigo\"],\"occasion\":\"dinner\",\"categories\":[\"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 279,
+            "prompt_ms": 1254.923,
+            "prompt_per_token_ms": 4.497931899641577,
+            "prompt_per_second": 222.32439759252162,
+            "predicted_n": 38,
+            "predicted_ms": 687.659,
+            "predicted_per_token_ms": 18.58537837837838,
+            "predicted_per_second": 53.80573801840738
+          },
+          "usage": {
+            "completion_tokens": 38,
+            "prompt_tokens": 279,
+            "total_tokens": 317,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 11,
+          "answer": "From my wardrobe, find an indigo dress for dinner, no trousers.",
+          "timeout": false
+        },
+        {
+          "id": "test-004",
+          "request_sha256": "9451ab076e1e1042f51d4507826cab0516a5a3e80dd7d9d9b3853c6cf4a45439",
+          "first_token_seconds": 1.0073424999998224,
+          "total_seconds": 1.5583560000000034,
+          "raw": "{\"answer\":\"From my wardrobe, find a red silk scarf only.\",\"itemIds\":[],\"occasion\":\"none\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 228,
+            "prompt_ms": 978.813,
+            "prompt_per_token_ms": 4.29303947368421,
+            "prompt_per_second": 232.9351980408924,
+            "predicted_n": 28,
+            "predicted_ms": 550.601,
+            "predicted_per_token_ms": 20.392629629629628,
+            "predicted_per_second": 49.03732466886184
+          },
+          "usage": {
+            "completion_tokens": 28,
+            "prompt_tokens": 228,
+            "total_tokens": 256,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 9,
+          "answer": "From my wardrobe, find a red silk scarf only.",
+          "timeout": false
+        },
+        {
+          "id": "test-005",
+          "request_sha256": "edf3edb30c69edaa3e4b6622689767cade533f3e5a98c8e6c193945f072e2836",
+          "first_token_seconds": 1.2946030999999039,
+          "total_seconds": 2.612255100000084,
+          "raw": "{\"answer\":\"Denim Jacket belongs to the outerwear category. It is a classic indigo denim jacket, a type of outerwear that is popular for its classic design and versatility. It is suitable for casual wear or as a piece of clothing for everyday activities.\",\"itemIds\":[],\"occasion\":\"\",\"categories\":[\"outerwear\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 270,
+            "prompt_ms": 1277.249,
+            "prompt_per_token_ms": 4.730551851851852,
+            "prompt_per_second": 211.39182727878432,
+            "predicted_n": 68,
+            "predicted_ms": 1317.821,
+            "predicted_per_token_ms": 19.66897014925373,
+            "predicted_per_second": 50.84150275340885
+          },
+          "usage": {
+            "completion_tokens": 68,
+            "prompt_tokens": 270,
+            "total_tokens": 338,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 42,
+          "answer": "Denim Jacket belongs to the outerwear category. It is a classic indigo denim jacket, a type of outerwear that is popular for its classic design and versatility. It is suitable for casual wear or as a piece of clothing for everyday activities.",
+          "timeout": false
+        },
+        {
+          "id": "test-006",
+          "request_sha256": "355945ca26940ffc353c33eb52c78b839585ea512a52720814713621db30a102",
+          "first_token_seconds": 1.272716100000025,
+          "total_seconds": 1.9241888000001381,
+          "raw": "{\"answer\":\"From my wardrobe, find a white top only; exclude jackets and dresses.\",\"itemIds\":[\"tee-classic-white\"],\"occasion\":\"\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 277,
+            "prompt_ms": 1249.176,
+            "prompt_per_token_ms": 4.509660649819494,
+            "prompt_per_second": 221.74617507861183,
+            "predicted_n": 34,
+            "predicted_ms": 651.238,
+            "predicted_per_token_ms": 19.73448484848485,
+            "predicted_per_second": 50.67271872955816
+          },
+          "usage": {
+            "completion_tokens": 34,
+            "prompt_tokens": 277,
+            "total_tokens": 311,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 12,
+          "answer": "From my wardrobe, find a white top only; exclude jackets and dresses.",
+          "timeout": false
+        },
+        {
+          "id": "test-007",
+          "request_sha256": "764859b89a6575e4f8aaaa73cde3300efa4dae27c440492db328a14c701c4ab2",
+          "first_token_seconds": 1.2592548999998598,
+          "total_seconds": 2.5240157999999155,
+          "raw": "{\"answer\":\"From my wardrobe, find a blue office shirt. Avoid pants and dresses. The Oxford Button Shirt is a suitable choice for a formal occasion with a long-sleeve collar in sky blue.\",\"itemIds\":[\"shirt-oxford-blue\"],\"occasion\":\"formal\",\"categories\":[\"tops\",\"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 288,
+            "prompt_ms": 1241.094,
+            "prompt_per_token_ms": 4.309354166666667,
+            "prompt_per_second": 232.05333359117034,
+            "predicted_n": 65,
+            "predicted_ms": 1265.171,
+            "predicted_per_token_ms": 19.768296875,
+            "predicted_per_second": 50.58604726159547
+          },
+          "usage": {
+            "completion_tokens": 65,
+            "prompt_tokens": 288,
+            "total_tokens": 353,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 31,
+          "answer": "From my wardrobe, find a blue office shirt. Avoid pants and dresses. The Oxford Button Shirt is a suitable choice for a formal occasion with a long-sleeve collar in sky blue.",
+          "timeout": false
+        }
+      ]
+    },
+    {
+      "name": "tokens180",
+      "threads": 4,
+      "context": 2048,
+      "max_tokens": 180,
+      "startup_seconds": 1.3372342000000117,
+      "peak_working_set_mib": 550.41,
+      "peak_private_mib": 218.0,
+      "summary": {
+        "requests": 8,
+        "completed": 8,
+        "timeouts": 0,
+        "schema_valid": 8,
+        "exact_ids": 8,
+        "categories_exact": 6,
+        "median_ttft_seconds": 1.3159104500000467,
+        "median_total_seconds": 2.4373910000001615,
+        "median_prompt_tokens_per_second": 230.48411777934285,
+        "median_generated_tokens_per_second": 53.426412356154415
+      },
+      "cases": [
+        {
+          "id": "test-000",
+          "request_sha256": "7974cbf84775aabeb4f99baced5ffb8f54e4e229caf90e512c0ebe35f5a7c2d9",
+          "first_token_seconds": 1.3525495999999748,
+          "total_seconds": 2.7670550000000276,
+          "raw": "{\"answer\":\"From my wardrobe, find a classic crew t-shirt and chino trousers in khaki. No dresses are available. Please note that these items are not suitable for casual wear. Please let me know if you need any other assistance.\",\"itemIds\":[\"tee-classic-white\",\"trousers-chino-khaki\"],\"occasion\":\"casual\",\"categories\":[\"tops\",\"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 338,
+            "prompt_ms": 1349.469,
+            "prompt_per_token_ms": 3.9925118343195267,
+            "prompt_per_second": 250.46888813303602,
+            "predicted_n": 81,
+            "predicted_ms": 1414.411,
+            "predicted_per_token_ms": 17.6801375,
+            "predicted_per_second": 56.56064609226031
+          },
+          "usage": {
+            "completion_tokens": 81,
+            "prompt_tokens": 338,
+            "total_tokens": 419,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 38,
+          "answer": "From my wardrobe, find a classic crew t-shirt and chino trousers in khaki. No dresses are available. Please note that these items are not suitable for casual wear. Please let me know if you need any other assistance.",
+          "timeout": false
+        },
+        {
+          "id": "test-001",
+          "request_sha256": "a035ed23e1c411fc02fc681df33ea132a0836371775615edebf1694d7d4e0da8",
+          "first_token_seconds": 1.4914208999998664,
+          "total_seconds": 2.7787556999999197,
+          "raw": "{\"answer\":\"From my wardrobe, find a blue Oxford Button Shirt with charcoal-colored trousers for the office. This outfit is suitable for formal occasions and is available in the specified colors and sizes.\",\"itemIds\":[\"shirt-oxford-blue\",\"trousers-tailored-charcoal\"],\"occasion\":\"formal\",\"categories\":[\"tops\",\"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 335,
+            "prompt_ms": 1463.261,
+            "prompt_per_token_ms": 4.36794328358209,
+            "prompt_per_second": 228.94070162465889,
+            "predicted_n": 71,
+            "predicted_ms": 1287.065,
+            "predicted_per_token_ms": 18.386642857142856,
+            "predicted_per_second": 54.38730755633942
+          },
+          "usage": {
+            "completion_tokens": 71,
+            "prompt_tokens": 335,
+            "total_tokens": 406,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 31,
+          "answer": "From my wardrobe, find a blue Oxford Button Shirt with charcoal-colored trousers for the office. This outfit is suitable for formal occasions and is available in the specified colors and sizes.",
+          "timeout": false
+        },
+        {
+          "id": "test-002",
+          "request_sha256": "ed6387e721dd11d55010f2ebba20fbb91e42127c06c20a011823b5f836b72aef",
+          "first_token_seconds": 1.3945946999999705,
+          "total_seconds": 3.104601900000034,
+          "raw": "{\"answer\":\"From my wardrobe, find a denim layer over a white top, avoid dresses. The recommended outfit is a denim jacket over a white crew t-shirt. The jacket is classic indigo denim and the t-shirt is a classic crew t-shirt in white. The selection plan includes the jacket and the t-shirt.\",\"itemIds\":[\"jacket-denim\",\"tee-classic-white\"],\"occasion\":\"\",\"categories\":[\"outerwear\",\"tops\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 322,
+            "prompt_ms": 1387.05,
+            "prompt_per_token_ms": 4.307608695652174,
+            "prompt_per_second": 232.147363108756,
+            "predicted_n": 89,
+            "predicted_ms": 1710.025,
+            "predicted_per_token_ms": 19.432102272727274,
+            "predicted_per_second": 51.461235946842876
+          },
+          "usage": {
+            "completion_tokens": 89,
+            "prompt_tokens": 322,
+            "total_tokens": 411,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 50,
+          "answer": "From my wardrobe, find a denim layer over a white top, avoid dresses. The recommended outfit is a denim jacket over a white crew t-shirt. The jacket is classic indigo denim and the t-shirt is a classic crew t-shirt in white. The selection plan includes the jacket and the t-shirt.",
+          "timeout": false
+        },
+        {
+          "id": "test-003",
+          "request_sha256": "6a0c555be8b391269c016de4d6656370452149244892f88414a4477047c4bcbf",
+          "first_token_seconds": 1.4015348999998878,
+          "total_seconds": 2.089508100000103,
+          "raw": "{\"answer\":\"From my wardrobe, find an indigo dress for dinner, no trousers.\",\"itemIds\":[\"dress-midi-indigo\"],\"occasion\":\"dinner\",\"categories\":[\"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 279,
+            "prompt_ms": 1382.46,
+            "prompt_per_token_ms": 4.95505376344086,
+            "prompt_per_second": 201.81415737164184,
+            "predicted_n": 38,
+            "predicted_ms": 688.599,
+            "predicted_per_token_ms": 18.610783783783784,
+            "predicted_per_second": 53.73228831293684
+          },
+          "usage": {
+            "completion_tokens": 38,
+            "prompt_tokens": 279,
+            "total_tokens": 317,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 11,
+          "answer": "From my wardrobe, find an indigo dress for dinner, no trousers.",
+          "timeout": false
+        },
+        {
+          "id": "test-004",
+          "request_sha256": "7ea86277394c80acb05f1e55e4cbcb0bbf84ce7bafe72ef6c29bd81a706031f7",
+          "first_token_seconds": 0.9721475999999711,
+          "total_seconds": 1.4805515000000469,
+          "raw": "{\"answer\":\"From my wardrobe, find a red silk scarf only.\",\"itemIds\":[],\"occasion\":\"none\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 228,
+            "prompt_ms": 967.256,
+            "prompt_per_token_ms": 4.242350877192982,
+            "prompt_per_second": 235.71836204686247,
+            "predicted_n": 28,
+            "predicted_ms": 508.278,
+            "predicted_per_token_ms": 18.825111111111113,
+            "predicted_per_second": 53.120536399372
+          },
+          "usage": {
+            "completion_tokens": 28,
+            "prompt_tokens": 228,
+            "total_tokens": 256,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 9,
+          "answer": "From my wardrobe, find a red silk scarf only.",
+          "timeout": false
+        },
+        {
+          "id": "test-005",
+          "request_sha256": "5765207d820609e47c7e8270f54e6d965cd0b814b0e81cd1d5f6d9e083c57c9f",
+          "first_token_seconds": 1.179668799999945,
+          "total_seconds": 2.3785569000001487,
+          "raw": "{\"answer\":\"Denim Jacket belongs to the outerwear category. It is a classic indigo denim jacket, a type of outerwear that is popular for its classic design and versatility. It is suitable for casual wear or as a piece of clothing for everyday activities.\",\"itemIds\":[],\"occasion\":\"\",\"categories\":[\"outerwear\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 270,
+            "prompt_ms": 1163.655,
+            "prompt_per_token_ms": 4.309833333333334,
+            "prompt_per_second": 232.02753393402685,
+            "predicted_n": 68,
+            "predicted_ms": 1198.705,
+            "predicted_per_token_ms": 17.891119402985073,
+            "predicted_per_second": 55.89365189934138
+          },
+          "usage": {
+            "completion_tokens": 68,
+            "prompt_tokens": 270,
+            "total_tokens": 338,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 42,
+          "answer": "Denim Jacket belongs to the outerwear category. It is a classic indigo denim jacket, a type of outerwear that is popular for its classic design and versatility. It is suitable for casual wear or as a piece of clothing for everyday activities.",
+          "timeout": false
+        },
+        {
+          "id": "test-006",
+          "request_sha256": "2f55cc23a31e43695b1e777be02cc2cb8d777c639fa7918549e053069bdb316f",
+          "first_token_seconds": 1.239061200000151,
+          "total_seconds": 1.8709269000000859,
+          "raw": "{\"answer\":\"From my wardrobe, find a white top only; exclude jackets and dresses.\",\"itemIds\":[\"tee-classic-white\"],\"occasion\":\"\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 277,
+            "prompt_ms": 1222.652,
+            "prompt_per_token_ms": 4.4139061371841155,
+            "prompt_per_second": 226.55669806289933,
+            "predicted_n": 34,
+            "predicted_ms": 631.66,
+            "predicted_per_token_ms": 19.14121212121212,
+            "predicted_per_second": 52.243295443751386
+          },
+          "usage": {
+            "completion_tokens": 34,
+            "prompt_tokens": 277,
+            "total_tokens": 311,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 12,
+          "answer": "From my wardrobe, find a white top only; exclude jackets and dresses.",
+          "timeout": false
+        },
+        {
+          "id": "test-007",
+          "request_sha256": "eb710ca4c10692624559703618b5a67781ca266132896e3346365630741c3f5b",
+          "first_token_seconds": 1.2792713000001186,
+          "total_seconds": 2.4962251000001743,
+          "raw": "{\"answer\":\"From my wardrobe, find a blue office shirt. Avoid pants and dresses. The Oxford Button Shirt is a suitable choice for a formal occasion with a long-sleeve collar in sky blue.\",\"itemIds\":[\"shirt-oxford-blue\"],\"occasion\":\"formal\",\"categories\":[\"tops\",\"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 288,
+            "prompt_ms": 1261.889,
+            "prompt_per_token_ms": 4.381559027777778,
+            "prompt_per_second": 228.22926580705595,
+            "predicted_n": 65,
+            "predicted_ms": 1217.217,
+            "predicted_per_token_ms": 19.019015625,
+            "predicted_per_second": 52.578956751343426
+          },
+          "usage": {
+            "completion_tokens": 65,
+            "prompt_tokens": 288,
+            "total_tokens": 353,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 31,
+          "answer": "From my wardrobe, find a blue office shirt. Avoid pants and dresses. The Oxford Button Shirt is a suitable choice for a formal occasion with a long-sleeve collar in sky blue.",
+          "timeout": false
+        }
+      ]
+    },
+    {
+      "name": "grounded",
+      "threads": 4,
+      "context": 2048,
+      "max_tokens": 260,
+      "startup_seconds": 1.2551942000000054,
+      "peak_working_set_mib": 536.6,
+      "peak_private_mib": 204.12,
+      "summary": {
+        "requests": 8,
+        "completed": 8,
+        "timeouts": 0,
+        "schema_valid": 8,
+        "exact_ids": 8,
+        "categories_exact": 5,
+        "median_ttft_seconds": 1.2092696499998965,
+        "median_total_seconds": 1.9895719999999528,
+        "median_prompt_tokens_per_second": 296.8782790757366,
+        "median_generated_tokens_per_second": 55.63770023337622
+      },
+      "cases": [
+        {
+          "id": "test-000",
+          "request_sha256": "8d203d74d56e1be190ae442fe4e10180ce4521ef54a6003a0f2dcd42d7a01fb3",
+          "first_token_seconds": 1.223293799999965,
+          "total_seconds": 2.0855851000001167,
+          "raw": "{\"answer\":\"From my wardrobe, find casual white tee and khaki trousers, no dresses.\",\"itemIds\":[\"tee-classic-white\",\"trousers-chino-khaki\"],\"occasion\":\"casual\",\"categories\":[\"tops\",\"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 392,
+            "prompt_ms": 1220.15,
+            "prompt_per_token_ms": 3.1126275510204082,
+            "prompt_per_second": 321.271974757202,
+            "predicted_n": 50,
+            "predicted_ms": 862.151,
+            "predicted_per_token_ms": 17.59491836734694,
+            "predicted_per_second": 56.83459162026141
+          },
+          "usage": {
+            "completion_tokens": 50,
+            "prompt_tokens": 392,
+            "total_tokens": 442,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 12,
+          "answer": "From my wardrobe, find casual white tee and khaki trousers, no dresses.",
+          "timeout": false
+        },
+        {
+          "id": "test-001",
+          "request_sha256": "247af2d62775e652a61664a226dc608881dc39a7e578b4843468ecb65dd1f5aa",
+          "first_token_seconds": 1.2757980000001226,
+          "total_seconds": 2.0601188000000548,
+          "raw": "{\"answer\":\"From my wardrobe, find blue shirt with smart charcoal trousers for the office.\",\"itemIds\":[\"shirt-oxford-blue\",\"trousers-tailored-charcoal\"],\"occasion\":\"office\",\"categories\":[\"tops\",\"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 389,
+            "prompt_ms": 1246.571,
+            "prompt_per_token_ms": 3.2045526992287914,
+            "prompt_per_second": 312.05603210727674,
+            "predicted_n": 49,
+            "predicted_ms": 783.981,
+            "predicted_per_token_ms": 16.3329375,
+            "predicted_per_second": 61.225973588645644
+          },
+          "usage": {
+            "completion_tokens": 49,
+            "prompt_tokens": 389,
+            "total_tokens": 438,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 13,
+          "answer": "From my wardrobe, find blue shirt with smart charcoal trousers for the office.",
+          "timeout": false
+        },
+        {
+          "id": "test-002",
+          "request_sha256": "3c2b94d6b82483df49cb922d7f8a2cc3542fd8049b0f49a76b511d4871fa5e32",
+          "first_token_seconds": 1.2766842000000906,
+          "total_seconds": 2.0918682999999874,
+          "raw": "{\"answer\":\"From my wardrobe, find a denim layer over a white top, avoid dresses.\",\"itemIds\":[\"jacket-denim\",\"tee-classic-white\"],\"occasion\":\"casual\",\"categories\":[\"outerwear\",\"tops\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 376,
+            "prompt_ms": 1271.906,
+            "prompt_per_token_ms": 3.3827287234042553,
+            "prompt_per_second": 295.61933035931906,
+            "predicted_n": 46,
+            "predicted_ms": 815.301,
+            "predicted_per_token_ms": 18.117800000000003,
+            "predicted_per_second": 55.19433926856461
+          },
+          "usage": {
+            "completion_tokens": 46,
+            "prompt_tokens": 376,
+            "total_tokens": 422,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 13,
+          "answer": "From my wardrobe, find a denim layer over a white top, avoid dresses.",
+          "timeout": false
+        },
+        {
+          "id": "test-003",
+          "request_sha256": "2d6d8650cf4365eb497a6f2e0504a935aabd8c2108883bafd09963001106e291",
+          "first_token_seconds": 1.195245499999828,
+          "total_seconds": 1.9190251999998509,
+          "raw": "{\"answer\":\"Find the indigo dress from your wardrobe for dinner, no trousers.\",\"itemIds\":[\"dress-midi-indigo\"],\"occasion\":\"dinner\",\"categories\":[\"dresses\",\"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 333,
+            "prompt_ms": 1172.003,
+            "prompt_per_token_ms": 3.5195285285285283,
+            "prompt_per_second": 284.1289655401906,
+            "predicted_n": 41,
+            "predicted_ms": 723.563,
+            "predicted_per_token_ms": 18.089075,
+            "predicted_per_second": 55.281986502902996
+          },
+          "usage": {
+            "completion_tokens": 41,
+            "prompt_tokens": 333,
+            "total_tokens": 374,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 11,
+          "answer": "Find the indigo dress from your wardrobe for dinner, no trousers.",
+          "timeout": false
+        },
+        {
+          "id": "test-004",
+          "request_sha256": "7616cbed31cb94913c27c1d81a8f3bb83c340b7d84268e0a9a2fb07a2eee4ad1",
+          "first_token_seconds": 0.9610867999999755,
+          "total_seconds": 1.4667082999999366,
+          "raw": "{\"answer\":\"From my wardrobe, find a red silk scarf only.\",\"itemIds\":[],\"occasion\":\"\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 282,
+            "prompt_ms": 943.305,
+            "prompt_per_token_ms": 3.3450531914893613,
+            "prompt_per_second": 298.94890835943835,
+            "predicted_n": 26,
+            "predicted_ms": 505.14,
+            "predicted_per_token_ms": 20.2056,
+            "predicted_per_second": 49.491230154016705
+          },
+          "usage": {
+            "completion_tokens": 26,
+            "prompt_tokens": 282,
+            "total_tokens": 308,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 9,
+          "answer": "From my wardrobe, find a red silk scarf only.",
+          "timeout": false
+        },
+        {
+          "id": "test-005",
+          "request_sha256": "37394e0a68d60c8f955103efa1487021608ad9c76b7021ab6c2d16c92706864a",
+          "first_token_seconds": 1.1462274999998954,
+          "total_seconds": 1.7185500000000502,
+          "raw": "{\"answer\":\"Denim Jacket belongs to the outerwear category. It is a classic indigo denim jacket.\",\"itemIds\":[],\"occasion\":\"\",\"categories\":[]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 324,
+            "prompt_ms": 1142.395,
+            "prompt_per_token_ms": 3.5259104938271606,
+            "prompt_per_second": 283.61468668892985,
+            "predicted_n": 35,
+            "predicted_ms": 572.126,
+            "predicted_per_token_ms": 16.827235294117646,
+            "predicted_per_second": 59.4274687743609
+          },
+          "usage": {
+            "completion_tokens": 35,
+            "prompt_tokens": 324,
+            "total_tokens": 359,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 14,
+          "answer": "Denim Jacket belongs to the outerwear category. It is a classic indigo denim jacket.",
+          "timeout": false
+        },
+        {
+          "id": "test-006",
+          "request_sha256": "a66a91aa89091871fb41704292963f192f5d1c4d797e79ff13f7ea347f96b3ba",
+          "first_token_seconds": 1.1320307999999386,
+          "total_seconds": 1.7929306999999426,
+          "raw": "{\"answer\":\"From my wardrobe, find a white top only; exclude jackets and dresses.\",\"itemIds\":[\"tee-classic-white\"],\"occasion\":\"casual\",\"categories\":[\"tops\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 331,
+            "prompt_ms": 1110.227,
+            "prompt_per_token_ms": 3.3541601208459215,
+            "prompt_per_second": 298.1372277921542,
+            "predicted_n": 38,
+            "predicted_ms": 660.792,
+            "predicted_per_token_ms": 17.859243243243245,
+            "predicted_per_second": 55.99341396384944
+          },
+          "usage": {
+            "completion_tokens": 38,
+            "prompt_tokens": 331,
+            "total_tokens": 369,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 12,
+          "answer": "From my wardrobe, find a white top only; exclude jackets and dresses.",
+          "timeout": false
+        },
+        {
+          "id": "test-007",
+          "request_sha256": "9fd100c4242097a7416291d031dd3cb212e332709b6cd5c09aad187d69874143",
+          "first_token_seconds": 1.354104100000086,
+          "total_seconds": 2.1583362000001216,
+          "raw": "{\"answer\":\"From my wardrobe, find a blue office shirt, avoid pants and dresses.\",\"itemIds\":[\"shirt-oxford-blue\"],\"occasion\":\"formal\",\"categories\":[\"tops\",\"bottoms\",\"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 342,
+            "prompt_ms": 1331.111,
+            "prompt_per_token_ms": 3.892137426900585,
+            "prompt_per_second": 256.92823513591276,
+            "predicted_n": 44,
+            "predicted_ms": 804.552,
+            "predicted_per_token_ms": 18.71051162790698,
+            "predicted_per_second": 53.445892869572134
+          },
+          "usage": {
+            "completion_tokens": 44,
+            "prompt_tokens": 342,
+            "total_tokens": 386,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 12,
+          "answer": "From my wardrobe, find a blue office shirt, avoid pants and dresses.",
+          "timeout": false
+        }
+      ]
+    },
+    {
+      "name": "fewshot",
+      "threads": 4,
+      "context": 2048,
+      "max_tokens": 260,
+      "startup_seconds": 1.1576866000000336,
+      "peak_working_set_mib": 520.69,
+      "peak_private_mib": 185.21,
+      "summary": {
+        "requests": 8,
+        "completed": 8,
+        "timeouts": 0,
+        "schema_valid": 8,
+        "exact_ids": 8,
+        "categories_exact": 3,
+        "median_ttft_seconds": 1.8933946500001184,
+        "median_total_seconds": 2.8394247500000347,
+        "median_prompt_tokens_per_second": 231.76456653688655,
+        "median_generated_tokens_per_second": 52.41411693536625
+      },
+      "cases": [
+        {
+          "id": "test-000",
+          "request_sha256": "f6ec45cb998bebdec6bbb59f46a7cb0f35de5e60731923fca326c53064a4ef06",
+          "first_token_seconds": 1.6691673000000264,
+          "total_seconds": 2.6397062000000915,
+          "raw": "{\"answer\": \"Find a classic crew t-shirt and chino trousers from your wardrobe for a casual look.\", \"itemIds\": [\"tee-classic-white\", \"trousers-chino-khaki\"], \"occasion\": \"casual\", \"categories\": [\"tops\", \"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 504,
+            "prompt_ms": 1649.983,
+            "prompt_per_token_ms": 3.2737757936507936,
+            "prompt_per_second": 305.45769259440857,
+            "predicted_n": 61,
+            "predicted_ms": 970.768,
+            "predicted_per_token_ms": 16.179466666666666,
+            "predicted_per_second": 61.80673446178695
+          },
+          "usage": {
+            "completion_tokens": 61,
+            "prompt_tokens": 504,
+            "total_tokens": 565,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 15,
+          "answer": "Find a classic crew t-shirt and chino trousers from your wardrobe for a casual look.",
+          "timeout": false
+        },
+        {
+          "id": "test-001",
+          "request_sha256": "f6c3b825b7c8cdc6edb650db8d22d61c315eff77ed1b5928666c57bd6d3578a1",
+          "first_token_seconds": 1.67438889999994,
+          "total_seconds": 2.640344799999639,
+          "raw": "{\"answer\": \"Find the Oxford Button Shirt and Tailored Trousers for the office.\", \"itemIds\": [\"shirt-oxford-blue\", \"trousers-tailored-charcoal\"], \"occasion\": \"formal\", \"categories\": [\"tops\", \"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 501,
+            "prompt_ms": 1656.292,
+            "prompt_per_token_ms": 3.3059720558882235,
+            "prompt_per_second": 302.48289552808325,
+            "predicted_n": 59,
+            "predicted_ms": 965.66,
+            "predicted_per_token_ms": 16.649310344827587,
+            "predicted_per_second": 60.06254789470414
+          },
+          "usage": {
+            "completion_tokens": 59,
+            "prompt_tokens": 501,
+            "total_tokens": 560,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 11,
+          "answer": "Find the Oxford Button Shirt and Tailored Trousers for the office.",
+          "timeout": false
+        },
+        {
+          "id": "test-002",
+          "request_sha256": "b5c0aecdf266d28604f49d36a3172084a6e4bd78f1e7d6200ddcd6d694880674",
+          "first_token_seconds": 1.7973791999997957,
+          "total_seconds": 2.838018099999772,
+          "raw": "{\"answer\": \"Find a denim jacket over a white top to complete the casual look.\", \"itemIds\": [\"jacket-denim\", \"tee-classic-white\"], \"occasion\": \"casual\", \"categories\": [\"outerwear\", \"tops\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 488,
+            "prompt_ms": 1778.167,
+            "prompt_per_token_ms": 3.643784836065574,
+            "prompt_per_second": 274.439914811151,
+            "predicted_n": 53,
+            "predicted_ms": 1040.396,
+            "predicted_per_token_ms": 20.007615384615384,
+            "predicted_per_second": 49.980968784962656
+          },
+          "usage": {
+            "completion_tokens": 53,
+            "prompt_tokens": 488,
+            "total_tokens": 541,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": true,
+          "answer_words": 13,
+          "answer": "Find a denim jacket over a white top to complete the casual look.",
+          "timeout": false
+        },
+        {
+          "id": "test-003",
+          "request_sha256": "30aefaaa39e6e967a4ac9449f3910908215471783aa67b9c3db7118732d32d30",
+          "first_token_seconds": 1.9894101000004412,
+          "total_seconds": 2.8408314000002974,
+          "raw": "{\"answer\": \"Find the Midi Dress from my wardrobe for dinner.\", \"itemIds\": [\"dress-midi-indigo\"], \"occasion\": \"dinner\", \"categories\": [\"dresses\", \"tops\", \"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 445,
+            "prompt_ms": 1969.993,
+            "prompt_per_token_ms": 4.426950561797753,
+            "prompt_per_second": 225.88912752481863,
+            "predicted_n": 48,
+            "predicted_ms": 850.728,
+            "predicted_per_token_ms": 18.10059574468085,
+            "predicted_per_second": 55.246800387432884
+          },
+          "usage": {
+            "completion_tokens": 48,
+            "prompt_tokens": 445,
+            "total_tokens": 493,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 9,
+          "answer": "Find the Midi Dress from my wardrobe for dinner.",
+          "timeout": false
+        },
+        {
+          "id": "test-004",
+          "request_sha256": "42c3118268fdee8590494f4356f922da5f25709b209f002cf744fd287e7a26c5",
+          "first_token_seconds": 1.7861636999996335,
+          "total_seconds": 2.7521137999997336,
+          "raw": "{\"answer\": \"I found a red silk scarf in my wardrobe.\", \"itemIds\": [], \"occasion\": \"\", \"categories\": [\"tops\", \"bottoms\", \"outerwear\", \"dresses\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 394,
+            "prompt_ms": 1657.97,
+            "prompt_per_token_ms": 4.208045685279188,
+            "prompt_per_second": 237.64000554895443,
+            "predicted_n": 45,
+            "predicted_ms": 965.69,
+            "predicted_per_token_ms": 21.9475,
+            "predicted_per_second": 45.563275999544366
+          },
+          "usage": {
+            "completion_tokens": 45,
+            "prompt_tokens": 394,
+            "total_tokens": 439,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 9,
+          "answer": "I found a red silk scarf in my wardrobe.",
+          "timeout": false
+        },
+        {
+          "id": "test-005",
+          "request_sha256": "c4fffb07bd8bc57cc9d86d95c0014557004b441eea2816670f51552baa40ce51",
+          "first_token_seconds": 2.0978408000000854,
+          "total_seconds": 3.0611367000001337,
+          "raw": "{\"answer\": \"Denim Jacket belongs to the outerwear category.\", \"itemIds\": [], \"occasion\": \"casual\", \"categories\": [\"outerwear\", \"bottoms\", \"tops\", \"outerwear\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 436,
+            "prompt_ms": 2093.253,
+            "prompt_per_token_ms": 4.801038990825688,
+            "prompt_per_second": 208.2882480044218,
+            "predicted_n": 47,
+            "predicted_ms": 962.953,
+            "predicted_per_token_ms": 20.933760869565216,
+            "predicted_per_second": 47.76972500215483
+          },
+          "usage": {
+            "completion_tokens": 47,
+            "prompt_tokens": 436,
+            "total_tokens": 483,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 7,
+          "answer": "Denim Jacket belongs to the outerwear category.",
+          "timeout": false
+        },
+        {
+          "id": "test-006",
+          "request_sha256": "9a8033227fc6214e3f73a4d572a04a43eec01e3fbbaca05bb174e6f33d21c246",
+          "first_token_seconds": 2.146939100000054,
+          "total_seconds": 2.9098855000002004,
+          "raw": "{\"answer\": \"Find a white top from your wardrobe.\", \"itemIds\": [\"tee-classic-white\"], \"occasion\": \"casual\", \"categories\": [\"tops\", \"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 443,
+            "prompt_ms": 2130.214,
+            "prompt_per_token_ms": 4.808609480812641,
+            "prompt_per_second": 207.9603269906216,
+            "predicted_n": 41,
+            "predicted_ms": 762.735,
+            "predicted_per_token_ms": 19.068375,
+            "predicted_per_second": 52.44285367788288
+          },
+          "usage": {
+            "completion_tokens": 41,
+            "prompt_tokens": 443,
+            "total_tokens": 484,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 7,
+          "answer": "Find a white top from your wardrobe.",
+          "timeout": false
+        },
+        {
+          "id": "test-007",
+          "request_sha256": "49cc1af5bc0ead8a48aef1faeb8e0f827a82b6d300df6447c2791f763ecf89ed",
+          "first_token_seconds": 2.2409691000002567,
+          "total_seconds": 3.0811969999999747,
+          "raw": "{\"answer\": \"Find the Oxford Button Shirt for a formal office look.\", \"itemIds\": [\"shirt-oxford-blue\"], \"occasion\": \"formal\", \"categories\": [\"tops\", \"bottoms\"]}",
+          "timings": {
+            "cache_n": 0,
+            "prompt_n": 454,
+            "prompt_ms": 2220.2,
+            "prompt_per_token_ms": 4.890308370044052,
+            "prompt_per_second": 204.48608233492482,
+            "predicted_n": 45,
+            "predicted_ms": 839.929,
+            "predicted_per_token_ms": 19.089295454545454,
+            "predicted_per_second": 52.38538019284963
+          },
+          "usage": {
+            "completion_tokens": 45,
+            "prompt_tokens": 454,
+            "total_tokens": 499,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            }
+          },
+          "finish_reason": "stop",
+          "schema_valid": true,
+          "grounded": true,
+          "exact_ids": true,
+          "categories_exact": false,
+          "answer_words": 10,
+          "answer": "Find the Oxford Button Shirt for a formal office look.",
+          "timeout": false
+        }
+      ]
+    }
+  ]
+}

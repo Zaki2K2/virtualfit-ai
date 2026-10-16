@@ -12,24 +12,35 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
 export default function StylistPage() {
+  const [turns, setTurns] = useState<Array<{ message: string; result: StylingRecommendation }>>([]);
   const [model, setModel] = useState<'base' | 'custom'>('base');
   const [message, setMessage] = useState(
     'Suggest a casual outfit with a white top and comfortable trousers.',
   );
   const status = useQuery({
     queryKey: ['styling-status'],
-    queryFn: () => apiRequest<StylingStatus>('/styling/status'),
+    queryFn: () => apiRequest<StylingStatus>('/styling/status', {}, 90_000),
+    refetchInterval: 30_000,
     staleTime: 15_000,
     retry: false,
   });
   const recommendation = useMutation({
-    mutationFn: (text: string) =>
+    mutationFn: ({ text, history }: { text: string; history: string[] }) =>
       apiRequest<StylingRecommendation>(
         '/styling/recommend',
-        { method: 'POST', ...jsonBody({ message: text, model }) },
+        { method: 'POST', ...jsonBody({ message: text, model, history }) },
         125_000,
       ),
+    onSuccess: (result, variables) =>
+      setTurns((previous) => [...previous, { message: variables.text, result }].slice(-4)),
   });
+  const selectedStatus = status.data?.models?.find((option) => option.id === model) ?? status.data;
+  const submit = () =>
+    recommendation.mutate({
+      text: message.trim(),
+      history: turns.slice(-2).map((turn) => turn.message),
+    });
+  const previousTurns = recommendation.isSuccess ? turns.slice(0, -1) : turns;
   return (
     <PageContainer>
       <PageHeader
@@ -51,12 +62,14 @@ export default function StylistPage() {
               <ErrorState error={status.error} onRetry={() => status.refetch()} />
             ) : (
               <div role="status" className="rounded-md bg-muted p-3 text-sm">
-                <p>{status.data.reason}</p>
+                <p>{selectedStatus?.reason}</p>
                 <p className="text-xs text-muted-foreground">
-                  {status.data.model} ·{' '}
-                  {status.data.available ? 'Local language inference ready' : 'Unavailable'}
+                  {selectedStatus?.displayName ?? selectedStatus?.model} ·{' '}
+                  {selectedStatus?.available
+                    ? 'Inference verified on this computer'
+                    : 'Unavailable'}
                 </p>
-                {!status.data.available && (
+                {!selectedStatus?.available && (
                   <Button
                     variant="outline"
                     size="sm"
@@ -72,7 +85,7 @@ export default function StylistPage() {
               className="space-y-3"
               onSubmit={(event) => {
                 event.preventDefault();
-                recommendation.mutate(message.trim());
+                submit();
               }}
             >
               <label htmlFor="styling-model" className="block text-sm font-medium">
@@ -84,6 +97,7 @@ export default function StylistPage() {
                 onChange={(event) => {
                   setModel(event.target.value as 'base' | 'custom');
                   recommendation.reset();
+                  setTurns([]);
                 }}
                 disabled={recommendation.isPending}
                 className="w-full rounded-md border border-border bg-background p-2"
@@ -99,13 +113,15 @@ export default function StylistPage() {
                   ]
                 ).map((option) => (
                   <option key={option.id} value={option.id} disabled={!option.available}>
-                    {option.id === 'base' ? 'Original Qwen (rollback)' : 'Custom checkpoint'} ?{' '}
-                    {option.available ? 'Available' : option.reason}
+                    {option.id === 'base'
+                      ? 'Qwen2.5-0.5B Q4 (default / rollback)'
+                      : 'Custom checkpoint'}{' '}
+                    / {option.available ? 'Available' : option.reason}
                   </option>
                 ))}
               </select>
               <label htmlFor="style-request" className="block text-sm font-medium">
-                What would you like to wear?
+                What would you like to wear or ask?
               </label>
               <textarea
                 id="style-request"
@@ -117,7 +133,7 @@ export default function StylistPage() {
                 rows={4}
                 disabled={recommendation.isPending}
                 className="w-full rounded-md border border-border bg-background p-3 text-sm"
-                placeholder="A blue and white outfit for a relaxed office day. No dresses."
+                placeholder="A blue and white outfit for the office. Or follow up: Make it casual."
               />
               <p className="text-xs text-muted-foreground">
                 Include the occasion, colors, clothing categories, and anything to avoid. Only the
@@ -135,22 +151,50 @@ export default function StylistPage() {
                   message.trim().length < 3
                 }
               >
-                {recommendation.isPending ? 'Thinking locally...' : 'Suggest an outfit'}
+                {recommendation.isPending ? 'Generating locally...' : 'Ask local Qwen'}
               </Button>
+              {turns.length > 0 && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="ml-2"
+                  disabled={recommendation.isPending}
+                  onClick={() => {
+                    setTurns([]);
+                    recommendation.reset();
+                    setMessage('');
+                  }}
+                >
+                  New conversation
+                </Button>
+              )}
+              <p className="text-xs text-muted-foreground">
+                The last two requests provide follow-up context. This conversation stays in this tab
+                and clears on refresh.
+              </p>
             </form>
           </CardContent>
         </Card>
+        {previousTurns.length > 0 && (
+          <section aria-label="Earlier styling conversation" className="space-y-3">
+            {previousTurns.map((turn, index) => (
+              <div key={index} className="rounded-md border border-border p-4 text-sm">
+                <p className="font-medium">You: {turn.message}</p>
+                <p className="mt-2">{turn.result.answer}</p>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {turn.result.source === 'model' ? 'Local Qwen' : 'Catalog fallback'}
+                </p>
+              </div>
+            ))}
+          </section>
+        )}
         {recommendation.isPending && (
           <Spinner label="Finding an outfit with your local language model..." />
         )}
-        {recommendation.isError && (
-          <ErrorState
-            error={recommendation.error}
-            onRetry={() => recommendation.mutate(message.trim())}
-          />
-        )}
+        {recommendation.isError && <ErrorState error={recommendation.error} onRetry={submit} />}
         {recommendation.isSuccess && (
           <section aria-label="Styling recommendation" className="space-y-4">
+            <p className="text-sm font-medium">You: {recommendation.variables?.text}</p>
             <p role="status" className="rounded-md border border-border bg-surface p-4">
               {recommendation.data.answer}
             </p>
@@ -182,7 +226,7 @@ export default function StylistPage() {
               {recommendation.data.source === 'model'
                 ? `Generated locally by ${recommendation.data.model}.`
                 : recommendation.data.source === 'deterministic-fallback'
-                  ? `Catalog fallback: the model response failed validation (${recommendation.data.fallbackReason}).`
+                  ? 'Catalog fallback: the local model response could not be used safely.'
                   : 'Answered by catalog rules; no model generation was needed.'}{' '}
               Suggestions may be imperfect; check that they match your preferences.
             </p>
